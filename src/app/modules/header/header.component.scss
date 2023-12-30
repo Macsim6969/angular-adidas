@@ -1,0 +1,15 @@
+
+.mat-toolbar {
+  justify-content: space-between;
+  .header-logo {
+    max-width: 64px;
+
+    cursor: pointer;
+    mat-icon{
+      max-width: 58px;
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+

@@ -1,0 +1,5 @@
+<mat-list role="menu-list">
+ <mat-list-item *ngFor="let menu of menuList" role="menu-listitem">
+   <nav (click)="choiceMenu(menu.route)"> {{menu.name}}</nav>
+ </mat-list-item>
+</mat-list>
