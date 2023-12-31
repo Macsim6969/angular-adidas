@@ -13,6 +13,7 @@ export class MatIconService {
     this.matIconRegistry.addSvgIcon('like', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/images/adidas/header/like.svg'))
     this.matIconRegistry.addSvgIcon('shop', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/images/adidas/header/shop.svg'))
     this.matIconRegistry.addSvgIcon('user', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/images/adidas/header/user.svg'))
+    this.matIconRegistry.addSvgIcon('en', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/images/adidas/languages/en.svg'))
   }
 
 }

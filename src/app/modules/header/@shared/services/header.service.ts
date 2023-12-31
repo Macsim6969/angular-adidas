@@ -4,7 +4,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 @Injectable()
 
 export class HeaderService {
-  private isDropdown$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private isDropdown$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
   public isDropdownSubject: Observable<boolean> = this.isDropdown$.asObservable();
 

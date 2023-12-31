@@ -21,7 +21,6 @@ const routes: Routes = [
   ],
   exports: [],
     imports: [
-        CommonModule,
         RouterModule.forRoot(routes),
         StoreModule.forRoot({store: storeReducers}),
         BrowserAnimationsModule,
