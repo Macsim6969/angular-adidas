@@ -8,6 +8,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {RouterModule, Routes} from "@angular/router";
 import {ShareModule} from "./shared/share.module";
 import {HeaderModule} from "./modules/header/header.module";
+import {ChoiceLanguagesModule} from "./modules/choice-languages/choice-languages.module";
 const routes: Routes = [
   {
     path: 'languages',
@@ -16,18 +17,19 @@ const routes: Routes = [
 ]
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   exports: [],
-  imports: [
-    CommonModule,
-    RouterModule.forRoot(routes),
-    StoreModule.forRoot({store: storeReducers}),
-    BrowserAnimationsModule,
-    HttpClientModule,
-    HeaderModule,
-    ShareModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forRoot(routes),
+        StoreModule.forRoot({store: storeReducers}),
+        BrowserAnimationsModule,
+        HttpClientModule,
+        HeaderModule,
+        ShareModule,
+        ChoiceLanguagesModule
+    ],
   bootstrap: [AppComponent]
 })
 

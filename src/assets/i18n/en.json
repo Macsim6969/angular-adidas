@@ -1,9 +1,15 @@
 {
-  "logo": "LOGO1",
-  "menu-navigation": [
-    {
-      "name": "men",
-      "route": "/men"
-    }
-  ]
+  "header": {
+    "options": {
+      "login": "login",
+      "logout": "logout",
+      "language": "Change Country"
+    },
+    "menu-navigation": [
+      {
+        "name": "men",
+        "route": "/men"
+      }
+    ]
+  }
 }

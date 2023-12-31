@@ -9,4 +9,10 @@
   <div class="icon">
     <mat-icon svgIcon="shop"></mat-icon>
   </div>
+  <div class="icon" (click)="toggleTooltip()">
+    <mat-icon svgIcon="user"></mat-icon>
+  </div>
+
+  <app-options-dropdown (closeDropdown)="closeDropdown($event)" class="dropdown" *ngIf="isDropdown"></app-options-dropdown>
+
 </div>

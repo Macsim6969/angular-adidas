@@ -1,0 +1,40 @@
+.popup-country {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  height: 100%;
+  width: 100%;
+
+  z-index: 12;
+  background-color: #e1e5d9;
+
+  animation: openPopup 1s;
+}
+
+
+.closest{
+  animation: closePopup 1s;
+}
+
+
+@keyframes openPopup {
+  from {
+    top: -2000px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+@keyframes closePopup {
+  from {
+    top: 0;
+  }
+  to {
+    top: -2000px;
+  }
+}

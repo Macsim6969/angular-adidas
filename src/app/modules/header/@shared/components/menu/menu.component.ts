@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 import {Store} from "@ngrx/store";
-import {StoreInterface} from "../../../../store/model/store.model";
-import {MenuList} from "../../../../interfaces/home.interface";
-import {storeSelectorLang} from "../../../../store/selectors/store.selectors";
+import {StoreInterface} from "../../../../../store/model/store.model";
+import {MenuList} from "../../../../../interfaces/home.interface";
+import {storeSelectorLang} from "../../../../../store/selectors/store.selectors";
 import {Router} from "@angular/router";
 
 @Component({
@@ -26,7 +26,7 @@ export class MenuComponent implements OnInit {
 
   private getDataMenuListFromJson(){
     this.store.select(storeSelectorLang).subscribe(() => {
-      this.translate.get('menu-navigation').subscribe((data: MenuList[]) => {
+      this.translate.get('header.menu-navigation').subscribe((data: MenuList[]) => {
         this.menuList = data
       })
     })

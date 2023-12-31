@@ -1,12 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {StoreInterface} from "./store/model/store.model";
-import {combineLatest, Observable} from "rxjs";
+import {combineLatest, Observable, take} from "rxjs";
 import {increment, newCountry, newLang} from "./store/actions/store.actions";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {storeSelectorCountry, storeSelectorLang} from "./store/selectors/store.selectors";
 import {primitivesAreNotAllowedInProps} from "@ngrx/store/src/models";
 import {TranslateService} from "@ngx-translate/core";
+import {HeaderService} from "./modules/header/@shared/services/header.service";
 
 @Component({
   selector: 'app-root',
@@ -21,11 +22,14 @@ export class AppComponent implements OnInit {
   lang: string;
   country: string;
 
+  isDropdown: boolean = false;
+
   constructor(
     private store: Store<{ store: StoreInterface }>,
     private router: Router,
     private route: ActivatedRoute,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private headerService: HeaderService
   ) {
   }
 
@@ -33,7 +37,7 @@ export class AppComponent implements OnInit {
     this.getDataObservFromStore()
     this.setDataLocalFromObservable()
     this.addedQueryParams()
-
+    this.getDataFromHeaderService()
   }
 
   private getDataObservFromStore() {
@@ -59,6 +63,12 @@ export class AppComponent implements OnInit {
       } else {
         this.addedQueryParamsRouter(this.lang, this.country)
       }
+    })
+  }
+
+  private getDataFromHeaderService() {
+    this.headerService.isDropdownSubject.subscribe((data: boolean) => {
+      this.isDropdown = data;
     })
   }
 

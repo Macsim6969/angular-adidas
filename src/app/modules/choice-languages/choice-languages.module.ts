@@ -1,20 +1,21 @@
 import {NgModule} from "@angular/core";
 import {ChoiceLanguagesComponent} from "./choice-languages.component";
 import {CommonModule} from "@angular/common";
-import {RouterModule, Routes} from "@angular/router";
+import {ShareModule} from "../../shared/share.module";
 
-const routes: Routes = [
-  {path: '', component: ChoiceLanguagesComponent}
-]
+
 @NgModule({
   declarations: [
     ChoiceLanguagesComponent
   ],
-  exports: [],
+  exports: [
+    ChoiceLanguagesComponent
+  ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    ShareModule
   ]
 })
 
-export class ChoiceLanguagesModule {}
+export class ChoiceLanguagesModule {
+}

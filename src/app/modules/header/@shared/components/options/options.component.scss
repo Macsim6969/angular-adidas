@@ -1,0 +1,26 @@
+.options{
+  display: flex;
+  gap: 24px;
+  align-items: center;
+
+  .icon{
+    cursor: pointer;
+  }
+
+  .dropdown{
+    position: absolute;
+    z-index: 9;
+    top: 66px;
+    right: 15px;
+    padding: 12px;
+
+    display: flex;
+    flex-direction: column;
+
+    border-radius: 20px;
+    background-color: #eae3e3;
+
+    height: auto;
+    gap: 7px;
+  }
+}

@@ -2,16 +2,19 @@ import {NgModule} from "@angular/core";
 import {HeaderComponent} from "./header.component";
 import {CommonModule} from "@angular/common";
 import {ShareModule} from "../../shared/share.module";
-import {MenuComponent} from "./@shared/menu/menu.component";
+import {MenuComponent} from "./@shared/components/menu/menu.component";
 import {TranslateModule} from "@ngx-translate/core";
-import {OptionsComponent} from "./@shared/options/options.component";
+import {OptionsComponent} from "./@shared/components/options/options.component";
+import {HeaderService} from "./@shared/services/header.service";
+import {OptionsDropdownComponent} from "./@shared/components/options-dropdown/options-dropdown.component";
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
     MenuComponent,
-    OptionsComponent
+    OptionsComponent,
+    OptionsDropdownComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +22,11 @@ import {OptionsComponent} from "./@shared/options/options.component";
     TranslateModule
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    OptionsDropdownComponent
+  ],
+  providers: [
+    HeaderService
   ]
 })
 

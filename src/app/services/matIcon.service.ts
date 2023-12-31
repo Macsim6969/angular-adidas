@@ -8,10 +8,11 @@ import {DomSanitizer} from "@angular/platform-browser";
 export class MatIconService {
   constructor(private matIconRegistry: MatIconRegistry,
               private domSanitizer: DomSanitizer) {
-    this.matIconRegistry.addSvgIcon('adidas-logo', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/images/adidas/header/adidas-logo.svg')),
-      this.matIconRegistry.addSvgIcon('unlike', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/images/adidas/header/unlike.svg')),
-      this.matIconRegistry.addSvgIcon('like', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/images/adidas/header/like.svg')),
-      this.matIconRegistry.addSvgIcon('shop', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/images/adidas/header/shop.svg'))
+    this.matIconRegistry.addSvgIcon('adidas-logo', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/images/adidas/header/adidas-logo.svg'))
+    this.matIconRegistry.addSvgIcon('unlike', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/images/adidas/header/unlike.svg'))
+    this.matIconRegistry.addSvgIcon('like', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/images/adidas/header/like.svg'))
+    this.matIconRegistry.addSvgIcon('shop', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/images/adidas/header/shop.svg'))
+    this.matIconRegistry.addSvgIcon('user', this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/images/adidas/header/user.svg'))
   }
 
 }
