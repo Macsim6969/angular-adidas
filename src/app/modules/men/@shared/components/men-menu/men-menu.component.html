@@ -1,0 +1,10 @@
+<div class="menu-list">
+  <mat-card class="list-card" *ngFor="let item of menuList" (click)="open(item.route)">
+    <mat-card-header>
+      <img mat-card-image [src]="item.image">
+    </mat-card-header>
+    <mat-card-actions>
+      <button mat-button [innerHTML]="item.name"></button>
+    </mat-card-actions>
+  </mat-card>
+</div>

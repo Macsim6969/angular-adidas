@@ -5,6 +5,7 @@ import {MatIconService} from "../services/matIcon.service";
 import {TranslationModule} from "./translate.module";
 import {MatListModule} from "@angular/material/list";
 import {CommonModule} from "@angular/common";
+import {MatButtonModule} from "@angular/material/button";
 @NgModule({
   declarations: [
 
@@ -14,6 +15,7 @@ import {CommonModule} from "@angular/common";
     MatToolbarModule,
     MatIconModule,
     MatListModule,
+    MatButtonModule,
     TranslationModule
   ],
   exports: [
@@ -21,6 +23,7 @@ import {CommonModule} from "@angular/common";
     MatToolbarModule,
     MatIconModule,
     MatListModule,
+    MatButtonModule,
     TranslationModule
   ],
   providers: [MatIconService]

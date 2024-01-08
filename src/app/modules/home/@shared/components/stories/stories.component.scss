@@ -1,0 +1,33 @@
+:host {
+  .stories {
+    display: flex;
+    width: 100%;
+    max-width: 1420px;
+    margin: 0 auto;
+    padding: 26px;
+
+    .stories_inner {
+
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .title {
+        margin: 0;
+        font-size: 2.8rem;
+        font-weight: 500;
+      }
+
+      .content {
+        font-size: 1.6rem;
+      }
+
+      .stories_inner_time,
+      .stories_inner_clothes {
+        display: flex;
+        flex-direction: column;
+        flex-basis: 45%;
+      }
+    }
+  }
+}

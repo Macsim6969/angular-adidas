@@ -2,6 +2,7 @@ import {Component, ElementRef, OnInit, ViewChild, ViewChildren} from '@angular/c
 import {HeaderService} from "../header/@shared/services/header.service";
 import {take, timer} from "rxjs";
 import {Languages, LanguagesService} from "./@shared/services/languages.service";
+import {MatIconService} from "../../services/matIcon.service";
 
 @Component({
   selector: 'app-choice-languages',
@@ -16,7 +17,8 @@ export class ChoiceLanguagesComponent implements OnInit {
 
   constructor(
     private headerService: HeaderService,
-    private languageService: LanguagesService
+    private languageService: LanguagesService,
+    private matIcon: MatIconService
   ) {
   }
 

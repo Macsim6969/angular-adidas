@@ -3,7 +3,7 @@ import {Store} from "@ngrx/store";
 import {StoreInterface} from "./store/model/store.model";
 import {combineLatest, Observable, take} from "rxjs";
 import {increment, newCountry, newLang} from "./store/actions/store.actions";
-import {ActivatedRoute, Params, Router} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, NavigationExtras, Params, Router} from "@angular/router";
 import {storeSelectorCountry, storeSelectorLang} from "./store/selectors/store.selectors";
 import {primitivesAreNotAllowedInProps} from "@ngrx/store/src/models";
 import {TranslateService} from "@ngx-translate/core";
@@ -38,6 +38,7 @@ export class AppComponent implements OnInit {
     this.setDataLocalFromObservable()
     this.addedQueryParams()
     this.getDataFromHeaderService()
+    this.checkNavigation()
   }
 
   private getDataObservFromStore() {
@@ -47,7 +48,6 @@ export class AppComponent implements OnInit {
 
   private setDataLocalFromObservable() {
     combineLatest([this.lang$, this.country$]).subscribe(([lang, country]) => {
-      console.log(lang)
       this.lang = lang;
       this.country = country;
       this.translate.use(lang)
@@ -73,11 +73,37 @@ export class AppComponent implements OnInit {
   }
 
   private addedQueryParamsRouter(lang, country) {
-    this.router.navigate([], {
-      queryParams: {
-        hl: lang,
-        country: country
+    // const navigationExtras: NavigationExtras = {
+    //   queryParams: {
+    //     hl: lang,
+    //     country: country
+    //   },
+    //   replaceUrl: false
+    // };
+    // this.router.navigate([], navigationExtras).then();
+  }
+
+  private checkNavigation() {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        if (event.url.substring(0, event.url.indexOf('?')) !== '/') {
+          if (event.url.indexOf('/') !== -1) {
+            const currentParams = this.router.routerState.snapshot.root.queryParams;
+            if (!currentParams['hl'] || !currentParams['country']) {
+              const defaultParams = {
+                hl: 'en',
+                country: 'US'
+              };
+
+              this.router.navigate([], {
+                queryParams: defaultParams,
+              });
+            }
+          } else {
+            this.router.navigate(['/'])
+          }
+        }
       }
-    }).then()
+    })
   }
 }

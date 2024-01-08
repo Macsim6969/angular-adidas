@@ -1,0 +1,20 @@
+:host {
+  .main {
+    &-content {
+      background-image: url("../../../assets/images/adidas/home/home.jpg");
+      background-size: cover;
+      width: 100%;
+      height: calc(100vh - 64px);
+      background-repeat: no-repeat;
+
+      @media (max-width: 960px) {
+        background-image: url("../../../assets/images/adidas/home/home_mobile.jpg");
+      }
+    }
+
+    .stories {
+      display: flex;
+      background: #f5f5e5;
+    }
+  }
+}

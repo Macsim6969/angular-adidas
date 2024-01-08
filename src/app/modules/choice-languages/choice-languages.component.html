@@ -1,9 +1,10 @@
-
 <div class="popup-country" #popup>
   <div class="popup-country-block">
     <div class="popup-country-block-header">
       <h2>Choice country</h2>
-      <span (click)="closePopup()">Close</span>
+      <span class="close" (click)="closePopup()">
+        <mat-icon svgIcon="close"></mat-icon>
+      </span>
     </div>
     <div class="popup-country-block-main">
       <div [ngClass]="{'active': lang.icon === activeLang}" *ngFor="let lang of langList; index as i" class="popup-country-block-main-list">

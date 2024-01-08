@@ -20,22 +20,26 @@
   &-block {
     border: 1px solid whitesmoke;
     border-radius: 18px;
-    max-width: 480px;
+    max-width: 460px;
     max-height: 680px;
     height: 100%;
     width: 100%;
     background-color: #e1e5d9;
 
-    padding: 15px;
+    padding: 24px;
 
     &-header {
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       flex-direction: row;
       align-items: center;
 
       h1 {
         margin: 0;
+      }
+
+      .close{
+        cursor: pointer;
       }
     }
 
