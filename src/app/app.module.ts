@@ -8,6 +8,7 @@ import {ShareModule} from "./shared/share.module";
 import {HeaderModule} from "./modules/header/header.module";
 import {ChoiceLanguagesModule} from "./modules/choice-languages/choice-languages.module";
 import {AppRoutingModule} from "./app-routing.module";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import {AppRoutingModule} from "./app-routing.module";
   ],
   exports: [],
   imports: [
+    CommonModule,
     AppRoutingModule,
     StoreModule.forRoot({store: storeReducers}),
     BrowserAnimationsModule,

@@ -1,0 +1,39 @@
+.men {
+  display: flex;
+  flex-direction: column;
+
+  max-width: 1280px;
+  width: 100%;
+  margin: 100px auto 0 auto;
+
+  @media (max-width: 1300px) {
+    width: 95%;
+  }
+
+  .men-list {
+    display: flex;
+    gap: 12px;
+
+    .menu-list-item {
+      cursor: pointer;
+      font-size: 1.8rem;
+      width: auto;
+      border-bottom: 2px solid transparent;
+      &.active {
+        border-bottom: 2px solid black;
+      }
+    }
+  }
+  .men-shoes-list-products{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+    .products{
+      padding: 0;
+      .products-header{
+        padding: 0;
+      }
+    }
+  }
+}

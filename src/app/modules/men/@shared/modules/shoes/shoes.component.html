@@ -1,0 +1,27 @@
+<section class="men">
+  <app-shoes-header></app-shoes-header>
+  <mat-list role="men-shoes-list" class="men-list">
+    <mat-list-item
+      (click)="choiceMenu(i, itemList.filter)"
+      [attr.aria-label]="itemList['list-item']" class="menu-list-item"
+      *ngFor="let itemList of listMenuItem; index as i"
+      role="men-shoes-list-item"
+      [ngClass]="{'active' : listMenuItemActive === i}"
+    >{{itemList['list-item']}}</mat-list-item>
+  </mat-list>
+  <div class="men-shoes-list-products" *ngIf="!isLoading;else loader">
+    <mat-card class="products" *ngFor="let item of list">
+      <mat-card-header class="products-header">
+        <img mat-card-image style="max-height: 383px" src="{{item.imageURL[0]}}" alt="">
+      </mat-card-header>
+      <mat-card-content>
+        <p [innerHTML]="item.name"></p>
+        <p [innerHTML]="item.categ"></p>
+        <p>Color: {{item.galleryDop.length}}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <ng-template #loader>
+    <p>Loader</p>
+  </ng-template>
+</section>

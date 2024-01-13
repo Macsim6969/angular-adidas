@@ -3,5 +3,5 @@ export interface StoreInterface {
   hl: string;
   country: string;
   load: boolean
-  dataList: {}
+  dataList: []
 }

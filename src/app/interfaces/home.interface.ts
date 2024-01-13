@@ -8,3 +8,7 @@ export interface MenListMenu {
   name: string
   route: string
 }
+export interface MenuListMenuShoper {
+  ['list-item']: string
+  filter: string
+}

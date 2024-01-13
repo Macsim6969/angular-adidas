@@ -17,6 +17,7 @@ import {OptionsDropdownComponent} from "./@shared/components/options-dropdown/op
     OptionsDropdownComponent
   ],
   imports: [
+    CommonModule,
     ShareModule,
     TranslateModule
   ],

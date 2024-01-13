@@ -3,6 +3,7 @@ import {createAction, props, Action} from "@ngrx/store";
 export const INCREMENT = "INCREMENT"
 export const NEWLANG = 'NEWLANG'
 export const NEWCOUNTRY = 'NEWCOUNTRY'
+export const NEWSHOESDATA = 'NEWSHOESDATA'
 
 export const increment = createAction(
   INCREMENT,
@@ -17,4 +18,9 @@ export const newLang = createAction(
 export const newCountry = createAction(
   NEWCOUNTRY,
   props<{value: string}>()
+)
+
+export const newShoesData = createAction(
+  NEWSHOESDATA,
+  props<{value: any}>()
 )

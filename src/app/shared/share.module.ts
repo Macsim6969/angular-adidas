@@ -11,7 +11,6 @@ import {MatButtonModule} from "@angular/material/button";
 
   ],
   imports: [
-    CommonModule,
     MatToolbarModule,
     MatIconModule,
     MatListModule,
@@ -19,7 +18,6 @@ import {MatButtonModule} from "@angular/material/button";
     TranslationModule
   ],
   exports: [
-    CommonModule,
     MatToolbarModule,
     MatIconModule,
     MatListModule,

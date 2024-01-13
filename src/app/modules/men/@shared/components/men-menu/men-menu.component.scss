@@ -5,8 +5,53 @@
   display: flex;
   gap: 10px;
 
-  margin: 0 auto;
-  .list-card {
+  margin: 60px auto 0 auto;
 
+  @media (max-width: 1300px) {
+    width: 95%;
+  }
+  @media (max-width: 972px) {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 620px) {
+    flex-direction: column;
+  }
+
+  .list-card {
+    cursor: pointer;
+    border: none;
+    box-shadow: unset;
+    background-color: #ebeff1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @media (max-width: 972px) {
+      flex-direction: row;
+      flex-basis: 48%;
+      justify-content: space-between;
+    }
+
+    .list-card-header {
+
+      .list-card-header-image {
+        max-width: 99%;
+        object-fit: cover;
+        @media (max-width: 972px) {
+          max-height: 144px;
+        }
+      }
+    }
+
+    .list-card-actions {
+      button {
+        text-decoration: underline;
+        text-transform: uppercase;
+        font-size: 1.8rem;
+
+      }
+    }
   }
 }

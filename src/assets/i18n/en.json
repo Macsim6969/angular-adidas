@@ -26,7 +26,7 @@
       {
         "image": "./assets/images/adidas/men/list/sneakers.jpg",
         "name": "sneakers",
-        "route": "/men_sneakers"
+        "route": "/men/shoes"
       },
       {
         "image": "./assets/images/adidas/men/list/tops.jpg",
@@ -42,6 +42,44 @@
         "image": "./assets/images/adidas/men/list/pants.jpg",
         "name": "pants",
         "route": "/men_pants"
+      }
+    ],
+    "articles": {
+      "articlesTitle": "MEN’S CLOTHING & SHOES",
+      "articlesDesc": "As a creator, you look for ways to excel and express yourself when and where you can, from reaching for that last rep to evolving your streetwear style. Log miles or tear down the baseline in men's shoes with responsive cushioning. Rep an athletic style off the field in lifestyle apparel born of sport heritage. From athletes to streetwear enthusiasts, adidas men’s clothing and shoes exist to let you go harder, dig deeper, and get the most out of yourself, from the pitch to the street to the road less traveled."
+    },
+    "men-shoes-list": [
+      {
+        "list-item": "All Men's Shoes",
+        "filter": "all"
+      },
+      {
+        "list-item": "Sneakers",
+        "filter": "sneakers"
+      },
+      {
+        "list-item": "Running",
+        "filter": "running"
+      },
+      {
+        "list-item": "Soccer",
+        "filter": "soccer"
+      },
+      {
+        "list-item": "Basketball",
+        "filter": "basketball"
+      },
+      {
+        "list-item": "Slides & Sandals",
+        "filter": "sandals"
+      },
+      {
+        "list-item": "Hiking",
+        "filter": "hiking"
+      },
+      {
+        "list-item": "Football",
+        "filter": "football"
       }
     ]
   }
