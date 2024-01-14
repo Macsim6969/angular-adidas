@@ -5,6 +5,7 @@ import {StoreInterface} from "../../../../../store/model/store.model";
 import {storeSelectorLang, storeSelectorShoesData} from "../../../../../store/selectors/store.selectors";
 import {MenuListMenuShoper} from "../../../../../interfaces/home.interface";
 import {StateShoesService} from "./services/state-shoes.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-all-shoes',
@@ -23,13 +24,13 @@ export class ShoesComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private store: Store<{ store: StoreInterface }>,
-    private stateShoesService: StateShoesService
+    private stateShoesService: StateShoesService,
+    private router: Router
   ) {
   }
 
   ngOnInit() {
     this.translate.use('en')
-    this.getShoesData();
     this.getListMenu();
     this.getShoesDataFromStore()
 
@@ -54,9 +55,6 @@ export class ShoesComponent implements OnInit {
     }
   }
 
-  private getShoesData() {
-    this.stateShoesService.getDataShoes()
-  }
 
   private getShoesDataFromStore() {
     this.store.select(storeSelectorShoesData).subscribe((data) => {
@@ -69,5 +67,11 @@ export class ShoesComponent implements OnInit {
 
   showHoverImage(isHovered: boolean, index: number) {
     this.isHover[index] = isHovered;
+  }
+
+  public openContent(name_id: string, id: number) {
+    const newRoute = '_' + name_id.replace(/ /g, '_').toLowerCase();
+    localStorage.setItem('id-shoes', `${id}`)
+    this.router.navigate(['/men/shoes' + newRoute], {queryParamsHandling: 'merge'}).then()
   }
 }

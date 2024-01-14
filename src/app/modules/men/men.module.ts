@@ -13,7 +13,9 @@ const routes: Routes = [
   {
     path: '', component: MenComponent, children: [
       {path: '', component: MenMenuComponent},
-      {path: 'shoes', loadChildren: () => import('./@shared/modules/shoes/shoes.module').then(m => m.ShoesModule)}
+      {path: 'shoes', loadChildren: () => import('./@shared/modules/shoes/shoes.module').then(m => m.ShoesModule)},
+      {path: ':id', loadChildren: () => import('./@shared/modules/shoes-content/shoes-content.module').then(m => m.ShoesContentModule)}
+
     ]
   }
 ]
