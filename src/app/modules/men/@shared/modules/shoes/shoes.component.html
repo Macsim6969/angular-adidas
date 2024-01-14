@@ -7,21 +7,25 @@
       *ngFor="let itemList of listMenuItem; index as i"
       role="men-shoes-list-item"
       [ngClass]="{'active' : listMenuItemActive === i}"
-    >{{itemList['list-item']}}</mat-list-item>
+    >{{ itemList['list-item'] }}
+    </mat-list-item>
   </mat-list>
-  <div class="men-shoes-list-products" *ngIf="!isLoading;else loader">
-    <mat-card class="products" *ngFor="let item of list">
+  <div class="men-shoes-list-products" *ngIf="!isLoading; else loading">
+    <mat-card class="products" *ngFor="let item of list; index as i" (mouseover)="showHoverImage(true, i)"
+              (mouseleave)="showHoverImage(false, i)">
       <mat-card-header class="products-header">
-        <img mat-card-image style="max-height: 383px" src="{{item.imageURL[0]}}" alt="">
+        <img mat-card-image src="{{item.imageURL[0]}}" alt="">
+        <img [ngClass]="{'active': isHover[i]}" class="hover" mat-card-image src="{{item.imageURL_hover}}" alt="">
+        <p class="products-header-price" [innerHTML]="item.price + '$'"></p>
       </mat-card-header>
-      <mat-card-content>
-        <p [innerHTML]="item.name"></p>
-        <p [innerHTML]="item.categ"></p>
-        <p>Color: {{item.galleryDop.length}}</p>
+      <mat-card-content class="products-content">
+        <p class="products-content-name" [innerHTML]="item.name"></p>
+        <p class="products-content-category" [innerHTML]="item.categ"></p>
+        <p class="products-content-colors">Color: {{ item.galleryDop.length }}</p>
       </mat-card-content>
     </mat-card>
   </div>
-  <ng-template #loader>
-    <p>Loader</p>
+  <ng-template #loading>
+    <app-loading></app-loading>
   </ng-template>
 </section>

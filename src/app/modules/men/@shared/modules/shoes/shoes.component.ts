@@ -5,18 +5,20 @@ import {StoreInterface} from "../../../../../store/model/store.model";
 import {storeSelectorLang, storeSelectorShoesData} from "../../../../../store/selectors/store.selectors";
 import {MenuListMenuShoper} from "../../../../../interfaces/home.interface";
 import {StateShoesService} from "./services/state-shoes.service";
-import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-all-shoes',
   templateUrl: './shoes.component.html',
   styleUrl: './shoes.component.scss'
 })
 export class ShoesComponent implements OnInit {
-  isLoading: boolean = true;
   private originalList: any;
   public list: any;
   public listMenuItem: MenuListMenuShoper[];
   public listMenuItemActive: number;
+
+  public isHover: boolean[] = [];
+  public isLoading: boolean = true;
 
   constructor(
     private translate: TranslateService,
@@ -32,7 +34,6 @@ export class ShoesComponent implements OnInit {
     this.getShoesDataFromStore()
 
     this.choiceMenu(0, 'all');
-
   }
 
   private getListMenu() {
@@ -57,11 +58,16 @@ export class ShoesComponent implements OnInit {
     this.stateShoesService.getDataShoes()
   }
 
-  private getShoesDataFromStore(){
+  private getShoesDataFromStore() {
     this.store.select(storeSelectorShoesData).subscribe((data) => {
-      this.list =  data;
+      this.list = data;
       this.originalList = data;
       this.isLoading = false;
+      console.log(data)
     });
+  }
+
+  showHoverImage(isHovered: boolean, index: number) {
+    this.isHover[index] = isHovered;
   }
 }

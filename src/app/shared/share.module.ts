@@ -6,23 +6,28 @@ import {TranslationModule} from "./translate.module";
 import {MatListModule} from "@angular/material/list";
 import {CommonModule} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {LoadingComponent} from "./components/loading/loading.component";
 @NgModule({
   declarations: [
-
+    LoadingComponent
   ],
   imports: [
     MatToolbarModule,
     MatIconModule,
     MatListModule,
     MatButtonModule,
-    TranslationModule
+    TranslationModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatToolbarModule,
     MatIconModule,
     MatListModule,
     MatButtonModule,
-    TranslationModule
+    TranslationModule,
+    MatProgressSpinnerModule,
+    LoadingComponent
   ],
   providers: [MatIconService]
 })

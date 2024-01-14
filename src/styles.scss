@@ -29,3 +29,12 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 
 }
+
+
+.loader {
+  display: flex;
+  justify-content: center;
+  height: calc(100vh - 400px);
+  align-items: center;
+}
+
