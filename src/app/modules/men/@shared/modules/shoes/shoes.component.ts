@@ -4,7 +4,6 @@ import {Store} from "@ngrx/store";
 import {StoreInterface} from "../../../../../store/model/store.model";
 import {storeSelectorLang, storeSelectorShoesData} from "../../../../../store/selectors/store.selectors";
 import {MenuListMenuShoper} from "../../../../../interfaces/home.interface";
-import {StateShoesService} from "./services/state-shoes.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -24,7 +23,6 @@ export class ShoesComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private store: Store<{ store: StoreInterface }>,
-    private stateShoesService: StateShoesService,
     private router: Router
   ) {
   }
@@ -41,7 +39,6 @@ export class ShoesComponent implements OnInit {
     this.store.select(storeSelectorLang).subscribe(() => {
       this.translate.get('men.men-shoes-list').subscribe((data: MenuListMenuShoper[]) => {
         this.listMenuItem = data;
-
       })
     })
   }
@@ -55,23 +52,19 @@ export class ShoesComponent implements OnInit {
     }
   }
 
-
   private getShoesDataFromStore() {
     this.store.select(storeSelectorShoesData).subscribe((data) => {
       this.list = data;
       this.originalList = data;
-      this.isLoading = false;
-      console.log(data)
+      this.originalList.length > 0 ? this.isLoading = false : this.isLoading  = true;
     });
   }
 
-  showHoverImage(isHovered: boolean, index: number) {
+ public showHoverImage(isHovered: boolean, index: number) {
     this.isHover[index] = isHovered;
   }
-
-  public openContent(name_id: string, id: number) {
+  public openContent(name_id: string) {
     const newRoute = '_' + name_id.replace(/ /g, '_').toLowerCase();
-    localStorage.setItem('id-shoes', `${id}`)
     this.router.navigate(['/men/shoes' + newRoute], {queryParamsHandling: 'merge'}).then()
   }
 }

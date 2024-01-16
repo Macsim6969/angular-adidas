@@ -12,7 +12,7 @@
   </mat-list>
   <div class="men-shoes-list-products" *ngIf="!isLoading; else loading">
     <mat-card class="products" *ngFor="let item of list; index as i" (mouseover)="showHoverImage(true, i)"
-              (mouseleave)="showHoverImage(false, i)" (click)="openContent(item.name, item.id)">
+              (mouseleave)="showHoverImage(false, i)" (click)="openContent(item.name)">
       <mat-card-header class="products-header">
         <img mat-card-image src="{{item.imageURL[0]}}" alt="">
         <img [ngClass]="{'active': isHover[i]}" class="hover" mat-card-image src="{{item.imageURL_hover}}" alt="">

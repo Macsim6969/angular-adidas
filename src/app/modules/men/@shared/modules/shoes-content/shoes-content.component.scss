@@ -1,0 +1,86 @@
+.shoes-content {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: row;
+
+  .shoes-content-left {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 75%;
+
+    .shoes-content-left-header {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 4px;
+
+      &.wide {
+        max-height: 715px;
+        overflow-y: hidden;
+      }
+
+      &.open {
+        max-height: 100%;
+        animation: open 0.8s;
+      }
+
+      .shoes-content-left-header-image {
+        width: 49.78%;
+        height: auto;
+
+        img {
+          object-fit: cover;
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      button {
+        position: absolute;
+        left: 43%;
+        bottom: 0;
+        font-size: 1.4rem;
+        padding: 15px 30px;
+        border: 1px solid #000000;
+        background-color: #ffff;
+      }
+    }
+  }
+
+  .shoes-content-right {
+    flex-basis: 25%;
+    padding: 15px 32px;
+    display: flex;
+    flex-direction: column;
+
+    .shoes-content-right-color {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      gap: 5px;
+
+      span {
+        max-width: 56px;
+        max-height: 100%;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}
+
+@keyframes open {
+  from {
+    max-height: 715px;
+  }
+  to {
+    max-height: 100%;
+  }
+}

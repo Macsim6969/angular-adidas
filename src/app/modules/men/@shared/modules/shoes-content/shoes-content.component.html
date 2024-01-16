@@ -1,3 +1,25 @@
-<div *ngIf="contentItem">
-  <p>{{contentItem.name}}</p>
-</div>
+<section class="shoes-content" *ngIf="contentItem;else loading">
+  <div class="shoes-content-left">
+    <div *ngIf="contentItem.galleryDop[choiceColorShoes].info; else loading" class="shoes-content-left-header" [ngClass]="{'wide': contentItem.galleryDop[choiceColorShoes].info.length > 4, 'open': isMorePhoto}">
+      <div class="shoes-content-left-header-image" *ngFor="let image of contentItem.galleryDop[choiceColorShoes].info">
+        <img src="{{image}}" alt="">
+      </div>
+      <button (click)="isMorePhoto= !isMorePhoto"> {{isMorePhoto ? 'Less More' : 'Show More' }}</button>
+    </div>
+    <ng-template #loading>
+      <app-loading></app-loading>
+    </ng-template>
+  </div>
+  <div class="shoes-content-right">
+    <div class="shoes-content-right-title">{{contentItem.categ}}</div>
+    <p>Color</p>
+    <div class="shoes-content-right-color">
+      <span *ngFor="let image of contentItem.imageURL; index as i" (click)="choiceColorShoes = i">
+        <img src="{{image}}" alt="">
+      </span>
+    </div>
+  </div>
+</section>
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>
