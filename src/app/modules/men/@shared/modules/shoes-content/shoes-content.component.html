@@ -1,22 +1,36 @@
 <section class="shoes-content" *ngIf="contentItem;else loading">
   <div class="shoes-content-left">
-    <div *ngIf="contentItem.galleryDop[choiceColorShoes].info; else loading" class="shoes-content-left-header" [ngClass]="{'wide': contentItem.galleryDop[choiceColorShoes].info.length > 4, 'open': isMorePhoto}">
+    <div *ngIf="contentItem.galleryDop[choiceColorShoes].info; else loading" class="shoes-content-left-header"
+         [ngClass]="{'wide': contentItem.galleryDop[choiceColorShoes].info.length > 4, 'open': isMorePhoto}">
       <div class="shoes-content-left-header-image" *ngFor="let image of contentItem.galleryDop[choiceColorShoes].info">
         <img src="{{image}}" alt="">
       </div>
-      <button (click)="isMorePhoto= !isMorePhoto"> {{isMorePhoto ? 'Less More' : 'Show More' }}</button>
+      <button (click)="isMorePhoto= !isMorePhoto"> {{ isMorePhoto ? 'Less More' : 'Show More' }}</button>
     </div>
     <ng-template #loading>
       <app-loading></app-loading>
     </ng-template>
   </div>
   <div class="shoes-content-right">
-    <div class="shoes-content-right-title">{{contentItem.categ}}</div>
-    <p>Color</p>
-    <div class="shoes-content-right-color">
-      <span *ngFor="let image of contentItem.imageURL; index as i" (click)="choiceColorShoes = i">
+    <p class="shoes-content-right-title">{{ contentItem.categ }}</p>
+    <p class="shoes-content-right-name">{{contentItem.name}}</p>
+    <p class="shoes-content-right-price">${{contentItem.price}}</p>
+    <p class="shoes-content-right-color">Color</p>
+    <div class="shoes-content-right-colors">
+      <span *ngFor="let image of contentItem.imageURL; index as i" (click)="choiceColor(i)">
         <img src="{{image}}" alt="">
       </span>
+    </div>
+    <p class="shoes-content-right-size">Sizes</p>
+    <div class="shoes-content-right-sizes">
+      <button mat-button *ngFor="let size of sizes" [style.opacity]="contentItem['sizes'].includes(size) ? '1' : '0.4'" [disabled]="!contentItem['sizes'].includes(size)" >
+        {{size}}
+      </button>
+    </div>
+    <p class="shoes-content-right-size-guide">Size guide</p>
+    <div class="shoes-content-right-actions">
+      <button mat-button class="add">ADD TO BAG</button>
+      <button mat-button class="like">Like</button>
     </div>
   </div>
 </section>

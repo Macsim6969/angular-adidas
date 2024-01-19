@@ -56,14 +56,35 @@
     display: flex;
     flex-direction: column;
 
-    .shoes-content-right-color {
+    gap: 14px;
+
+    p{
+      margin: 0;
+      font-size: 1.6rem;
+    }
+
+    .shoes-content-right-name {
+      font-size: 3rem;
+      font-weight: 600;
+    }
+    .shoes-content-right-price{
+      font-weight: 600;
+    }
+
+    .shoes-content-right-color{
+      font-weight: 500;
+      padding-top: 15px;
+    }
+
+    .shoes-content-right-colors {
       display: flex;
       flex-wrap: wrap;
       flex-direction: row;
       gap: 5px;
 
       span {
-        max-width: 56px;
+        cursor: pointer;
+        max-width: 70px;
         max-height: 100%;
 
         img {
@@ -71,6 +92,57 @@
           height: 100%;
           object-fit: cover;
         }
+      }
+    }
+
+    .shoes-content-right-size{
+      padding-top: 25px;
+      font-weight: 500;
+    }
+
+    .shoes-content-right-sizes{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 5px;
+      button{
+        cursor: pointer;
+        padding: 10px 0;
+        width: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid gray;
+      }
+    }
+
+    .shoes-content-right-size-guide{
+      text-decoration: underline;
+    }
+
+    .shoes-content-right-actions{
+      display: flex;
+      flex-direction: row;
+      gap: 24px;
+      width: 100%;
+      justify-content: space-between;
+
+      .add{
+        height: auto;
+        padding: 10px 0;
+        display: flex;
+        background-color: black;
+        color: #e1e5d9;
+        font-size: 2.4rem;
+        flex-basis: 70%;
+      }
+
+      .like{
+        height: auto;
+        font-size: 2.2rem;
+        display: flex;
+        flex-basis: 25%;
+        border: 1px solid gray;
       }
     }
   }
