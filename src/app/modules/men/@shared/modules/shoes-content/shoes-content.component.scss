@@ -48,6 +48,75 @@
         background-color: #ffff;
       }
     }
+
+    .shoes-content-left-content {
+      margin: 50px 0 0 0;
+
+      .left-content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        max-width: 820px;
+        margin: 0 auto;
+        padding: 25px 0;
+        .left-content-header {
+          font-size: 1.8rem;
+          font-weight: 500;
+
+          padding: 15px 0;
+          border-top: 1px solid gray;
+          border-bottom: 1px solid gray;
+
+          width: 100%;
+          text-align: center;
+        }
+
+        .left-content-main {
+          width: 100%;
+          .left-content-main-details {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            max-height: 300px;
+            gap: 15px;
+            .title{
+              font-size: 1.7rem;
+              white-space: normal;
+              max-width: 320px;
+            }
+          }
+        }
+
+        .descriptions-content {
+          display: flex;
+          flex-direction: row;
+          gap: 26px;
+
+          .descriptions-content-left {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+
+            .descriptions-content-left-title {
+              font-size: 2.4rem;
+              font-weight: 500;
+            }
+
+            .descriptions-content-left-text {
+              font-size: 1.8rem;
+            }
+          }
+
+          .descriptions-content-right {
+            img {
+              max-width: 403px;
+              object-fit: cover;
+            }
+          }
+        }
+      }
+
+    }
   }
 
   .shoes-content-right {
@@ -58,7 +127,7 @@
 
     gap: 14px;
 
-    p{
+    p {
       margin: 0;
       font-size: 1.6rem;
     }
@@ -67,11 +136,12 @@
       font-size: 3rem;
       font-weight: 600;
     }
-    .shoes-content-right-price{
+
+    .shoes-content-right-price {
       font-weight: 600;
     }
 
-    .shoes-content-right-color{
+    .shoes-content-right-color {
       font-weight: 500;
       padding-top: 15px;
     }
@@ -95,17 +165,18 @@
       }
     }
 
-    .shoes-content-right-size{
+    .shoes-content-right-size {
       padding-top: 25px;
       font-weight: 500;
     }
 
-    .shoes-content-right-sizes{
+    .shoes-content-right-sizes {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
       gap: 5px;
-      button{
+
+      button {
         cursor: pointer;
         padding: 10px 0;
         width: 80px;
@@ -116,18 +187,18 @@
       }
     }
 
-    .shoes-content-right-size-guide{
+    .shoes-content-right-size-guide {
       text-decoration: underline;
     }
 
-    .shoes-content-right-actions{
+    .shoes-content-right-actions {
       display: flex;
       flex-direction: row;
       gap: 24px;
       width: 100%;
       justify-content: space-between;
 
-      .add{
+      .add {
         height: auto;
         padding: 10px 0;
         display: flex;
@@ -137,7 +208,7 @@
         flex-basis: 70%;
       }
 
-      .like{
+      .like {
         height: auto;
         font-size: 2.2rem;
         display: flex;
