@@ -3,6 +3,7 @@ import {StoreInterface} from "../../../../../store/model/store.model";
 import {Store} from "@ngrx/store";
 import {storeSelectorShoesData} from "../../../../../store/selectors/store.selectors";
 import {ActivatedRoute, Params} from "@angular/router";
+import {MatIconService} from "../../../../../services/matIcon.service";
 
 @Component({
   selector: 'app-shoes-content',
@@ -18,10 +19,13 @@ export class ShoesContentComponent implements OnInit {
     6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12
   ]
 
+  titleActive: 'Descriptions' | 'Details'
   public titleContentLeft: ['Descriptions', 'Details'] = ['Descriptions', 'Details']
+  public tabsActive: number = -1;
   constructor(
     private store: Store<{ store: StoreInterface }>,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private matIcon: MatIconService
   ) {
   }
 
@@ -40,5 +44,12 @@ export class ShoesContentComponent implements OnInit {
 
   public choiceColor(index: number) {
     this.choiceColorShoes = index;
+  }
+
+  public handleTabs(string: 'Details' | 'Descriptions', index: number) {
+    this.titleActive = string;
+    this.tabsActive = index;
+
+
   }
 }

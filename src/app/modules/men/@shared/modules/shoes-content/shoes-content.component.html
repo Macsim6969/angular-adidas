@@ -1,4 +1,10 @@
 <section class="shoes-content" *ngIf="contentItem;else loading">
+  <div class="breacroom-back">
+    <div class="breacroom-back-content" [routerLink]="['/men/shoes']">
+      <span><mat-icon svgIcon="back-arrow"></mat-icon></span>
+      <p class="breacroom-back-content-title" [innerHTML]="'back' | translate"></p>
+    </div>
+  </div>
   <div class="shoes-content-left">
     <div *ngIf="contentItem.galleryDop[choiceColorShoes].info; else loading" class="shoes-content-left-header"
          [ngClass]="{'wide': contentItem.galleryDop[choiceColorShoes].info.length > 4, 'open': isMorePhoto}">
@@ -8,26 +14,27 @@
       <button (click)="isMorePhoto= !isMorePhoto"> {{ isMorePhoto ? 'Less More' : 'Show More' }}</button>
     </div>
     <div class="shoes-content-left-content">
-      <div class="left-content" *ngFor="let title of titleContentLeft">
-        <div class="left-content-header">{{ title }}</div>
-        <div class="left-content-main" *ngIf="title === 'Details';else descriptions">
+      <div class="left-content" *ngFor="let title of titleContentLeft; index as i">
+        <div class="left-content-header" [ngClass]="{'active': tabsActive === i}"
+             (click)="handleTabs(title, i)">{{ title }}
+        </div>
+        <div class="left-content-main"
+             [ngClass]="{'active': titleActive === 'Details'}"
+             *ngIf="title === 'Details';else descriptions">
           <ul class="left-content-main-details">
             <li *ngFor="let details of contentItem['details']" class="title">{{ details }}</li>
           </ul>
         </div>
         <ng-template #descriptions>
-          <div class="descriptions-content">
+          <div class="descriptions-content" [ngClass]="{'active': titleActive === 'Descriptions'}">
             <div class="descriptions-content-left">
-              <h3 class="descriptions-content-left-title">{{ contentItem['descriptions']['name']}}</h3>
-              <p class="descriptions-content-left-text">{{ contentItem['descriptions']['text']}}</p>
+              <h3 class="descriptions-content-left-title">{{ contentItem['descriptions']['name'] }}</h3>
+              <p class="descriptions-content-left-text">{{ contentItem['descriptions']['text'] }}</p>
             </div>
             <div class="descriptions-content-right">
               <img src="{{contentItem['descriptions']['image']}}" alt="">
             </div>
-
-
           </div>
-
         </ng-template>
       </div>
     </div>
@@ -36,26 +43,29 @@
     </ng-template>
   </div>
   <div class="shoes-content-right">
-    <p class="shoes-content-right-title">{{ contentItem.categ }}</p>
-    <p class="shoes-content-right-name">{{ contentItem.name }}</p>
-    <p class="shoes-content-right-price">${{ contentItem.price }}</p>
-    <p class="shoes-content-right-color">Color</p>
-    <div class="shoes-content-right-colors">
+    <div class="shoes-content-right-fixed">
+      <p class="shoes-content-right-title">{{ contentItem.categ }}</p>
+      <p class="shoes-content-right-name">{{ contentItem.name }}</p>
+      <p class="shoes-content-right-price">${{ contentItem.price }}</p>
+      <p class="shoes-content-right-color">Color</p>
+      <div class="shoes-content-right-colors">
       <span *ngFor="let image of contentItem.imageURL; index as i" (click)="choiceColor(i)">
         <img src="{{image}}" alt="">
       </span>
-    </div>
-    <p class="shoes-content-right-size">Sizes</p>
-    <div class="shoes-content-right-sizes">
-      <button mat-button *ngFor="let size of sizes" [style.opacity]="contentItem['sizes'].includes(size) ? '1' : '0.4'"
-              [disabled]="!contentItem['sizes'].includes(size)">
-        {{ size }}
-      </button>
-    </div>
-    <p class="shoes-content-right-size-guide">Size guide</p>
-    <div class="shoes-content-right-actions">
-      <button mat-button class="add">ADD TO BAG</button>
-      <button mat-button class="like">Like</button>
+      </div>
+      <p class="shoes-content-right-size">Sizes</p>
+      <div class="shoes-content-right-sizes">
+        <button mat-button *ngFor="let size of sizes"
+                [style.opacity]="contentItem['sizes'].includes(size) ? '1' : '0.4'"
+                [disabled]="!contentItem['sizes'].includes(size)">
+          {{ size }}
+        </button>
+      </div>
+      <p class="shoes-content-right-size-guide">Size guide</p>
+      <div class="shoes-content-right-actions">
+        <button mat-button class="add">ADD TO BAG</button>
+        <button mat-button class="like">Like</button>
+      </div>
     </div>
   </div>
 </section>
