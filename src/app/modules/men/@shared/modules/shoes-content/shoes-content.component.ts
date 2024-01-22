@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {StoreInterface} from "../../../../../store/model/store.model";
 import {Store} from "@ngrx/store";
-import {storeSelectorShoesData} from "../../../../../store/selectors/store.selectors";
+import {storeSelectorHoodiesData, storeSelectorShoesData} from "../../../../../store/selectors/store.selectors";
 import {ActivatedRoute, Params} from "@angular/router";
 import {MatIconService} from "../../../../../services/matIcon.service";
 
@@ -22,6 +22,7 @@ export class ShoesContentComponent implements OnInit {
   titleActive: 'Descriptions' | 'Details'
   public titleContentLeft: ['Descriptions', 'Details'] = ['Descriptions', 'Details']
   public tabsActive: number = -1;
+
   constructor(
     private store: Store<{ store: StoreInterface }>,
     private route: ActivatedRoute,
@@ -31,22 +32,39 @@ export class ShoesContentComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-      const targetId = params['id'].split('_').slice(1).map((word) => word.toUpperCase()).join(' ')
-      this.store.select(storeSelectorShoesData).subscribe((data: any[]) => {
-        if (data.length > 0) {
-          this.contentItem = data.find((item: any) => item.name === targetId);
-          console.log(this.contentItem)
+        const targetId = params['shoes'].split('_').slice(1).map((word) => word.toUpperCase()).join(' ')
+        // this.store.select(storeSelectorShoesData).subscribe((data: any[]) => {
+        //   if (data.length > 0) {
+        //     this.contentItem = data.find((item: any) => item.name === targetId);
+        //   }
+        // })
+        this.store.select(storeSelectorHoodiesData).subscribe((data: any[]) => {
+          if (data.length > 0) {
+            this.contentItem = data.find((item: any) => item.name === targetId);
+            console.log(this.contentItem)
+          }
+        })
+      }
+    )
 
-        }
-      })
+  }
+
+  private getDataHoodies(targetId: number) {
+    console.log(targetId, 'hoodie')
+    this.store.select(storeSelectorHoodiesData).subscribe((data: any[]) => {
+      if (data.length > 0) {
+        this.contentItem = data.find((item: any) => item.name === targetId);
+        console.log(this.contentItem)
+      }
     })
   }
 
-  public choiceColor(index: number) {
+  choiceColor(index: number) {
     this.choiceColorShoes = index;
   }
 
-  public handleTabs(string: 'Details' | 'Descriptions', index: number) {
+
+  handleTabs(string: 'Details' | 'Descriptions', index: number) {
     this.titleActive = string;
     this.tabsActive = index;
 

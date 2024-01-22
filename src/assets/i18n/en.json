@@ -37,7 +37,7 @@
       {
         "image": "./assets/images/adidas/men/list/hoodies.jpg",
         "name": "hoodies & sweatshirts",
-        "route": "/men_hoodies-sweatshirts"
+        "route": "/men/hoodies"
       },
       {
         "image": "./assets/images/adidas/men/list/pants.jpg",

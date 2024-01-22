@@ -1,7 +1,9 @@
 mat-list{
   mat-list-item{
     cursor: pointer;
+    font-size: 1.8rem;
     &:hover{
+      color: white;
       background-color: #afacac;
     }
   }

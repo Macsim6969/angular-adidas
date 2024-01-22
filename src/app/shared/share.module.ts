@@ -8,6 +8,7 @@ import {CommonModule} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {LoadingComponent} from "./components/loading/loading.component";
+import {MatCardModule} from "@angular/material/card";
 @NgModule({
   declarations: [
     LoadingComponent
@@ -18,7 +19,8 @@ import {LoadingComponent} from "./components/loading/loading.component";
     MatListModule,
     MatButtonModule,
     TranslationModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatCardModule
   ],
   exports: [
     MatToolbarModule,
@@ -27,7 +29,8 @@ import {LoadingComponent} from "./components/loading/loading.component";
     MatButtonModule,
     TranslationModule,
     MatProgressSpinnerModule,
-    LoadingComponent
+    LoadingComponent,
+    MatCardModule
   ],
   providers: [MatIconService]
 })

@@ -7,7 +7,7 @@ import {ShoesComponent} from "./shoes.component";
 import {MatCardModule} from "@angular/material/card";
 
 const routes: Routes = [
-  {path: '', component: ShoesComponent }
+  {path: '', component: ShoesComponent}
 ]
 @NgModule({
   declarations: [
