@@ -26,7 +26,6 @@ export class StateMenService {
   getDataHoodies(){
     this.http.get<ProdsFromService[]>('https://angular-adidas-default-rtdb.firebaseio.com/hoodies.json').pipe(take(1)).subscribe((data: ProdsFromService[]) =>{
       this.store.dispatch(newHoodiesData({value: data}))
-      console.log(data)
     })
   }
 }

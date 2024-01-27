@@ -15,8 +15,12 @@ export class ShoesContentComponent implements OnInit {
   public choiceColorShoes: number = 0;
   public isMorePhoto: boolean = false;
 
-  public sizes: number[] = [
+  public sizesShoes: number[] = [
     6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12
+  ]
+
+  public sizesClothes: string[] = [
+    'XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL'
   ]
 
   titleActive: 'Descriptions' | 'Details'

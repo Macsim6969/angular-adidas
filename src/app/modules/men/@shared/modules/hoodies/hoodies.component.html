@@ -2,12 +2,12 @@
 <!--  <app-shoes-header></app-shoes-header>-->
   <mat-list role="men-shoes-list" class="men-list">
     <mat-list-item
-      (click)="choiceMenu(i, itemList.filter)"
-      [attr.aria-label]="itemList['list-item']" class="menu-list-item"
-      *ngFor="let itemList of listMenuItem; index as i"
+        *ngFor="let itemList of listMenuItem; index as i"
+      (click)="choiceMenu(i, itemList)"
+      [attr.aria-label]="itemList" class="menu-list-item"
       role="men-shoes-list-item"
       [ngClass]="{'active' : listMenuItemActive === i}"
-    >{{ itemList['list-item'] }}
+    >{{ itemList }}
     </mat-list-item>
   </mat-list>
   <div class="men-shoes-list-products" *ngIf="!isLoading; else loading">

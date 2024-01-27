@@ -54,13 +54,22 @@
       </span>
       </div>
       <p class="shoes-content-right-size">Sizes</p>
-      <div class="shoes-content-right-sizes">
-        <button mat-button *ngFor="let size of sizes"
+      <div class="shoes-content-right-sizes" *ngIf="contentItem.sizes.includes(8);else clothes">
+        <button mat-button *ngFor="let size of sizesShoes"
                 [style.opacity]="contentItem['sizes'].includes(size) ? '1' : '0.4'"
                 [disabled]="!contentItem['sizes'].includes(size)">
           {{ size }}
         </button>
       </div>
+      <ng-template #clothes>
+        <div class="shoes-content-right-sizes">
+          <button mat-button *ngFor="let size of sizesClothes"
+                  [style.opacity]="contentItem['sizes'].includes(size) ? '1' : '0.4'"
+                  [disabled]="!contentItem['sizes'].includes(size)">
+            {{ size }}
+          </button>
+        </div>
+      </ng-template>
       <p class="shoes-content-right-size-guide">Size guide</p>
       <div class="shoes-content-right-actions">
         <button mat-button class="add">ADD TO BAG</button>
