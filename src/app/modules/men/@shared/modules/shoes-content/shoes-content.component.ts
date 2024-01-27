@@ -1,7 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {StoreInterface} from "../../../../../store/model/store.model";
 import {Store} from "@ngrx/store";
-import {storeSelectorHoodiesData, storeSelectorShoesData} from "../../../../../store/selectors/store.selectors";
+import {
+  storeSelectorClothesData,
+  storeSelectorHoodiesData,
+  storeSelectorShoesData
+} from "../../../../../store/selectors/store.selectors";
 import {ActivatedRoute, Params} from "@angular/router";
 import {MatIconService} from "../../../../../services/matIcon.service";
 
@@ -37,15 +41,11 @@ export class ShoesContentComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
         const targetId = params['shoes'].split('_').slice(1).map((word) => word.toUpperCase()).join(' ')
-        // this.store.select(storeSelectorShoesData).subscribe((data: any[]) => {
-        //   if (data.length > 0) {
-        //     this.contentItem = data.find((item: any) => item.name === targetId);
-        //   }
-        // })
-        this.store.select(storeSelectorHoodiesData).subscribe((data: any[]) => {
-          if (data.length > 0) {
-            this.contentItem = data.find((item: any) => item.name === targetId);
-            console.log(this.contentItem)
+        const targetClothes = params['shoes'].split('_')[0]
+
+        this.store.select(storeSelectorClothesData).subscribe(data => {
+          if (data[targetClothes]) {
+            this.contentItem = data[targetClothes].find(data => data.name == targetId)
           }
         })
       }

@@ -15,5 +15,6 @@ export class MenComponent implements OnInit{
     this.translate.use('en');
     this.stateShoesService.getDataShoes();
     this.stateShoesService.getDataHoodies();
+    this.stateShoesService.getDataClothes();
   }
 }

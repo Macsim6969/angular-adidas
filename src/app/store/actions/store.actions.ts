@@ -31,3 +31,8 @@ export const newHoodiesData = createAction(
   NEWHOODIESDATA,
   props<{value: any}>()
 )
+
+export const newClothesData = createAction(
+  'NEWCLOTHES',
+  props<{value: any}>()
+)
