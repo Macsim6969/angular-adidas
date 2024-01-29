@@ -31,7 +31,6 @@ export class StateMenService {
 
   getDataClothes(){
     this.http.get<ProdsFromService[]>('https://angular-adidas-default-rtdb.firebaseio.com/clothes.json').pipe(take(1)).subscribe((data: ProdsFromService[]) =>{
-      console.log(data)
       this.store.dispatch(newClothesData({value: data}))
     })
   }

@@ -30,11 +30,6 @@
         "route": "/men/shoes"
       },
       {
-        "image": "./assets/images/adidas/men/list/tops.jpg",
-        "name": "tops",
-        "route": "/men_tops"
-      },
-      {
         "image": "./assets/images/adidas/men/list/hoodies.jpg",
         "name": "hoodies & sweatshirts",
         "route": "/men/hoodies"
@@ -42,7 +37,7 @@
       {
         "image": "./assets/images/adidas/men/list/pants.jpg",
         "name": "pants",
-        "route": "/men_pants"
+        "route": "/men/pants"
       }
     ],
     "articles": {
