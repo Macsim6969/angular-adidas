@@ -8,11 +8,11 @@ import {ActivatedRoute, Params} from "@angular/router";
 import {MatIconService} from "../../../../../services/matIcon.service";
 
 @Component({
-  selector: 'app-shoes-content',
-  templateUrl: './shoes-content.component.html',
-  styleUrl: './shoes-content.component.scss'
+  selector: 'app-clothes-content',
+  templateUrl: './clothes-content.component.html',
+  styleUrl: './clothes-content.component.scss'
 })
-export class ShoesContentComponent implements OnInit {
+export class ClothesContentComponent implements OnInit {
   public contentItem: any;
   public choiceColorShoes: number = 0;
   public isMorePhoto: boolean = false;

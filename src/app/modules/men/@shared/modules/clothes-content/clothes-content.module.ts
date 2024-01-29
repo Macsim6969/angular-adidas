@@ -1,15 +1,15 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {RouterModule, Routes} from "@angular/router";
-import {ShoesContentComponent} from "./shoes-content.component";
+import {ClothesContentComponent} from "./clothes-content.component";
 import {ShareModule} from "../../../../../shared/share.module";
 
 const routes: Routes = [
-  {path: '', component: ShoesContentComponent}
+  {path: '', component: ClothesContentComponent}
 ]
 @NgModule({
   declarations:[
-    ShoesContentComponent
+    ClothesContentComponent
   ],
   imports: [
     CommonModule,
@@ -19,6 +19,6 @@ const routes: Routes = [
   exports: []
 })
 
-export class ShoesContentModule {
+export class ClothesContentModule {
 
 }

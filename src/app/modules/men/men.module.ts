@@ -13,8 +13,8 @@ const routes: Routes = [
   {
     path: '', component: MenComponent, children: [
       {path: '', component: MenMenuComponent},
-      {path: ':menu', loadChildren: () => import('./@shared/modules/hoodies/hoodies.module').then(m => m.HoodiesModule)},
-      {path: ':menu/:clothes', loadChildren: () => import('./@shared/modules/shoes-content/shoes-content.module').then(m => m.ShoesContentModule)},
+      {path: ':menu', loadChildren: () => import('./@shared/modules/clothes/clothes.module').then(m => m.ClothesModule)},
+      {path: ':menu/:clothes', loadChildren: () => import('./@shared/modules/clothes-content/clothes-content.module').then(m => m.ClothesContentModule)},
     ]
   }
 ]
