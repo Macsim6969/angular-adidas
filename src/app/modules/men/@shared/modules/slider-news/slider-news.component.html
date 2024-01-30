@@ -1,0 +1,11 @@
+<section class="sliders-news">
+  <h2 class="sliders-news-title">OURS NEW COLLECTIONS</h2>
+  <div class="slider-news-collections">
+    <drag-scroll #nav>
+      <div (click)="openNewCollection(clothes.name)" class="collections-block" drag-scroll-item *ngFor="let clothes of newsList">
+        <img src="{{clothes.imageURL[0]}}" alt="">
+      </div>
+    </drag-scroll>
+  </div>
+</section>
+

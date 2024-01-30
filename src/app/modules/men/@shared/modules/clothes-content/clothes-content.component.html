@@ -7,7 +7,7 @@
   </div>
   <div class="shoes-content-left">
     <div *ngIf="contentItem.galleryDop[choiceColorShoes].info; else loading" class="shoes-content-left-header"
-         [ngClass]="{'wide': contentItem.galleryDop[choiceColorShoes].info.length > 4, 'open': isMorePhoto}">
+         [ngClass]="{'wide': contentItem.galleryDop[choiceColorShoes].info.length > 2, 'open': isMorePhoto}">
       <div class="shoes-content-left-header-image" *ngFor="let image of contentItem.galleryDop[choiceColorShoes].info">
         <img src="{{image}}" alt="">
       </div>
@@ -38,6 +38,7 @@
         </ng-template>
       </div>
     </div>
+    <app-slider-news></app-slider-news>
     <ng-template #loading>
       <app-loading></app-loading>
     </ng-template>

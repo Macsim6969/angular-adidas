@@ -9,7 +9,7 @@
     },
     "menu-navigation": [
       {
-        "name": "men",
+        "name": "Men",
         "route": "/men"
       }
     ]
