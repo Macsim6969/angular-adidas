@@ -1,13 +1,32 @@
-.options{
+.options {
   display: flex;
   gap: 24px;
   align-items: center;
 
-  .icon{
+  .options-search {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 0 10px;
+    input {
+      border: unset;
+      outline: unset;
+      padding: 8px 0;
+      font-size: 1.6rem;
+      &:active{
+        border: unset;
+      }
+    }
+    .options-search-icons{
+      cursor: pointer;
+    }
+  }
+
+  .icon {
     cursor: pointer;
   }
 
-  .dropdown{
+  .dropdown {
     position: absolute;
     z-index: 9;
     top: 66px;

@@ -1,6 +1,6 @@
 <section class="shoes-content" *ngIf="contentItem;else loading">
   <div class="breacroom-back">
-    <div class="breacroom-back-content" [routerLink]="['/men/shoes']">
+    <div class="breacroom-back-content" (click)="backRoute()">
       <span><mat-icon svgIcon="back-arrow"></mat-icon></span>
       <p class="breacroom-back-content-title" [innerHTML]="'back' | translate"></p>
     </div>

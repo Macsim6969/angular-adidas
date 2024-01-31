@@ -4,7 +4,7 @@ import {Store} from "@ngrx/store";
 import {
   storeSelectorClothesData, storeSelectorHoodiesData, storeSelectorShoesData
 } from "../../../../../store/selectors/store.selectors";
-import {ActivatedRoute, Params} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {MatIconService} from "../../../../../services/matIcon.service";
 
 @Component({
@@ -24,22 +24,30 @@ export class ClothesContentComponent implements OnInit {
   titleActive: 'Descriptions' | 'Details'
   public titleContentLeft: ['Descriptions', 'Details'] = ['Descriptions', 'Details']
   public tabsActive: number = -1;
+  public dataParam: string
 
-  constructor(private store: Store<{
-    store: StoreInterface
-  }>, private route: ActivatedRoute, private matIcon: MatIconService) {
+  constructor(
+    private store: Store<{ store: StoreInterface }>,
+    private route: ActivatedRoute, private matIcon: MatIconService,
+    private router: Router
+  ) {
   }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       const targetId = params['clothes'].split('_').map((word) => word.toUpperCase()).join(' ')
       this.store.select(storeSelectorClothesData).subscribe(data => {
+        this.dataParam = params['menu']
         if (data[params['menu']]) {
           this.contentItem = data[params['menu']].find(data => data.name == targetId)
         }
       })
     })
 
+  }
+
+  backRoute() {
+    this.router.navigate(['/men/' +this.dataParam], {queryParamsHandling: 'merge'}).then();
   }
 
   choiceColor(index: number) {

@@ -1,23 +1,27 @@
-.sliders-news{
- max-width: 1000px;
+.sliders-news {
+  max-width: 1000px;
   @media (max-width: 1400px) {
     width: 90%;
   }
-  .sliders-news-title{
+
+  .sliders-news-title {
     margin: 0;
     font-size: 2.8rem;
     padding: 0 0 30px 0;
   }
-  .slider-news-collections{
+
+  .slider-news-collections {
     overflow: hidden;
-   ::ng-deep drag-scroll{
+
+    ::ng-deep drag-scroll {
       display: flex !important;
 
-      .drag-scroll-content{
+      .drag-scroll-content {
         width: 100% !important;
         height: 100% !important;
         display: flex !important;
         padding-bottom: 6rem;
+
         &::-webkit-scrollbar-track {
           background-color: #ECEFF1;
         }
@@ -28,24 +32,54 @@
         }
 
         &::-webkit-scrollbar-thumb {
-          background:  #000000;
+          background: #000000;
           width: 0.5rem;
           border-radius: 0.4rem;
 
         }
-        .collections-block{
+
+        .collections-block {
           cursor: pointer;
           min-width: 300px;
           display: flex !important;
-          justify-content: center;
-          &:first-child{
+          justify-content: flex-start;
+          align-items: center;
+
+          box-shadow: unset;
+
+          &:hover{
+            border: 2px solid black;
+          }
+          &:first-child {
             min-width: 278px;
           }
-          &:last-child{
+
+          &:last-child {
             min-width: 278px;
           }
-          img{
-            width: 278px;
+
+          .collections-block-header {
+            position: relative;
+            padding: 0;
+            img {
+              width: 278px;
+            }
+
+            .price {
+              position: absolute;
+              background-color: white;
+              bottom: 0;
+              left: 25px;
+              font-size: 1.5rem;
+              padding: 5px 8px;
+              margin: 0;
+            }
+          }
+          mat-card-content{
+            p{
+              font-size: 1.6rem;
+              white-space: normal;
+            }
           }
         }
 
