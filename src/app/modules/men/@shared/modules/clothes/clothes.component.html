@@ -1,5 +1,10 @@
 <section class="men">
-<!--  <app-shoes-header></app-shoes-header>-->
+  <div class="header-description">
+    <div class="header-description-content" *ngFor="let title of headerTitleMenu;  index as t" [ngClass]="{'show': listMenuItemActive === t}">
+      <h2>{{title.descriptionTitle}}</h2>
+      <p>{{title.descriptionText}}</p>
+    </div>
+  </div>
   <mat-list role="men-shoes-list" class="men-list">
     <mat-list-item
         *ngFor="let itemList of listMenuItem; index as i"

@@ -13,8 +13,6 @@ export class MenComponent implements OnInit{
 
   ngOnInit() {
     this.translate.use('en');
-    this.stateShoesService.getDataShoes();
-    this.stateShoesService.getDataHoodies();
     this.stateShoesService.getDataClothes();
   }
 }

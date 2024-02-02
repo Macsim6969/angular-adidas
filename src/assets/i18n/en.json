@@ -44,39 +44,73 @@
       "articlesTitle": "MEN’S CLOTHING & SHOES",
       "articlesDesc": "As a creator, you look for ways to excel and express yourself when and where you can, from reaching for that last rep to evolving your streetwear style. Log miles or tear down the baseline in men's shoes with responsive cushioning. Rep an athletic style off the field in lifestyle apparel born of sport heritage. From athletes to streetwear enthusiasts, adidas men’s clothing and shoes exist to let you go harder, dig deeper, and get the most out of yourself, from the pitch to the street to the road less traveled."
     },
-    "men-shoes-list": [
-      {
-        "list-item": "All Men's Shoes",
-        "filter": "all"
-      },
-      {
-        "list-item": "Sneakers",
-        "filter": "sneakers"
-      },
-      {
-        "list-item": "Running",
-        "filter": "running"
-      },
-      {
-        "list-item": "Soccer",
-        "filter": "soccer"
-      },
-      {
-        "list-item": "Basketball",
-        "filter": "basketball"
-      },
-      {
-        "list-item": "Slides & Sandals",
-        "filter": "sandals"
-      },
-      {
-        "list-item": "Hiking",
-        "filter": "hiking"
-      },
-      {
-        "list-item": "Football",
-        "filter": "football"
-      }
-    ]
+    "header-content": {
+      "shoes": [
+        {
+          "descriptionTitle": "MEN'S SHOES",
+          "descriptionText": "Shop adidas for all styles of men's shoes including casual sneakers, high-performance running shoes, and comfy slides."
+        },
+        {
+          "descriptionTitle": "MEN'S ATHLETIC SHOES & SNEAKERS",
+          "descriptionText": "From Ultraboost to Superstar, you can find the perfect men’s athletic shoes to fit your lifestyle. Sneakers made with your comfort in mind so you can put all of your focus into your next session."
+        },
+        {
+          "descriptionTitle": "MEN'S SOCCER CLEATS & SHOES"
+        },
+        {
+          "descriptionTitle": "MEN'S FOOTBALL CLEATS",
+          "descriptionText": "Play like you mean it with men’s football cleats. When you’re speeding across the field in supportive gear built for speed and comfort, the game will belong to you."
+        },
+        {
+          "descriptionTitle": "MEN'S RUNNING SHOES",
+          "descriptionText": "Run your way. Whether it's stability, climate control or comfort you're looking for, these men's running shoes give you lots of options."
+        },
+        {
+          "descriptionTitle": "MEN'S SLIDES & SANDALS",
+          "descriptionText": "Men’s slides are the ultimate chill day essential whether you’re relaxing or running errands. adidas sandals are designed with a contoured footbed and plush cushioning, so you can kick back."
+        },
+        {
+          "descriptionTitle": "MEN'S BASKETBALL SHOES"
+        },
+        {
+          "descriptionTitle": "MEN'S HIKING SHOES",
+          "descriptionText": "From insulated boots made for the cold to lightweight trail runners designed to move fast in the mountains, men's hiking shoes help you find your footing."
+        }
+      ],
+      "hoodies": [
+        {
+          "descriptionTitle": "HOODIES *ALL"
+        },
+        {
+          "descriptionTitle": "HOODIES *SPORTSWEAR"
+        },
+        {
+          "descriptionTitle": "HOODIES *TRAINING"
+        },
+        {
+          "descriptionTitle": "HOODIES *ORIGINALS"
+        },
+        {
+          "descriptionTitle": "HOODIES *RUNNING"
+        }
+      ],
+      "pants": [
+        {
+          "descriptionTitle": "PANTS *ALL"
+        },
+        {
+          "descriptionTitle": "PANTS *SPORTSWEAR"
+        },
+        {
+          "descriptionTitle": "PANTS *TRAINING"
+        },
+        {
+          "descriptionTitle": "PANTS *ORIGINALS"
+        },
+        {
+          "descriptionTitle": "PANTS *RUNNING"
+        }
+      ]
+    }
   }
 }

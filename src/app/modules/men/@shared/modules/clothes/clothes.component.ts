@@ -4,7 +4,8 @@ import {TranslateService} from "@ngx-translate/core";
 import {Store} from "@ngrx/store";
 import {StoreInterface} from "../../../../../store/model/store.model";
 import {ActivatedRoute, Params, Router} from "@angular/router";
-import {storeSelectorClothesData} from "../../../../../store/selectors/store.selectors";
+import {storeSelectorClothesData, storeSelectorLang} from "../../../../../store/selectors/store.selectors";
+import {clothesMenuHeaderTitle} from "../../../../../interfaces/clothes.interface";
 
 
 @Component({
@@ -20,6 +21,7 @@ export class ClothesComponent implements OnInit {
   public isLoading: boolean = true;
   public activeRoute: string
   private originalList: ProdsFromService[];
+  public headerTitleMenu: clothesMenuHeaderTitle[]
 
   constructor(
     private translate: TranslateService,
@@ -31,10 +33,10 @@ export class ClothesComponent implements OnInit {
 
   ngOnInit() {
     this.translate.use('en')
-    // this.getListMenu();
     this.getShoesDataFromStore()
 
     this.choiceMenu(0, 'All');
+    this.getContentHeader();
   }
 
   public choiceMenu(index: number, filter: string) {
@@ -63,14 +65,22 @@ export class ClothesComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.activeRoute = params['menu']
       this.store.select(storeSelectorClothesData).subscribe((data: any[]) => {
-        console.log(params['menu'])
         this.list = data[params['menu']];
         this.originalList = data[params['menu']];
-        this.listMenuItem = Array.from(new Set(data[params['menu']].map(item => item.category)))
+        this.listMenuItem = Array.from(new Set(data[params['menu']]?.map(item => item.category)))
         this.listMenuItem.unshift('All');
         this.listMenuItem.length > 0 ? this.isLoading = false : this.isLoading = true;
       });
     })
 
+  }
+
+  private getContentHeader() {
+    this.store.select(storeSelectorLang).subscribe(() => {
+      this.translate.get(`men.header-content.${this.activeRoute}`).subscribe((data: clothesMenuHeaderTitle[]) => {
+        console.log(data)
+        this.headerTitleMenu = data
+      })
+    })
   }
 }

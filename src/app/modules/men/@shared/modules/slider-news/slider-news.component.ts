@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChildren} from '@angular/core';
 import {DragScrollComponent} from "ngx-drag-scroll";
 import {Store} from "@ngrx/store";
 import {StoreInterface} from "../../../../../store/model/store.model";
-import {storeSelectorHoodiesData} from "../../../../../store/selectors/store.selectors";
+import {storeSelectorClothesData, storeSelectorHoodiesData} from "../../../../../store/selectors/store.selectors";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
@@ -22,16 +22,16 @@ export class SliderNewsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.select(storeSelectorHoodiesData).subscribe(data => {
-      this.newsList = data;
+    this.store.select(storeSelectorClothesData).subscribe(data => {
+      this.newsList = data['valentines'];
     })
   }
 
-  openNewCollection(id: string){
+  openNewCollection(id: string) {
     const newRoute = id.replace(/ /g, '_').toLowerCase();
     const currentMenu = this.route.snapshot.params['menu'];
-    const newRouterLink = 'men/hoodies/' +newRoute;
-console.log(newRouterLink)
-   this.router.navigate([newRouterLink], {queryParamsHandling: 'merge'}).then();
+    const newRouterLink = 'men/valentines/' + newRoute;
+    console.log(newRouterLink)
+    this.router.navigate([newRouterLink], {queryParamsHandling: 'merge'}).then();
   }
 }

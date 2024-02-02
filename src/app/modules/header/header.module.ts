@@ -7,6 +7,7 @@ import {TranslateModule} from "@ngx-translate/core";
 import {OptionsComponent} from "./@shared/components/options/options.component";
 import {HeaderService} from "./@shared/services/header.service";
 import {OptionsDropdownComponent} from "./@shared/components/options-dropdown/options-dropdown.component";
+import {SearchPipe} from "./@shared/pipe/search.pipe";
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import {OptionsDropdownComponent} from "./@shared/components/options-dropdown/op
     HeaderComponent,
     MenuComponent,
     OptionsComponent,
-    OptionsDropdownComponent
+    OptionsDropdownComponent,
+    SearchPipe
   ],
   imports: [
     CommonModule,
