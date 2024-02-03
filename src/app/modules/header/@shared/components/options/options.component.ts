@@ -24,7 +24,7 @@ export class OptionsComponent implements OnInit {
   ngOnInit() {
     this.store.select(storeSelectorClothesData).subscribe((data) => {
       if (data && data['hoodies']) {
-        this.searchItem = [...data['hoodies'], ...data['pants'], ...data['shoes']];
+        this.searchItem = [...data['hoodies'], ...data['pants'], ...data['shoes'], ...data['valentines']];
         console.log(this.searchItem);
       }
     });
