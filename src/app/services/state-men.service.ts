@@ -1,9 +1,9 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {newClothesData, newHoodiesData, newShoesData} from "../../../../store/actions/store.actions";
+import {newClothesData, newHoodiesData, newShoesData} from "../store/actions/store.actions";
 import {Store} from "@ngrx/store";
-import {StoreInterface} from "../../../../store/model/store.model";
-import {ProdsFromService} from "../../../../interfaces/home.interface";
+import {StoreInterface} from "../store/model/store.model";
+import {ProdsFromService} from "../interfaces/home.interface";
 import {Observable, take} from "rxjs";
 
 

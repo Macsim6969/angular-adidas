@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
-import {StateMenService} from "./@shared/services/state-men.service";
+import {StateMenService} from "../../services/state-men.service";
 
 @Component({
   selector: 'app-men',
@@ -13,6 +13,5 @@ export class MenComponent implements OnInit{
 
   ngOnInit() {
     this.translate.use('en');
-    this.stateShoesService.getDataClothes();
   }
 }

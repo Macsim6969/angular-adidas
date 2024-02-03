@@ -8,6 +8,7 @@ import {storeSelectorCountry, storeSelectorLang} from "./store/selectors/store.s
 import {primitivesAreNotAllowedInProps} from "@ngrx/store/src/models";
 import {TranslateService} from "@ngx-translate/core";
 import {HeaderService} from "./modules/header/@shared/services/header.service";
+import {StateMenService} from "./services/state-men.service";
 
 @Component({
   selector: 'app-root',
@@ -29,9 +30,9 @@ export class AppComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private translate: TranslateService,
-    private headerService: HeaderService
-  ) {
-  }
+    private headerService: HeaderService,
+    private stateShoesService: StateMenService
+  ) {}
 
   ngOnInit() {
     this.getDataObservFromStore()
@@ -39,6 +40,7 @@ export class AppComponent implements OnInit {
     this.addedQueryParams()
     this.getDataFromHeaderService()
     this.checkNavigation()
+    this.stateShoesService.getDataClothes();
   }
 
   private getDataObservFromStore() {

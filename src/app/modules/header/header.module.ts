@@ -8,6 +8,7 @@ import {OptionsComponent} from "./@shared/components/options/options.component";
 import {HeaderService} from "./@shared/services/header.service";
 import {OptionsDropdownComponent} from "./@shared/components/options-dropdown/options-dropdown.component";
 import {SearchPipe} from "./@shared/pipe/search.pipe";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {SearchPipe} from "./@shared/pipe/search.pipe";
   imports: [
     CommonModule,
     ShareModule,
-    TranslateModule
+    TranslateModule,
+    FormsModule
   ],
   exports: [
     HeaderComponent,

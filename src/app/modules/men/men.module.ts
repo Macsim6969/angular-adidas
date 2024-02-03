@@ -7,7 +7,7 @@ import {MenMenuComponent} from "./@shared/components/men-menu/men-menu.component
 import {MatCardModule} from "@angular/material/card";
 import {ArticlesComponent} from "./@shared/components/articles/articles.component";
 import {HttpClientModule} from "@angular/common/http";
-import {StateMenService} from "./@shared/services/state-men.service";
+import {StateMenService} from "../../services/state-men.service";
 import {SliderNewsModule} from "./@shared/modules/slider-news/slider-news.module";
 
 const routes: Routes = [
@@ -33,7 +33,7 @@ const routes: Routes = [
     MatCardModule,
     HttpClientModule
   ],
-  providers: [StateMenService]
+  providers: []
 })
 
 export class MenModule {

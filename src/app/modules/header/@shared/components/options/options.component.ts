@@ -4,6 +4,7 @@ import {HeaderService} from "../../services/header.service";
 import {StoreInterface} from "../../../../../store/model/store.model";
 import {Store} from "@ngrx/store";
 import {storeSelectorClothesData} from "../../../../../store/selectors/store.selectors";
+import {iterator} from "rxjs/internal/symbol/iterator";
 
 @Component({
   selector: 'app-options',
@@ -14,19 +15,20 @@ export class OptionsComponent implements OnInit {
 
   isDropdown: boolean;
   searchItem: any
-
+  searchText: string
   constructor(
     private matIcon: MatIconService,
-    private headerService: HeaderService,
     private store: Store<{store: StoreInterface}>
   ) {}
 
   ngOnInit() {
-    // this.store.select(storeSelectorClothesData).subscribe((data) =>{
-    //   if(data){
-    //     this.searchItem = [...data['hoodies'], ...data['pants'], ...data['shoes']]
-    //   }
-    // })
+    this.store.select(storeSelectorClothesData).subscribe((data) => {
+      if (data && data['hoodies']) {
+        this.searchItem = [...data['hoodies'], ...data['pants'], ...data['shoes']];
+        console.log(this.searchItem);
+      }
+    });
+
   }
 
   toggleTooltip() {
@@ -36,4 +38,6 @@ export class OptionsComponent implements OnInit {
   closeDropdown(event){
   this.isDropdown = event;
   }
+
+  protected readonly iterator = iterator;
 }

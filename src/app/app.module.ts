@@ -9,6 +9,7 @@ import {HeaderModule} from "./modules/header/header.module";
 import {ChoiceLanguagesModule} from "./modules/choice-languages/choice-languages.module";
 import {AppRoutingModule} from "./app-routing.module";
 import {CommonModule} from "@angular/common";
+import {StateMenService} from "./services/state-men.service";
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import {CommonModule} from "@angular/common";
     ShareModule,
     ChoiceLanguagesModule
   ],
+  providers:[StateMenService],
   bootstrap: [AppComponent]
 })
 

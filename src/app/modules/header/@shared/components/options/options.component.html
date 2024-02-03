@@ -1,9 +1,16 @@
 <div class="options">
   <div class="options-search">
-    <input placeholder="search">
+    <input placeholder="search" [(ngModel)]="searchText">
     <mat-icon class="options-search-icons" svgIcon="search"></mat-icon>
   </div>
-  <div ></div>
+
+  <div class="search-list" *ngIf="searchText && searchText.length > 0">
+    <div class="search-list-content" *ngFor="let item of searchItem | filter: searchText">
+      <img class="image" [src]="item.imageURL[0]" alt="">
+      <p class="title">{{ item.name }}</p>
+    </div>
+  </div>
+
   <div class="icon">
     <mat-icon svgIcon="unlike"></mat-icon>
   </div>
