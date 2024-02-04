@@ -5,7 +5,7 @@
   </div>
 
   <div class="search-list" *ngIf="searchText && searchText.length > 0">
-    <div class="search-list-content" *ngFor="let item of searchItem | filter: searchText">
+    <div class="search-list-content" *ngFor="let item of searchItem | filter: searchText" (click)="openClothes(item.tage, item.name)">
       <img class="image" [src]="item.imageURL[0]" alt="">
       <p class="title">{{ item.name }}</p>
     </div>
