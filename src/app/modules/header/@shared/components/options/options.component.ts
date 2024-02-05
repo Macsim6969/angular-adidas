@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
 import {MatIconService} from "../../../../../services/matIcon.service";
 import {HeaderService} from "../../services/header.service";
 import {StoreInterface} from "../../../../../store/model/store.model";
@@ -18,27 +18,26 @@ export class OptionsComponent implements OnInit {
   searchItem: any;
   searchItemCategory: any
   searchListCategory: any
-  searchText: string;
+  searchText: string = '';
+  searchListVisible: boolean = false;
   menuAll: boolean;
   menuCategory: boolean
   constructor(
     private matIcon: MatIconService,
     private store: Store<{ store: StoreInterface }>,
-    private router: Router
+    private router: Router,
+    private elRef: ElementRef
   ) {}
 
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: Event): void {
-    const targetElement = event.target as HTMLElement
-    if (document.querySelector('.search-list') as HTMLElement) {
-      if (!targetElement.closest('.search-list')) {
-        document.querySelectorAll('.search-list').forEach((e) => {
-          //e.classList.add('hide')
-          //this.searchText = '';
-        })
-      }
-    }
-  }
+  // @HostListener('document:click', ['$event'])
+  // handleDocumentClick(event: Event) {
+  //   const clickedInsideSearchList = this.elRef.nativeElement.contains(event.target);
+  //   const clickedInsideChoice = (event.target as HTMLElement).classList.contains('search-list-choice');
+  //   const clicke = (event.target as HTMLElement).classList.contains('search-list-choice-item')
+  //   if (!clickedInsideSearchList && !clickedInsideChoice && !clicke) {
+  //      this.closeSearchList();
+  //   }
+  // }
 
   ngOnInit() {
     this.store.select(storeSelectorClothesData).subscribe((data) => {
@@ -55,12 +54,21 @@ export class OptionsComponent implements OnInit {
     if(active === 'all'){
       this.menuAll = true;
       this.menuCategory = false;
+      this.searchListVisible = true;
       this.searchListCategory = this.searchItem
     }
     if(active === 'category'){
+      this.searchListVisible = true;
       this.menuCategory = true;
       this.menuAll = false ;
     }
+  }
+
+  openSearchList() {
+    this.searchListVisible = true;
+  }
+  closeSearchList() {
+    this.searchListVisible = false;
   }
 
   backList(){

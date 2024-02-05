@@ -1,10 +1,10 @@
 <div class="options">
-  <div class="options-search">
+  <div class="options-search" (click)="openSearchList()">
     <input placeholder="search" [(ngModel)]="searchText">
     <mat-icon class="options-search-icons" svgIcon="search"></mat-icon>
   </div>
 
-  <div class="search-list" *ngIf="searchText && searchText.length > 0">
+  <div id="search-list-container" class="search-list" *ngIf="searchListVisible">
     <div class="search-list-back">
       <p (click)="backList()">Back</p>
     </div>
