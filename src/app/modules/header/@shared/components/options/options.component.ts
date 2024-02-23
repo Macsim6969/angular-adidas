@@ -25,19 +25,8 @@ export class OptionsComponent implements OnInit {
   constructor(
     private matIcon: MatIconService,
     private store: Store<{ store: StoreInterface }>,
-    private router: Router,
-    private elRef: ElementRef
+    private router: Router
   ) {}
-
-  // @HostListener('document:click', ['$event'])
-  // handleDocumentClick(event: Event) {
-  //   const clickedInsideSearchList = this.elRef.nativeElement.contains(event.target);
-  //   const clickedInsideChoice = (event.target as HTMLElement).classList.contains('search-list-choice');
-  //   const clicke = (event.target as HTMLElement).classList.contains('search-list-choice-item')
-  //   if (!clickedInsideSearchList && !clickedInsideChoice && !clicke) {
-  //      this.closeSearchList();
-  //   }
-  // }
 
   ngOnInit() {
     this.store.select(storeSelectorClothesData).subscribe((data) => {
@@ -88,6 +77,7 @@ export class OptionsComponent implements OnInit {
     const newRoute = name.replace(/ /g, '_').toLowerCase();
     this.router.navigate(['/men/' + route+'/' +newRoute], {queryParamsHandling: 'merge'}).then();
     this.searchText = '';
+    this.closeSearchList();
   }
 
   toggleTooltip() {
