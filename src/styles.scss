@@ -23,24 +23,24 @@ html, body {
   font-size: 16px;
 }
 
-@media only screen and (max-width: 600px) {
-  body {
-    font-size: 120% !important;
-  }
-  body h2{
-    font-size: 120% !important;
-  }
-  body p {
-    font-size: 1.2em !important;
-  }
-}
-
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 
 }
+.block p {
+  font-size: 1em;
+}
 
+@media only screen and (max-width: 720px) {
+  body {
+    font-size: 120%;
+  }
+
+  .block p {
+    font-size: 1.2em;
+  }
+}
 
 .loader {
   display: flex;
