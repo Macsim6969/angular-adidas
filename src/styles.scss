@@ -23,12 +23,16 @@ html, body {
   font-size: 16px;
 }
 
-body p {
-  font-size: 1em;
-}
-
-body h1, h2,h3,h4,h5{
-  font-size: 1em;
+@media only screen and (max-width: 600px) {
+  body {
+    font-size: 120% !important;
+  }
+  body h2{
+    font-size: 120% !important;
+  }
+  body p {
+    font-size: 1.2em !important;
+  }
 }
 
 body {
