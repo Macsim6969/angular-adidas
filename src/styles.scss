@@ -20,7 +20,7 @@ $my-app-theme: mat.define-light-theme((
 
 html, body {
   height: 100%;
-  font-size: 16px;
+  font-size: 10px;
 }
 
 body {
@@ -28,19 +28,9 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 
 }
-.block p {
-  font-size: 1em;
-}
 
-@media only screen and (max-width: 720px) {
-  body {
-    font-size: 120%;
-  }
 
-  .block p {
-    font-size: 1.2em;
-  }
-}
+
 
 .loader {
   display: flex;
