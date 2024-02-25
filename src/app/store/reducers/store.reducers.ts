@@ -1,6 +1,14 @@
 import {createReducer, on} from "@ngrx/store";
 import {StoreInterface} from "../model/store.model";
-import {increment, newClothesData, newCountry, newHoodiesData, newLang, newShoesData} from "../actions/store.actions";
+import {
+  increment,
+  newClothesData,
+  newCountry,
+  newHoodiesData,
+  newIdUser,
+  newLang,
+  newShoesData
+} from "../actions/store.actions";
 
 export const store: StoreInterface = {
   count: 0,
@@ -9,7 +17,8 @@ export const store: StoreInterface = {
   load: false,
   dataList: [],
   hoodiesList: [],
-  clothes: []
+  clothes: [],
+  idUser: null
 }
 
 export const storeReducers = createReducer(store,
@@ -30,6 +39,9 @@ export const storeReducers = createReducer(store,
   }),
   on(newClothesData, (state, action) =>{
     return {...state, clothes: action.value}
-  })
+  }),(
+  on(newIdUser, (state, action) => {
+    return {...state, idUser: action.value}
+  }))
 )
 

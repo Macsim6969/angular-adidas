@@ -8,4 +8,5 @@ export interface StoreInterface {
   dataList: ProdsFromService[]
   hoodiesList: ProdsFromService[]
   clothes: any[]
+  idUser: string
 }
