@@ -4,11 +4,13 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatIconService} from "../services/matIcon.service";
 import {TranslationModule} from "./translate.module";
 import {MatListModule} from "@angular/material/list";
-import {CommonModule} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {LoadingComponent} from "./components/loading/loading.component";
 import {MatCardModule} from "@angular/material/card";
+import {MatTabsModule} from "@angular/material/tabs";
+import {MatInputModule} from "@angular/material/input";
+import {MatFormFieldModule} from "@angular/material/form-field";
 @NgModule({
   declarations: [
     LoadingComponent
@@ -20,17 +22,23 @@ import {MatCardModule} from "@angular/material/card";
     MatButtonModule,
     TranslationModule,
     MatProgressSpinnerModule,
-    MatCardModule
+    MatCardModule,
+    MatTabsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports: [
     MatToolbarModule,
     MatIconModule,
     MatListModule,
     MatButtonModule,
+    MatTabsModule,
     TranslationModule,
     MatProgressSpinnerModule,
     LoadingComponent,
-    MatCardModule
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [MatIconService]
 })

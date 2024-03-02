@@ -1,2 +1,10 @@
-<p>auth works!</p>
-{{id}}
+<section class="authentication">
+  <mat-tab-group>
+    <mat-tab label="Sign Up">
+      <app-sign-up [idForm]="1"></app-sign-up>
+    </mat-tab>
+    <mat-tab label="Sign With">
+      <app-sign-up [idForm]="2"></app-sign-up>
+    </mat-tab>
+  </mat-tab-group>
+</section>

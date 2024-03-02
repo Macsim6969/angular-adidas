@@ -1,0 +1,38 @@
+.authentication {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  max-width: 1280px;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+
+  @media (max-width: 1300px) {
+    margin: 0 auto;
+    width: 95%;
+  }
+
+  ::ng-deep mat-tab-group {
+    width: 100%;
+
+    mat-tab-header {
+      font-size: 2rem;
+      color: black;
+
+      .mat-mdc-tab-label-container {
+        .mat-mdc-tab-list {
+          .mat-mdc-tab-labels {
+            .mat-mdc-tab {
+              .mdc-tab__content {
+                font-size: 2rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+}

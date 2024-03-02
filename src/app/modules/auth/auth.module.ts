@@ -5,19 +5,26 @@ import {CommonModule} from "@angular/common";
 import {ShareModule} from "../../shared/share.module";
 import {RouterModule, Routes} from "@angular/router";
 import {HttpClientModule} from "@angular/common/http";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {SignUpComponent} from "./components/sign-up/sign-up.component";
 
 const routes: Routes = [
   {path: '', component: AuthComponent}
 ]
 @NgModule({
   declarations: [
-    AuthComponent
+    AuthComponent,
+    SignUpComponent
+
   ],
   imports: [
     CommonModule,
     ShareModule,
     RouterModule.forChild(routes),
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+
   ],
   exports: [
     AuthComponent

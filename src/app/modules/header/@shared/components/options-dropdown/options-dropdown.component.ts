@@ -16,6 +16,7 @@ export class OptionsDropdownComponent {
 
   openAuthPage(){
    this.router.navigate(['/auth'], {queryParamsHandling: 'merge'}).then();
+   this.closeDropdown.emit(false) ;
   }
   openPopup(){
    this.headerService.handleDropdown(true);
