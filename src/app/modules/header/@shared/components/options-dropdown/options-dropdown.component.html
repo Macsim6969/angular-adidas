@@ -1,5 +1,5 @@
 <div class="dropdown" >
-  <nav (click)="openAuthPage()">{{'header.options.login' | translate}}</nav>
-  <nav>{{'header.options.logout' | translate}}</nav>
+  <nav *ngIf="!isAuthenticated" (click)="openAuthPage()">{{'header.options.login' | translate}}</nav>
+  <nav *ngIf="isAuthenticated" (click)="logout()">{{'header.options.logout' | translate}}</nav>
   <nav (click)="openPopup()">{{'header.options.language' | translate}}</nav>
 </div>

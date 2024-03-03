@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {newIdUser} from "../../../../store/actions/store.actions";
 import {timer} from "rxjs";
-import {AuthService} from "../../services/auth.service";
 import {Store} from "@ngrx/store";
 import {StoreInterface} from "../../../../store/model/store.model";
 import {FormControl, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
+import {AuthService} from "../../../../services/auth.service";
 
 @Component({
   selector: 'app-sign-up',

@@ -4,7 +4,8 @@ import {newClothesData, newHoodiesData, newShoesData} from "../store/actions/sto
 import {Store} from "@ngrx/store";
 import {StoreInterface} from "../store/model/store.model";
 import {ProdsFromService} from "../interfaces/home.interface";
-import {Observable, take} from "rxjs";
+import {exhaustMap, Observable, take} from "rxjs";
+import {AuthService} from "./auth.service";
 
 
 @Injectable()
@@ -12,25 +13,20 @@ import {Observable, take} from "rxjs";
 export class StateMenService {
   constructor(
     private http: HttpClient,
-    private store: Store<{ store: StoreInterface }>
+    private store: Store<{ store: StoreInterface }>,
+    private authService: AuthService
   ) {
   }
 
+  getFavouritesClothes() {
+    this.authService.user.pipe(take(1), exhaustMap(user => {
+     return this.http.get<ProdsFromService[]>('https://angular-adidas-default-rtdb.firebaseio.com/favourites.json')
 
-  getDataShoes(){
-    this.http.get<ProdsFromService>('https://angular-adidas-default-rtdb.firebaseio.com/clothes/shoes.json').pipe(take(1)).subscribe((data: ProdsFromService) => {
-      this.store.dispatch(newShoesData({value: data}))
-    })
+    }));
   }
 
-  getDataHoodies(){
-    this.http.get<ProdsFromService[]>('https://angular-adidas-default-rtdb.firebaseio.com/clothes/hoodies.json').pipe(take(1)).subscribe((data: ProdsFromService[]) =>{
-      this.store.dispatch(newHoodiesData({value: data}))
-    })
-  }
-
-  getDataClothes(){
-    this.http.get<ProdsFromService[]>('https://angular-adidas-default-rtdb.firebaseio.com/clothes.json').pipe(take(1)).subscribe((data: ProdsFromService[]) =>{
+  getDataClothes() {
+    this.http.get<ProdsFromService[]>('https://angular-adidas-default-rtdb.firebaseio.com/clothes.json').pipe(take(1)).subscribe((data: ProdsFromService[]) => {
       this.store.dispatch(newClothesData({value: data}))
     })
   }

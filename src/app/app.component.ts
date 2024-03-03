@@ -9,6 +9,7 @@ import {primitivesAreNotAllowedInProps} from "@ngrx/store/src/models";
 import {TranslateService} from "@ngx-translate/core";
 import {HeaderService} from "./modules/header/@shared/services/header.service";
 import {StateMenService} from "./services/state-men.service";
+import {AuthService} from "./services/auth.service";
 
 @Component({
   selector: 'app-root',
@@ -31,16 +32,22 @@ export class AppComponent implements OnInit {
     private route: ActivatedRoute,
     private translate: TranslateService,
     private headerService: HeaderService,
-    private stateShoesService: StateMenService
+    private stateShoesService: StateMenService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
+    this.initializeUserLogin();
     this.getDataObservFromStore()
     this.setDataLocalFromObservable()
     this.addedQueryParams()
     this.getDataFromHeaderService()
     this.checkNavigation()
     this.stateShoesService.getDataClothes();
+  }
+
+  private initializeUserLogin(){
+    this.authService.autoLogin();
   }
 
   private getDataObservFromStore() {

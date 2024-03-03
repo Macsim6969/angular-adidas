@@ -22,11 +22,14 @@ export class OptionsComponent implements OnInit {
   searchListVisible: boolean = false;
   menuAll: boolean;
   menuCategory: boolean
+  protected readonly iterator = iterator;
+
   constructor(
     private matIcon: MatIconService,
     private store: Store<{ store: StoreInterface }>,
     private router: Router
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.store.select(storeSelectorClothesData).subscribe((data) => {
@@ -39,33 +42,34 @@ export class OptionsComponent implements OnInit {
 
   }
 
-  choiceMenuSearch(active: 'all' | 'category'){
-    if(active === 'all'){
+  choiceMenuSearch(active: 'all' | 'category') {
+    if (active === 'all') {
       this.menuAll = true;
       this.menuCategory = false;
       this.searchListVisible = true;
       this.searchListCategory = this.searchItem
     }
-    if(active === 'category'){
+    if (active === 'category') {
       this.searchListVisible = true;
       this.menuCategory = true;
-      this.menuAll = false ;
+      this.menuAll = false;
     }
   }
 
   openSearchList() {
     this.searchListVisible = true;
   }
+
   closeSearchList() {
     this.searchListVisible = false;
   }
 
-  backList(){
+  backList() {
     this.menuAll = false;
     this.menuCategory = false;
   }
 
-  openSearchCategory(id: string){
+  openSearchCategory(id: string) {
     this.searchListCategory = this.searchItem.filter(data => {
       return data.category === id;
     });
@@ -73,9 +77,10 @@ export class OptionsComponent implements OnInit {
     this.menuAll = true;
     this.menuCategory = false;
   }
+
   public openClothes(route: string, name: string) {
     const newRoute = name.replace(/ /g, '_').toLowerCase();
-    this.router.navigate(['/men/' + route+'/' +newRoute], {queryParamsHandling: 'merge'}).then();
+    this.router.navigate(['/men/' + route + '/' + newRoute], {queryParamsHandling: 'merge'}).then();
     this.searchText = '';
     this.closeSearchList();
   }
@@ -88,5 +93,7 @@ export class OptionsComponent implements OnInit {
     this.isDropdown = event;
   }
 
-  protected readonly iterator = iterator;
+  openFavourites() {
+    this.router.navigate(['/favourites'], {queryParamsHandling: 'merge'}).then()
+  }
 }

@@ -10,6 +10,8 @@ import {ChoiceLanguagesModule} from "./modules/choice-languages/choice-languages
 import {AppRoutingModule} from "./app-routing.module";
 import {CommonModule} from "@angular/common";
 import {StateMenService} from "./services/state-men.service";
+import {AuthService} from "./services/auth.service";
+import {AuthGuard} from "./services/auth.guard";
 
 @NgModule({
   declarations: [
@@ -26,7 +28,7 @@ import {StateMenService} from "./services/state-men.service";
     ShareModule,
     ChoiceLanguagesModule
   ],
-  providers:[StateMenService],
+  providers:[StateMenService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 

@@ -12,6 +12,6 @@ export class HeaderComponent {
               private router: Router) {}
 
   homeRoute(){
-    this.router.navigate(['/'], {queryParamsHandling: 'merge'})
+    this.router.navigate(['/'], {queryParamsHandling: 'merge'}).then();
   }
 }
