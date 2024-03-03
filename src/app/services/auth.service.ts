@@ -2,8 +2,11 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, tap} from "rxjs";
 import {User} from "../modules/auth/auth.model";
+import {StoreInterface} from "../store/model/store.model";
+import {Store} from "@ngrx/store";
+import {newIdUser} from "../store/actions/store.actions";
 
-interface AuthResponseData {
+export interface AuthResponseData {
   idToken: string
   email: string
   refreshToken: string
@@ -19,7 +22,7 @@ export class AuthService {
   public token: string = null;
   private tokenExpirationTimer: any;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private store: Store<StoreInterface>) {
   }
 
   sigUp(form: { email: string, password: string }) {
@@ -33,19 +36,19 @@ export class AuthService {
   login() {
     return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBnH3aX4XoyXvuvnNnD4vojwyDMPTMEe9s', {
       email: 'macs.belousov666@gmail.com', password: 'Vfrcbv-65', returnSecureToken: true
-    }).pipe(tap(resData => {
+    }).pipe(tap((resData: AuthResponseData) => {
       this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
+      this.store.dispatch(newIdUser({value: resData.idToken}))
     }));
   }
 
   logout() {
-    this.user.next(null)
-    localStorage.removeItem('userData')
-    if(this.tokenExpirationTimer){
-      clearTimeout(this.tokenExpirationTimer)
-    }
-
-    this.tokenExpirationTimer = null
+    // this.user.next(null)
+    // localStorage.removeItem('userData')
+    // if(this.tokenExpirationTimer){
+    //   clearTimeout(this.tokenExpirationTimer)
+    // }
+    // this.tokenExpirationTimer = null
   }
 
   autoLogin() {
@@ -68,9 +71,9 @@ export class AuthService {
   }
 
   autoLogout(expirationDuration: number) {
-   this.tokenExpirationTimer = setTimeout(() => {
-      this.logout();
-    }, expirationDuration)
+    // this.tokenExpirationTimer = setTimeout(() => {
+    //    this.logout();
+    //  }, expirationDuration)
   }
 
   private handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {

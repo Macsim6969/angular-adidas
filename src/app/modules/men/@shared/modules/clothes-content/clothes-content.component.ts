@@ -6,6 +6,10 @@ import {
 } from "../../../../../store/selectors/store.selectors";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {MatIconService} from "../../../../../services/matIcon.service";
+import {AuthService} from "../../../../../services/auth.service";
+import {map, take} from "rxjs";
+import {StateMenService} from "../../../../../services/state-men.service";
+import {User} from "../../../../auth/auth.model";
 
 @Component({
   selector: 'app-clothes-content',
@@ -28,34 +32,55 @@ export class ClothesContentComponent implements OnInit {
 
   constructor(
     private store: Store<{ store: StoreInterface }>,
-    private route: ActivatedRoute, private matIcon: MatIconService,
-    private router: Router
+    private route: ActivatedRoute,
+    private matIcon: MatIconService,
+    private router: Router,
+    private authService: AuthService,
+    private stateMenService: StateMenService
   ) {
   }
 
   ngOnInit() {
+    this.checkRouterParams();
+  }
+
+  private checkRouterParams() {
     this.route.params.subscribe((params: Params) => {
       const targetId = params['clothes'].split('_').map((word) => word.toUpperCase()).join(' ')
-      this.store.select(storeSelectorClothesData).subscribe(data => {
-        this.dataParam = params['menu']
-        if (data[params['menu']]) {
-          this.contentItem = data[params['menu']].find(data => data.name == targetId)
-        }
-      })
+      this.getClothesDataFromStore(targetId, params)
     })
-
   }
 
-  backRoute() {
-    this.router.navigate(['/men/' +this.dataParam], {queryParamsHandling: 'merge'}).then();
+  private getClothesDataFromStore(targetId: string, params: Params) {
+    this.store.select(storeSelectorClothesData).subscribe(data => {
+      this.dataParam = params['menu']
+      if (data[params['menu']]) {
+        this.contentItem = data[params['menu']].find(data => data.name == targetId)
+      }
+    })
   }
 
-  choiceColor(index: number) {
+  public backRoute() {
+    this.router.navigate(['/men/' + this.dataParam], {queryParamsHandling: 'merge'}).then();
+  }
+
+  public choiceColor(index: number) {
     this.choiceColorShoes = index;
   }
 
-  handleTabs(string: 'Details' | 'Descriptions', index: number) {
+  public handleTabs(string: 'Details' | 'Descriptions', index: number) {
     this.titleActive = string;
     this.tabsActive = index;
   }
+
+  public like() {
+    if (this.authService.user.pipe(map((user) => !!user))) {
+      this.authService.user.subscribe((user) =>{
+        this.stateMenService.addFavouritesClothes(user.id, this.contentItem)
+
+      })
+    }
+  }
+
+
 }

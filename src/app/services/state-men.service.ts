@@ -18,11 +18,14 @@ export class StateMenService {
   ) {
   }
 
-  getFavouritesClothes() {
-    this.authService.user.pipe(take(1), exhaustMap(user => {
-     return this.http.get<ProdsFromService[]>('https://angular-adidas-default-rtdb.firebaseio.com/favourites.json')
+  public addFavouritesClothes(idToken: string, clothes: ProdsFromService) {
+    console.log(idToken, clothes)
+    return this.http.post<ProdsFromService>(`https://angular-adidas-default-rtdb.firebaseio.com/users/${idToken}/favourites.json`, clothes).subscribe();
+  }
 
-    }));
+  getFavouritesClothes(idToken: string) {
+    console.log(idToken)
+    return this.http.get<ProdsFromService[]>(`https://angular-adidas-default-rtdb.firebaseio.com/users/${idToken}/favourites.json`)
   }
 
   getDataClothes() {
