@@ -37,6 +37,11 @@ export const newClothesData = createAction(
   props<{value: any}>()
 )
 
+export const favouriteClothes = createAction(
+  'FAVOURITECLOTHES',
+  props<{value: ProdsFromService[]}>()
+)
+
 export const newIdUser = createAction(
   'NEWIDUSER',
   props<{value: string}>()

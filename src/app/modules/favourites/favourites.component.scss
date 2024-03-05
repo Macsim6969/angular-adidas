@@ -1,0 +1,76 @@
+.men-shoes-list-products {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
+
+  .products {
+    padding: 0;
+    max-width: 383px;
+
+    cursor: pointer;
+
+    .products-header {
+      position: relative;
+      padding: 0;
+
+      width: calc(0vh + 383px);
+      height: calc(0vh + 383px);
+
+      img {
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+
+      .hover {
+        display: none;
+      }
+
+      .active {
+        display: block;
+      }
+
+      .products-header-price {
+        position: absolute;
+        bottom: 0;
+        left: 1rem;
+        background: white;
+        margin: 0;
+        padding: 0.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+      }
+    }
+
+    .products-content {
+      font-size: 1.4rem;
+      margin: 1.5rem 0 0 0;
+
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      p {
+        margin: 0;
+      }
+
+      .products-content-name {
+        font-size: inherit;
+      }
+
+      .products-content-category {
+        font-size: inherit;
+      }
+
+      .products-content-colors {
+        font-size: inherit;
+      }
+    }
+  }
+}

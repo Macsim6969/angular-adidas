@@ -7,3 +7,5 @@ export const storeSelectorShoesData = (store: {store: StoreInterface}) => store.
 export const storeSelectorHoodiesData = (store: {store: StoreInterface}) => store.store.hoodiesList
 
 export const storeSelectorClothesData = (store: {store: StoreInterface}) => store.store.clothes
+
+export const storeSelectorFavourites = (store: {store: StoreInterface}) => store.store.favouriteClothes

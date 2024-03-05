@@ -1,1 +1,18 @@
-<p>favourites works!</p>
+<div class="men-shoes-list-products" *ngIf="!isLoading; else loading">
+  <mat-card class="products" *ngFor="let item of list; index as i" (mouseover)="showHoverImage(true, i)"
+            (mouseleave)="showHoverImage(false, i)" (click)="openContent(item.name, item.tage)">
+    <mat-card-header class="products-header">
+      <img mat-card-image src="{{item.imageURL[0]}}" alt="">
+      <img [ngClass]="{'active': isHover[i]}" class="hover" mat-card-image src="{{item.imageURL_hover}}" alt="">
+      <p class="products-header-price" [innerHTML]="item.price + '$'"></p>
+    </mat-card-header>
+    <mat-card-content class="products-content">
+      <p class="products-content-name" [innerHTML]="item.name"></p>
+      <p class="products-content-category" [innerHTML]="item.categ"></p>
+      <p class="products-content-colors">Color: {{ item.galleryDop.length }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

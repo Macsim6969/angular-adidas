@@ -36,7 +36,6 @@ export class SignUpComponent implements OnInit{
   public signUp() {
     this.isLoading = true;
     this.authService.sigUp(this.form.value).subscribe((data) => {
-      console.log(data, 'data')
       this.store.dispatch(newIdUser({value: data.localId}))
       timer(1000).subscribe(() =>{
         this.store.select((state) => state.store.idUser).subscribe(data =>{
@@ -54,7 +53,6 @@ export class SignUpComponent implements OnInit{
   public login(){
     this.isLoading = true;
     this.authService.login().subscribe((data) => {
-      console.log(data, 'data')
       this.store.dispatch(newIdUser({value: data.localId}))
       timer(100).subscribe(() =>{
         this.store.select((state) => state.store.idUser).subscribe(data =>{
@@ -64,7 +62,6 @@ export class SignUpComponent implements OnInit{
       this.router.navigate(['/men'], {queryParamsHandling: 'merge'}).then();
       this.isLoading = false;
     }, error => {
-      console.log(error)
     })
     this.form.reset();
   }

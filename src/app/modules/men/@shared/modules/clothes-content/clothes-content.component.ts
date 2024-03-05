@@ -2,14 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {StoreInterface} from "../../../../../store/model/store.model";
 import {Store} from "@ngrx/store";
 import {
-  storeSelectorClothesData, storeSelectorHoodiesData, storeSelectorShoesData
+  storeSelectorClothesData, storeSelectorFavourites
 } from "../../../../../store/selectors/store.selectors";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {MatIconService} from "../../../../../services/matIcon.service";
 import {AuthService} from "../../../../../services/auth.service";
-import {map, take} from "rxjs";
+import {map, of, take} from "rxjs";
 import {StateMenService} from "../../../../../services/state-men.service";
-import {User} from "../../../../auth/auth.model";
+import {ProdsFromService} from "../../../../../interfaces/home.interface";
 
 @Component({
   selector: 'app-clothes-content',
@@ -20,6 +20,7 @@ export class ClothesContentComponent implements OnInit {
   public contentItem: any;
   public choiceColorShoes: number = 0;
   public isMorePhoto: boolean = false;
+  public isFavourite: boolean = false;
 
   public sizesShoes: number[] = [6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12]
 
@@ -28,7 +29,8 @@ export class ClothesContentComponent implements OnInit {
   titleActive: 'Descriptions' | 'Details'
   public titleContentLeft: ['Descriptions', 'Details'] = ['Descriptions', 'Details']
   public tabsActive: number = -1;
-  public dataParam: string
+  public dataParam: string;
+  public keysData: ProdsFromService[];
 
   constructor(
     private store: Store<{ store: StoreInterface }>,
@@ -42,22 +44,7 @@ export class ClothesContentComponent implements OnInit {
 
   ngOnInit() {
     this.checkRouterParams();
-  }
 
-  private checkRouterParams() {
-    this.route.params.subscribe((params: Params) => {
-      const targetId = params['clothes'].split('_').map((word) => word.toUpperCase()).join(' ')
-      this.getClothesDataFromStore(targetId, params)
-    })
-  }
-
-  private getClothesDataFromStore(targetId: string, params: Params) {
-    this.store.select(storeSelectorClothesData).subscribe(data => {
-      this.dataParam = params['menu']
-      if (data[params['menu']]) {
-        this.contentItem = data[params['menu']].find(data => data.name == targetId)
-      }
-    })
   }
 
   public backRoute() {
@@ -75,12 +62,63 @@ export class ClothesContentComponent implements OnInit {
 
   public like() {
     if (this.authService.user.pipe(map((user) => !!user))) {
-      this.authService.user.subscribe((user) =>{
-        this.stateMenService.addFavouritesClothes(user.id, this.contentItem)
+      this.authService.user.subscribe((user) => {
+        this.stateMenService.addFavouritesClothes(user.id, this.contentItem).add(() =>{
+          this.stateMenService.getFavouritesClothes(user.id);
+        })
+      })
+    }
+    this.isFavourite = true;
+  }
+
+  unlike(id: number) {
+    console.log(id)
+    if (this.authService.user.pipe(map((user) => !!user))) {
+      this.authService.user.subscribe((user) => {
+        const entries = Object.entries(this.keysData);
+
+        const foundEntry = entries.find(([key, value]) => value.id === id);
+
+        if (foundEntry) {
+          const [key, value] = foundEntry;
+          const objectKeyToRemove = key;
+          this.stateMenService.removeFavouriteClothes(user.id, objectKeyToRemove)
+          this.isFavourite = false;
+        }
 
       })
     }
   }
 
+  private checkRouterParams() {
+    this.route.params.subscribe((params: Params) => {
+      const targetId = params['clothes'].split('_').map((word) => word.toUpperCase()).join(' ')
+      this.getClothesDataFromStore(targetId, params)
+    })
+  }
+
+  private getClothesDataFromStore(targetId: string, params: Params) {
+    this.store.select(storeSelectorClothesData).subscribe(data => {
+      this.dataParam = params['menu']
+      if (data[params['menu']]) {
+        this.contentItem = data[params['menu']].find(data => data.name == targetId)
+
+        of(null).pipe(take(1)).subscribe(() => {
+          this.authService.user.pipe(take(1)).subscribe((user) => {
+            this.store.select(storeSelectorFavourites).pipe(take(1)).subscribe((data) => {
+              this.keysData = data;
+              Object.values(data).find(clothes => {
+                if (clothes.id === this.contentItem.id) {
+                  this.isFavourite = true
+                } else {
+                  this.isFavourite = false;
+                }
+              })
+            })
+          })
+        })
+      }
+    })
+  }
 
 }

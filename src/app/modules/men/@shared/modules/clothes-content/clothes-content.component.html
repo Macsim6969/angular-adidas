@@ -74,7 +74,8 @@
       <p class="shoes-content-right-size-guide">Size guide</p>
       <div class="shoes-content-right-actions">
         <button mat-button class="add">ADD TO BAG</button>
-        <button mat-button class="like" (click)="like()">{{'Like'}}</button>
+        <button *ngIf="!isFavourite" mat-button class="like" (click)="like()">Like</button>
+        <button *ngIf="isFavourite" mat-button class="like" (click)=" unlike(contentItem.id)">Unlike</button>
       </div>
     </div>
   </div>

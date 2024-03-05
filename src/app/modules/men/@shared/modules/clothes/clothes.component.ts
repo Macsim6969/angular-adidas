@@ -78,7 +78,6 @@ export class ClothesComponent implements OnInit {
   private getContentHeader() {
     this.store.select(storeSelectorLang).subscribe(() => {
       this.translate.get(`men.header-content.${this.activeRoute}`).subscribe((data: clothesMenuHeaderTitle[]) => {
-        console.log(data)
         this.headerTitleMenu = data
       })
     })

@@ -23,10 +23,7 @@ export class OptionsDropdownComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
    this.userSub = this.authService.user.subscribe(user =>{
-     console.log(1)
      this.isAuthenticated = !!user;
-     console.log(!user)
-     console.log(!!user)
    })
   }
 

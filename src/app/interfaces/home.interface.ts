@@ -27,5 +27,6 @@ export interface ProdsFromService {
   name: string
   desc: string
   price: number
+  tage: string
   sizes: string[]
 }

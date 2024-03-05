@@ -7,6 +7,7 @@ export interface StoreInterface {
   load: boolean
   dataList: ProdsFromService[]
   hoodiesList: ProdsFromService[]
+  favouriteClothes: ProdsFromService[]
   clothes: any[]
   idUser: string
 }

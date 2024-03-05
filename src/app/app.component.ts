@@ -10,6 +10,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {HeaderService} from "./modules/header/@shared/services/header.service";
 import {StateMenService} from "./services/state-men.service";
 import {AuthService} from "./services/auth.service";
+import {User} from "./modules/auth/auth.model";
 
 @Component({
   selector: 'app-root',
@@ -44,6 +45,9 @@ export class AppComponent implements OnInit {
     this.getDataFromHeaderService()
     this.checkNavigation()
     this.stateShoesService.getDataClothes();
+    this.authService.user.subscribe((user: User) =>{
+      this.stateShoesService.getFavouritesClothes(user.id);
+    })
   }
 
   private initializeUserLogin(){

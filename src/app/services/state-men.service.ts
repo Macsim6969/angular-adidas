@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {newClothesData, newHoodiesData, newShoesData} from "../store/actions/store.actions";
+import {favouriteClothes, newClothesData, newHoodiesData, newShoesData} from "../store/actions/store.actions";
 import {Store} from "@ngrx/store";
 import {StoreInterface} from "../store/model/store.model";
 import {ProdsFromService} from "../interfaces/home.interface";
@@ -13,19 +13,24 @@ import {AuthService} from "./auth.service";
 export class StateMenService {
   constructor(
     private http: HttpClient,
-    private store: Store<{ store: StoreInterface }>,
-    private authService: AuthService
-  ) {
-  }
+    private store: Store<{ store: StoreInterface }>
+  ) {}
 
   public addFavouritesClothes(idToken: string, clothes: ProdsFromService) {
-    console.log(idToken, clothes)
     return this.http.post<ProdsFromService>(`https://angular-adidas-default-rtdb.firebaseio.com/users/${idToken}/favourites.json`, clothes).subscribe();
   }
 
+  public removeFavouriteClothes(idToken: string, id: string) {
+    console.log(id);
+    return this.http.delete(`https://angular-adidas-default-rtdb.firebaseio.com/users/${idToken}/favourites/${id}.json`).pipe(take(1)).subscribe(() =>{
+      this.getFavouritesClothes(idToken);
+    });
+  }
+
   getFavouritesClothes(idToken: string) {
-    console.log(idToken)
-    return this.http.get<ProdsFromService[]>(`https://angular-adidas-default-rtdb.firebaseio.com/users/${idToken}/favourites.json`)
+    this.http.get<ProdsFromService[]>(`https://angular-adidas-default-rtdb.firebaseio.com/users/${idToken}/favourites.json`).pipe(take(1)).subscribe((data: ProdsFromService[]) =>{
+      this.store.dispatch(favouriteClothes({value: data}))
+    })
   }
 
   getDataClothes() {
