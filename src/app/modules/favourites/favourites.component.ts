@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
-import {StateMenService} from "../../services/state-men.service";
 import {ProdsFromService} from "../../interfaces/home.interface";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {StoreInterface} from "../../store/model/store.model";
 import {Store} from "@ngrx/store";
 import {storeSelectorFavourites} from "../../store/selectors/store.selectors";
@@ -20,8 +19,7 @@ export class FavouritesComponent implements OnInit {
     private  store: Store<{store: StoreInterface}>,
     private authService: AuthService,
     private router: Router
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     this.authService.user.subscribe((user) => {

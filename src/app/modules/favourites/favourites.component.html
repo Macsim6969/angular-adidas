@@ -13,6 +13,11 @@
     </mat-card-content>
   </mat-card>
 </div>
+
+<div class="attention" *ngIf="!list.length">
+  <h2>MY WISHLIST</h2>
+  <p>You haven't saved any items to your wishlist yet. Start shopping and add your favorite items to your wishlist.</p>
+</div>
 <ng-template #loading>
   <app-loading></app-loading>
 </ng-template>
