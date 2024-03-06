@@ -88,24 +88,7 @@
     max-width: 720px;
     margin: 120px auto;
 
-    .attention_title {
-      font-size: 2.2rem;
-      margin: 0;
-    }
 
-    .attention_text {
-      font-size: 1.8rem;
-      text-align: center;
-      margin: 0;
-    }
-
-    ::ng-deep button{
-      border: 1px solid #212020;
-      font-size: 1.8rem;
-      font-weight: 500;
-      padding: 12px 20px ;
-      height: auto;
-    }
 
     app-slider-news{
       padding-top: 70px;

@@ -16,10 +16,9 @@
   </div>
 
   <div class="attention" *ngIf="stateInfo">
-    <h2 class="attention_title">MY WISHLIST</h2>
-    <p class="attention_text">You haven't saved any items to your wishlist yet. Start shopping and add your favorite items to your wishlist.</p>
-    <button mat-button (click)="openShop()">Shop</button>
+    <app-attention></app-attention>
     <app-slider-news></app-slider-news>
+
   </div>
 
 

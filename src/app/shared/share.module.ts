@@ -13,10 +13,12 @@ import {MatInputModule} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {InfoPopupComponent} from "./components/info-popup/info-popup.component";
 import {AsyncPipe, NgClass} from "@angular/common";
+import {AttentionComponent} from "./components/attention/attention.component";
 @NgModule({
   declarations: [
     LoadingComponent,
-    InfoPopupComponent
+    InfoPopupComponent,
+    AttentionComponent
   ],
   imports: [
     MatToolbarModule,
@@ -42,6 +44,7 @@ import {AsyncPipe, NgClass} from "@angular/common";
     MatProgressSpinnerModule,
     LoadingComponent,
     InfoPopupComponent,
+    AttentionComponent,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule

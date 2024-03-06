@@ -1,0 +1,14 @@
+.attention {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  max-width: 720px;
+  margin: 120px auto;
+
+
+
+  app-slider-news{
+    padding-top: 70px;
+  }
+}

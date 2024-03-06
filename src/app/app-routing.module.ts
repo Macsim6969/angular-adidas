@@ -9,8 +9,11 @@ const routes: Routes = [
     path: 'auth', loadChildren: () => import('./modules/auth/auth.module').then((m) => m.AuthModule)
   },
   {
-    path: 'favourites', loadChildren: () => import('./modules/favourites/favourites.module').then((m) => m.FavouritesModule), canActivate: [AuthGuard]
-  }];
+    path: 'favourites',
+    loadChildren: () => import('./modules/favourites/favourites.module').then((m) => m.FavouritesModule),
+    canActivate: [AuthGuard]
+  },
+  {path: 'bags', loadChildren: () => import('./modules/bags/bags.module').then((m) => m.BagsModule), canActivate: [AuthGuard]}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)], exports: [RouterModule]

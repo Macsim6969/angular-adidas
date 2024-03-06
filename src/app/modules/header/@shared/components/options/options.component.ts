@@ -85,15 +85,19 @@ export class OptionsComponent implements OnInit {
     this.closeSearchList();
   }
 
-  toggleTooltip() {
+  public toggleTooltip() {
     this.isDropdown = !this.isDropdown;
   };
 
-  closeDropdown(event) {
+  public closeDropdown(event) {
     this.isDropdown = event;
   }
 
-  openFavourites() {
+  public openBag() {
+    this.router.navigate(['/bags'], {queryParamsHandling: 'merge'}).then()
+  }
+
+  public openFavourites() {
     this.router.navigate(['/favourites'], {queryParamsHandling: 'merge'}).then()
   }
 }
