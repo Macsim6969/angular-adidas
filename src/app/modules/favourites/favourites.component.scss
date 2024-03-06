@@ -1,76 +1,115 @@
-.men-shoes-list-products {
+.favourites{
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 5px;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 50px;
+  .men-shoes-list-products {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
 
-  .products {
-    padding: 0;
-    max-width: 383px;
-
-    cursor: pointer;
-
-    .products-header {
-      position: relative;
+    .products {
       padding: 0;
+      max-width: 383px;
 
-      width: calc(0vh + 383px);
-      height: calc(0vh + 383px);
+      cursor: pointer;
 
-      img {
-        position: absolute;
-        bottom: 0;
-        top: 0;
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
+      .products-header {
+        position: relative;
+        padding: 0;
+
+        width: calc(0vh + 383px);
+        height: calc(0vh + 383px);
+
+        img {
+          position: absolute;
+          bottom: 0;
+          top: 0;
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+        }
+
+        .hover {
+          display: none;
+        }
+
+        .active {
+          display: block;
+        }
+
+        .products-header-price {
+          position: absolute;
+          bottom: 0;
+          left: 1rem;
+          background: white;
+          margin: 0;
+          padding: 0.5rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 1.5rem;
+        }
       }
 
-      .hover {
-        display: none;
-      }
+      .products-content {
+        font-size: 1.4rem;
+        margin: 1.5rem 0 0 0;
 
-      .active {
-        display: block;
-      }
-
-      .products-header-price {
-        position: absolute;
-        bottom: 0;
-        left: 1rem;
-        background: white;
-        margin: 0;
-        padding: 0.5rem;
         display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1.5rem;
-      }
-    }
+        flex-direction: column;
+        gap: 1rem;
 
-    .products-content {
-      font-size: 1.4rem;
-      margin: 1.5rem 0 0 0;
+        p {
+          margin: 0;
+        }
 
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
+        .products-content-name {
+          font-size: inherit;
+        }
 
-      p {
-        margin: 0;
-      }
+        .products-content-category {
+          font-size: inherit;
+        }
 
-      .products-content-name {
-        font-size: inherit;
-      }
-
-      .products-content-category {
-        font-size: inherit;
-      }
-
-      .products-content-colors {
-        font-size: inherit;
+        .products-content-colors {
+          font-size: inherit;
+        }
       }
     }
   }
+
+  .attention {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    max-width: 720px;
+    margin: 120px auto;
+
+    .attention_title {
+      font-size: 2.2rem;
+      margin: 0;
+    }
+
+    .attention_text {
+      font-size: 1.8rem;
+      text-align: center;
+      margin: 0;
+    }
+
+    ::ng-deep button{
+      border: 1px solid #212020;
+      font-size: 1.8rem;
+      font-weight: 500;
+      padding: 12px 20px ;
+      height: auto;
+    }
+
+    app-slider-news{
+      padding-top: 70px;
+    }
+  }
 }
+

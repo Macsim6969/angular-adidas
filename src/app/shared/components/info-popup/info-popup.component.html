@@ -1,0 +1,8 @@
+<div class="popup" [ngClass]="{'active': isActive}">
+  <div class="popup-favourite" (click)="openFavourites()">
+    <img src="{{(image$| async)}}" alt="">
+    <p class="popup-favourite-title">{{(title$| async)}}</p>
+    <p class="popup-favourite-desc">Added to favourite</p>
+  </div>
+
+</div>

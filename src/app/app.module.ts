@@ -12,6 +12,7 @@ import {CommonModule} from "@angular/common";
 import {StateMenService} from "./services/state-men.service";
 import {AuthService} from "./services/auth.service";
 import {AuthGuard} from "./services/auth.guard";
+import {InfoPopupService} from "./services/info-popup.service";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import {AuthGuard} from "./services/auth.guard";
     ShareModule,
     ChoiceLanguagesModule
   ],
-  providers:[StateMenService, AuthService, AuthGuard],
+  providers:[StateMenService, AuthService, AuthGuard, InfoPopupService],
   bootstrap: [AppComponent]
 })
 

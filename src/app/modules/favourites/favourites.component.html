@@ -1,23 +1,30 @@
-<div class="men-shoes-list-products" *ngIf="!isLoading; else loading">
-  <mat-card class="products" *ngFor="let item of list; index as i" (mouseover)="showHoverImage(true, i)"
-            (mouseleave)="showHoverImage(false, i)" (click)="openContent(item.name, item.tage)">
-    <mat-card-header class="products-header">
-      <img mat-card-image src="{{item.imageURL[0]}}" alt="">
-      <img [ngClass]="{'active': isHover[i]}" class="hover" mat-card-image src="{{item.imageURL_hover}}" alt="">
-      <p class="products-header-price" [innerHTML]="item.price + '$'"></p>
-    </mat-card-header>
-    <mat-card-content class="products-content">
-      <p class="products-content-name" [innerHTML]="item.name"></p>
-      <p class="products-content-category" [innerHTML]="item.categ"></p>
-      <p class="products-content-colors">Color: {{ item.galleryDop.length }}</p>
-    </mat-card-content>
-  </mat-card>
-</div>
+<div class="favourites">
+  <div class="men-shoes-list-products" *ngIf="!isLoading; else loading">
+    <mat-card class="products" *ngFor="let item of list; index as i" (mouseover)="showHoverImage(true, i)"
+              (mouseleave)="showHoverImage(false, i)" (click)="openContent(item.name, item.tage)">
+      <mat-card-header class="products-header">
+        <img mat-card-image src="{{item.imageURL[0]}}" alt="">
+        <img [ngClass]="{'active': isHover[i]}" class="hover" mat-card-image src="{{item.imageURL_hover}}" alt="">
+        <p class="products-header-price" [innerHTML]="item.price + '$'"></p>
+      </mat-card-header>
+      <mat-card-content class="products-content">
+        <p class="products-content-name" [innerHTML]="item.name"></p>
+        <p class="products-content-category" [innerHTML]="item.categ"></p>
+        <p class="products-content-colors">Color: {{ item.galleryDop.length }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
 
-<div class="attention" *ngIf="!list.length">
-  <h2>MY WISHLIST</h2>
-  <p>You haven't saved any items to your wishlist yet. Start shopping and add your favorite items to your wishlist.</p>
+  <div class="attention" *ngIf="stateInfo">
+    <h2 class="attention_title">MY WISHLIST</h2>
+    <p class="attention_text">You haven't saved any items to your wishlist yet. Start shopping and add your favorite items to your wishlist.</p>
+    <button mat-button (click)="openShop()">Shop</button>
+    <app-slider-news></app-slider-news>
+  </div>
+
+
+  <ng-template #loading>
+    <app-loading></app-loading>
+  </ng-template>
+
 </div>
-<ng-template #loading>
-  <app-loading></app-loading>
-</ng-template>

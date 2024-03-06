@@ -10,6 +10,7 @@ import {AuthService} from "../../../../../services/auth.service";
 import {map, of, take} from "rxjs";
 import {StateMenService} from "../../../../../services/state-men.service";
 import {ProdsFromService} from "../../../../../interfaces/home.interface";
+import {InfoPopupService} from "../../../../../services/info-popup.service";
 
 @Component({
   selector: 'app-clothes-content',
@@ -38,7 +39,8 @@ export class ClothesContentComponent implements OnInit {
     private matIcon: MatIconService,
     private router: Router,
     private authService: AuthService,
-    private stateMenService: StateMenService
+    private stateMenService: StateMenService,
+    private infoPopup: InfoPopupService
   ) {
   }
 
@@ -65,6 +67,8 @@ export class ClothesContentComponent implements OnInit {
       this.authService.user.subscribe((user) => {
         this.stateMenService.addFavouritesClothes(user.id, this.contentItem).add(() =>{
           this.stateMenService.getFavouritesClothes(user.id);
+          this.infoPopup._favouriteClotheImage = this.contentItem.imageURL[0];
+          this.infoPopup._favoriteClotheTitle = this.contentItem.name
         })
       })
     }

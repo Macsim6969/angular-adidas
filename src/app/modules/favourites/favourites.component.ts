@@ -15,6 +15,7 @@ export class FavouritesComponent implements OnInit {
   public list: ProdsFromService[];
   public isLoading: boolean = true;
   public isHover: boolean[] = [];
+  public stateInfo: boolean
   constructor(
     private  store: Store<{store: StoreInterface}>,
     private authService: AuthService,
@@ -25,12 +26,22 @@ export class FavouritesComponent implements OnInit {
     this.authService.user.subscribe((user) => {
       this.isLoading = true;
       this.store.select(storeSelectorFavourites).subscribe((data: ProdsFromService[]) => {
-        this.list = Object.values(data);
+        if(data){
+          this.list = Object.values(data);
+          this.stateInfo = false;
+        } else {
+          this.stateInfo = true;
+        }
         this.isLoading = false;
+
+        console.log(data)
       })
     })
   }
 
+  public openShop(){
+    this.router.navigate(["/men"], {queryParamsHandling: 'merge'}).then();
+  }
   public showHoverImage(isHovered: boolean, index: number) {
     this.isHover[index] = isHovered;
   }

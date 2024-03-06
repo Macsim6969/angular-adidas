@@ -11,9 +11,12 @@ import {MatCardModule} from "@angular/material/card";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatInputModule} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
+import {InfoPopupComponent} from "./components/info-popup/info-popup.component";
+import {AsyncPipe, NgClass} from "@angular/common";
 @NgModule({
   declarations: [
-    LoadingComponent
+    LoadingComponent,
+    InfoPopupComponent
   ],
   imports: [
     MatToolbarModule,
@@ -25,7 +28,9 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     MatCardModule,
     MatTabsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    AsyncPipe,
+    NgClass
   ],
   exports: [
     MatToolbarModule,
@@ -36,6 +41,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     TranslationModule,
     MatProgressSpinnerModule,
     LoadingComponent,
+    InfoPopupComponent,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule
