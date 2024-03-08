@@ -13,6 +13,7 @@ import {StateMenService} from "./services/state-men.service";
 import {AuthService} from "./services/auth.service";
 import {AuthGuard} from "./services/auth.guard";
 import {InfoPopupService} from "./services/info-popup.service";
+import {ClothesContentService} from "./services/clothes-content.service";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import {InfoPopupService} from "./services/info-popup.service";
     ShareModule,
     ChoiceLanguagesModule
   ],
-  providers:[StateMenService, AuthService, AuthGuard, InfoPopupService],
+  providers:[StateMenService, AuthService, AuthGuard, InfoPopupService, ClothesContentService],
   bootstrap: [AppComponent]
 })
 

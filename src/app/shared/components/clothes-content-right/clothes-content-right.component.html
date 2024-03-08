@@ -1,0 +1,39 @@
+<div class="shoes-content-right">
+  <div class="shoes-content-right-fixed">
+    <p class="shoes-content-right-title">{{ contentItem.categ }}</p>
+    <p class="shoes-content-right-name">{{ contentItem.name }}</p>
+    <p class="shoes-content-right-price">${{ contentItem.price }}</p>
+    <p class="shoes-content-right-color">Color</p>
+    <div class="shoes-content-right-colors">
+      <span *ngFor="let image of contentItem.imageURL; index as i" [ngClass]="{'active':  choiceColorShoes === i}" (click)="choiceColor(i)">
+        <img src="{{image}}" alt="">
+      </span>
+    </div>
+    <p class="shoes-content-right-size">Sizes</p>
+    <div class="shoes-content-right-sizes" *ngIf="contentItem.sizes.includes(8);else clothes">
+      <button mat-button *ngFor="let size of sizesShoes"
+              (click)="choiceSize(size)"
+              [style.opacity]="contentItem['sizes'].includes(size) ? '1' : '0.4'"
+              [disabled]="!contentItem['sizes'].includes(size)"
+              [ngClass]="{'active': activeSizeShoes === size}" >
+        {{ size }}
+      </button>
+    </div>
+    <ng-template #clothes>
+      <div class="shoes-content-right-sizes">
+        <button mat-button *ngFor="let size of sizesClothes"
+                [style.opacity]="contentItem['sizes'].includes(size) ? '1' : '0.4'"
+                [disabled]="!contentItem['sizes'].includes(size)"
+                [ngClass]="{'active': activeSizeClothes === size}" (click)="choiceSize(size)">
+          {{ size }}
+        </button>
+      </div>
+    </ng-template>
+    <p class="shoes-content-right-size-guide">Size guide</p>
+    <div class="shoes-content-right-actions">
+      <button mat-button class="add">ADD TO BAG</button>
+      <button *ngIf="!isFavourite" mat-button class="like" (click)="like()">Like</button>
+      <button *ngIf="isFavourite" mat-button class="like" (click)=" unlike(contentItem.id)">Unlike</button>
+    </div>
+  </div>
+</div>

@@ -29,4 +29,6 @@ export interface ProdsFromService {
   price: number
   tage: string
   sizes: string[]
+  activeColor?: number
+  activeSize?: any
 }

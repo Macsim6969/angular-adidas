@@ -1,0 +1,44 @@
+<div class="breacroom-back">
+  <div class="breacroom-back-content" (click)="backRoute()">
+    <span><mat-icon svgIcon="back-arrow"></mat-icon></span>
+    <p class="breacroom-back-content-title" [innerHTML]="'back' | translate"></p>
+  </div>
+</div>
+<div class="shoes-content-left">
+  <div *ngIf="contentItem.galleryDop[(choiceColorShoes$ | async)].info; else loading" class="shoes-content-left-header"
+       [ngClass]="{'wide': contentItem.galleryDop[(choiceColorShoes$ | async)].info.length > 2, 'open': isMorePhoto}">
+    <div class="shoes-content-left-header-image" *ngFor="let image of contentItem.galleryDop[(choiceColorShoes$ | async)].info">
+      <img src="{{image}}" alt="">
+    </div>
+    <button (click)="isMorePhoto= !isMorePhoto"> {{ isMorePhoto ? 'Less More' : 'Show More' }}</button>
+  </div>
+  <div class="shoes-content-left-content">
+    <div class="left-content" *ngFor="let title of titleContentLeft; index as i">
+      <div class="left-content-header" [ngClass]="{'active': tabsActive === i}"
+           (click)="handleTabs(title, i)">{{ title }}
+      </div>
+      <div class="left-content-main"
+           [ngClass]="{'active': titleActive === 'Details'}"
+           *ngIf="title === 'Details';else descriptions">
+        <ul class="left-content-main-details">
+          <li *ngFor="let details of contentItem['details']" class="title">{{ details }}</li>
+        </ul>
+      </div>
+      <ng-template #descriptions>
+        <div class="descriptions-content" [ngClass]="{'active': titleActive === 'Descriptions'}">
+          <div class="descriptions-content-left">
+            <h3 class="descriptions-content-left-title">{{ contentItem['descriptions']['name'] }}</h3>
+            <p class="descriptions-content-left-text">{{ contentItem['descriptions']['text'] }}</p>
+          </div>
+          <div class="descriptions-content-right">
+            <img src="{{contentItem['descriptions']['image']}}" alt="">
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  <app-slider-news></app-slider-news>
+  <ng-template #loading>
+    <app-loading></app-loading>
+  </ng-template>
+</div>
