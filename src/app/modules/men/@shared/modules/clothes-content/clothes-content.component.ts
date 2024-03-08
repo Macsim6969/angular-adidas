@@ -32,6 +32,8 @@ export class ClothesContentComponent implements OnInit {
   public tabsActive: number = -1;
   public dataParam: string;
   public keysData: ProdsFromService[];
+  public activeSizeShoes: number;
+  public activeSizeClothes: string;
 
   constructor(
     private store: Store<{ store: StoreInterface }>,
@@ -62,13 +64,36 @@ export class ClothesContentComponent implements OnInit {
     this.tabsActive = index;
   }
 
+  public choiceSize(size: number| string){
+    typeof size === 'number' ? this.activeSizeShoes = size : this.activeSizeClothes = size;
+  }
+
+  public addBag(){
+
+  }
+
   public like() {
+    let activeSize: number | string;
+    if(typeof this.contentItem.sizes === 'number'){
+      activeSize = this.activeSizeShoes;
+    } else {
+      activeSize = this.activeSizeClothes;
+    }
+
+    const dopInfo ={
+      activeColor: this.choiceColorShoes,
+      activeSize: activeSize
+    }
+
+    const newId = {...this.contentItem, ...dopInfo
+    }
+
     if (this.authService.user.pipe(map((user) => !!user))) {
       this.authService.user.subscribe((user) => {
-        this.stateMenService.addFavouritesClothes(user.id, this.contentItem).add(() =>{
+        this.stateMenService.addFavouritesClothes(user.id, newId).add(() =>{
           this.stateMenService.getFavouritesClothes(user.id);
-          this.infoPopup._favouriteClotheImage = this.contentItem.imageURL[0];
-          this.infoPopup._favoriteClotheTitle = this.contentItem.name
+          this.infoPopup._favouriteClotheImage = newId.imageURL[this.choiceColorShoes];
+          this.infoPopup._favoriteClotheTitle = newId.name
         })
       })
     }
@@ -106,6 +131,14 @@ export class ClothesContentComponent implements OnInit {
       this.dataParam = params['menu']
       if (data[params['menu']]) {
         this.contentItem = data[params['menu']].find(data => data.name == targetId)
+        console.log(this.contentItem);
+        if(this.contentItem.activeColor){
+          this.choiceColorShoes = this.contentItem.activeColor;
+        }
+        if(this.contentItem.activeSize){
+          this.activeSizeClothes = this.contentItem.activeSize;
+          this.activeSizeShoes = this.contentItem.activeSize;
+        }
 
         of(null).pipe(take(1)).subscribe(() => {
           this.authService.user.pipe(take(1)).subscribe((user) => {

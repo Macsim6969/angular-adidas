@@ -217,6 +217,11 @@
           cursor: pointer;
           max-width: 70px;
           max-height: 100%;
+          border: 2px solid transparent;
+
+          &.active{
+            border: 2px solid black ;
+          }
 
           img {
             width: 100%;
@@ -245,6 +250,11 @@
           align-items: center;
           justify-content: center;
           border: 1px solid gray;
+
+          &.active{
+            background-color: #7f8787;
+            color: wheat;
+          }
         }
       }
 
