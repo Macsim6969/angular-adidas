@@ -21,7 +21,6 @@ export class StateMenService {
   }
 
   public removeFavouriteClothes(idToken: string, id: string) {
-    console.log(id);
     return this.http.delete(`https://angular-adidas-default-rtdb.firebaseio.com/users/${idToken}/favourites/${id}.json`).pipe(take(1)).subscribe(() =>{
       this.getFavouritesClothes(idToken);
     });

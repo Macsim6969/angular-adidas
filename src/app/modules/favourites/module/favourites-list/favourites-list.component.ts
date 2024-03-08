@@ -50,7 +50,6 @@ export class FavouritesListComponent  implements OnInit{
   public openContent(name_id: string, tage: string) {
     const newRoute = name_id.replace(/ /g, '_').toLowerCase();
 
-    console.log('/men', tage, newRoute)
     const newRouterLink = ['/favourites', newRoute];
 
     this.router.navigate(newRouterLink, {queryParamsHandling: 'merge'}).then();

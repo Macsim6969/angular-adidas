@@ -2,7 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {MatIconService} from "../../../services/matIcon.service";
 import {ClothesContentService} from "../../../services/clothes-content.service";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-clothes-content-left',
@@ -16,7 +16,9 @@ export class ClothesContentLeftComponent implements OnInit, OnDestroy {
   public titleContentLeft: ['Descriptions', 'Details'] = ['Descriptions', 'Details'];
   public titleActive: 'Descriptions' | 'Details'
   public tabsActive: number = -1;
-  public choiceColorShoes$: Observable<number>;
+  public choiceColorShoes: number = 0;
+
+  private choiceColorShoesSubscription: Subscription;
 
   constructor(
     private router: Router,
@@ -26,8 +28,7 @@ export class ClothesContentLeftComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.choiceColorShoes$ = this.clothesContentService._choiceColorShoes$;
-
+    this.streamChoiceColorShoes();
   }
 
   public backRoute() {
@@ -40,10 +41,13 @@ export class ClothesContentLeftComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.choiceColorShoesSubscription.unsubscribe();
   }
 
-  private streamchoiceColorShoes() {
-
-  }
+  private streamChoiceColorShoes() {
+   this.choiceColorShoesSubscription = this.clothesContentService._choiceColorShoes$.subscribe((data) => {
+      this.choiceColorShoes = data;
+    });
+  };
 
 }

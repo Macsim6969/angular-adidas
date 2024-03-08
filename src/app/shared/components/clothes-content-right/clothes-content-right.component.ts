@@ -6,6 +6,7 @@ import {StateMenService} from "../../../services/state-men.service";
 import {InfoPopupService} from "../../../services/info-popup.service";
 import {ProdsFromService} from "../../../interfaces/home.interface";
 import {ClothesContentService} from "../../../services/clothes-content.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-clothes-content-right',
@@ -27,18 +28,21 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
   private keysDataSubscription: Subscription;
   private activeSizeShoesSubscription: Subscription;
   private activeSizeClothesSubscription: Subscription;
+  private choiceColorShoesSubscription: Subscription;
 
   constructor(
     private matIcon: MatIconService,
     private authService: AuthService,
     private stateMenService: StateMenService,
     private infoPopup: InfoPopupService,
-    private clothesContentService: ClothesContentService
+    private clothesContentService: ClothesContentService,
+    private router: Router
   ) {
   }
 
   ngOnInit() {
     this.streamIsFavouriteData();
+    this.streamChoiceColorShoes();
     this.streamIsKeyData();
     this.streamActiveSizeShoes();
     this.streamActiveSizeClothes();
@@ -87,7 +91,6 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
   }
 
   unlike(id: number) {
-    console.log(id)
     if (this.authService.user.pipe(map((user) => !!user))) {
       this.authService.user.subscribe((user) => {
         const entries = Object.entries(this.keysData);
@@ -100,9 +103,10 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
           this.stateMenService.removeFavouriteClothes(user.id, objectKeyToRemove)
           this.isFavourite = false;
         }
-
       })
     }
+    console.log(this.clothesContentService._paramsPage)
+    this.clothesContentService._paramsPage === 'products' ? this.router.navigate(['/favourites'], {queryParamsHandling: 'merge'}).then() : null;
   }
 
   ngOnDestroy() {
@@ -110,11 +114,18 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
     this.keysDataSubscription.unsubscribe();
     this.activeSizeShoesSubscription.unsubscribe();
     this.activeSizeClothesSubscription.unsubscribe();
+    this.choiceColorShoesSubscription.unsubscribe();
   }
 
   private streamIsFavouriteData() {
     this.isFavouriteSubscription = this.clothesContentService._isFavourite$.subscribe((data: boolean) => {
       this.isFavourite = data;
+    });
+  };
+
+  private streamChoiceColorShoes() {
+    this.choiceColorShoesSubscription = this.clothesContentService._choiceColorShoes$.subscribe((data: number) => {
+      this.choiceColorShoes = data;
     });
   };
 
@@ -131,8 +142,10 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
   };
 
   private streamActiveSizeClothes() {
-   this.activeSizeClothesSubscription = this.clothesContentService._activeSizeClothes$.subscribe((data: string) => {
+    this.activeSizeClothesSubscription = this.clothesContentService._activeSizeClothes$.subscribe((data: string) => {
       this.activeSizeClothes = data;
     });
   };
+
+
 }

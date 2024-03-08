@@ -33,41 +33,43 @@ export class ClothesContentComponent implements OnInit {
 
   private checkRouterParams() {
     this.route.params.subscribe((params: Params) => {
-      console.log(params)
+      this.clothesContentService._paramsPage = Object.keys(params)[0]
       const targetId = params['clothes'].split('_').map((word) => word.toUpperCase()).join(' ')
-      this.getClothesDataFromStore(targetId,params)
+      this.getClothesDataFromStore(targetId, params)
     })
   }
 
   private getClothesDataFromStore(targetId: string, params: Params) {
     this.store.select(storeSelectorClothesData).subscribe(data => {
-      this.dataParam = params['menu']
-      if (data[params['menu']]) {
-        this.contentItem = data[params['menu']].find(data => data.name == targetId)
-        console.log(this.contentItem);
-        if (this.contentItem?.activeColor) {
-          this.clothesContentService._choiceColorShoes = this.contentItem.activeColor;
-        }
-        if (this.contentItem?.activeSize) {
-          this.clothesContentService._activeSizeClothes = this.contentItem.activeSize;
-          this.clothesContentService._activeSizeShoes = this.contentItem.activeSize;
-        }
+        this.dataParam = params['menu']
+        if (data[params['menu']] && data) {
+          this.contentItem = data[params['menu']].find(data => data.name == targetId)
 
-        of(null).pipe(take(1)).subscribe(() => {
-          this.authService.user.pipe(take(1)).subscribe((user) => {
-            this.store.select(storeSelectorFavourites).pipe(take(1)).subscribe((data) => {
-              this.clothesContentService._keysData = data;
-              Object.values(data).find(clothes => {
-                if (clothes.id === this.contentItem.id) {
-                  this.clothesContentService._isFavourite = true;
-                } else {
-                  this.clothesContentService._isFavourite = false;
-                }
+          this.contentItem.activeColor ? this.clothesContentService._choiceColorShoes = this.contentItem.activeColor : this.clothesContentService._choiceColorShoes = 0;
+          if (this.contentItem?.activeSize) {
+            this.clothesContentService._activeSizeClothes = this.contentItem.activeSize;
+            this.clothesContentService._activeSizeShoes = this.contentItem.activeSize;
+          } else {
+            this.clothesContentService._activeSizeClothes = null;
+            this.clothesContentService._activeSizeShoes = null;
+          }
+
+          of(null).pipe(take(1)).subscribe(() => {
+              this.authService.user.pipe(take(1)).subscribe((user) => {
+                this.store.select(storeSelectorFavourites).pipe(take(1)).subscribe((data) => {
+                  if (data) {
+                    this.clothesContentService._keysData = data;
+                    Object.values(data).find(clothes => {
+                        clothes.id === this.contentItem.id ? this.clothesContentService._isFavourite = true : this.clothesContentService._isFavourite = false;
+                      }
+                    )
+                  }
+                })
               })
-            })
-          })
-        })
+            }
+          )
+        }
       }
-    })
+    )
   }
 }

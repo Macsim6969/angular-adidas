@@ -31,7 +31,6 @@ export class SliderNewsComponent implements OnInit {
     const newRoute = id.replace(/ /g, '_').toLowerCase();
     const currentMenu = this.route.snapshot.params['menu'];
     const newRouterLink = 'men/valentines/' + newRoute;
-    console.log(newRouterLink)
     this.router.navigate([newRouterLink], {queryParamsHandling: 'merge'}).then();
   }
 }

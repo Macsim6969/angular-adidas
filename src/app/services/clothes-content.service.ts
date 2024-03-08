@@ -10,6 +10,7 @@ export class ClothesContentService {
   private keysDataSubject: BehaviorSubject<ProdsFromService[]> = new BehaviorSubject<ProdsFromService[]>(null);
   private activeSizeShoesSubject: BehaviorSubject<number> = new BehaviorSubject<number>(null);
   private activeSizeClothesSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+  private paramsPageSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
   get _choiceColorShoes$() {
     return this.choiceColorShoesSubject;
@@ -49,6 +50,14 @@ export class ClothesContentService {
 
   set _activeSizeClothes(newSize: string) {
     this.activeSizeClothesSubject.next(newSize);
+  }
+
+  get _paramsPage(){
+    return this.paramsPageSubject.getValue();
+  }
+
+  set _paramsPage(newRoute: string){
+    this.paramsPageSubject.next(newRoute)
   }
 
 }

@@ -5,9 +5,9 @@
   </div>
 </div>
 <div class="shoes-content-left">
-  <div *ngIf="contentItem.galleryDop[(choiceColorShoes$ | async)].info; else loading" class="shoes-content-left-header"
-       [ngClass]="{'wide': contentItem.galleryDop[(choiceColorShoes$ | async)].info.length > 2, 'open': isMorePhoto}">
-    <div class="shoes-content-left-header-image" *ngFor="let image of contentItem.galleryDop[(choiceColorShoes$ | async)].info">
+  <div *ngIf="contentItem.galleryDop[choiceColorShoes].info; else loading" class="shoes-content-left-header"
+       [ngClass]="{'wide': contentItem.galleryDop[choiceColorShoes].info.length > 2, 'open': isMorePhoto}">
+    <div class="shoes-content-left-header-image" *ngFor="let image of contentItem.galleryDop[choiceColorShoes].info">
       <img src="{{image}}" alt="">
     </div>
     <button (click)="isMorePhoto= !isMorePhoto"> {{ isMorePhoto ? 'Less More' : 'Show More' }}</button>
