@@ -105,8 +105,6 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
         }
       })
     }
-    console.log(this.clothesContentService._paramsPage)
-    this.clothesContentService._paramsPage === 'products' ? this.router.navigate(['/favourites'], {queryParamsHandling: 'merge'}).then() : null;
   }
 
   ngOnDestroy() {

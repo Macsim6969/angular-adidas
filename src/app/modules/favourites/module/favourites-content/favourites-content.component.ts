@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProdsFromService} from "../../../../interfaces/home.interface";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {storeSelectorFavourites} from "../../../../store/selectors/store.selectors";
-import {of, Subject, Subscription, take, takeUntil} from "rxjs";
+import {of, Subscription, take} from "rxjs";
 import {Store} from "@ngrx/store";
 import {StoreInterface} from "../../../../store/model/store.model";
 import {AuthService} from "../../../../services/auth.service";
@@ -15,24 +15,22 @@ import {ClothesContentService} from "../../../../services/clothes-content.servic
 })
 export class FavouritesContentComponent implements OnInit, OnDestroy {
   public contentItem: ProdsFromService;
-
   private paramsSubscription: Subscription;
 
   constructor(
     private store: Store<{ store: StoreInterface }>,
     private authService: AuthService,
     private route: ActivatedRoute,
+    private router: Router,
     private clothesContentService: ClothesContentService
   ) {
   }
 
   ngOnInit() {
-    this.paramsSubscription = this.route.params.subscribe(params => console.log(params))
     this.checkRouterParams();
   }
 
   ngOnDestroy() {
-    this.paramsSubscription.unsubscribe();
   }
 
   private checkRouterParams() {
@@ -45,7 +43,8 @@ export class FavouritesContentComponent implements OnInit, OnDestroy {
 
   private getClothesDataFromStore(targetId: string) {
     this.store.select(storeSelectorFavourites).subscribe((data: ProdsFromService[]) => {
-      if (Object.values(data)) {
+      !data ? this.router.navigate(['favourites'], {queryParamsHandling: 'merge'}).then() : null;
+      if (data) {
         this.contentItem = Object.values(data).find((data: ProdsFromService) => data.name == targetId)
         if (this.contentItem?.activeColor) {
           this.clothesContentService._choiceColorShoes = this.contentItem.activeColor;
@@ -74,7 +73,6 @@ export class FavouritesContentComponent implements OnInit, OnDestroy {
           })
         })
       }
-
     })
   }
 }

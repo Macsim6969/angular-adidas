@@ -4,7 +4,7 @@ import {CommonModule} from "@angular/common";
 import {ShareModule} from "../../shared/share.module";
 import {RouterModule, Routes} from "@angular/router";
 import {SliderNewsModule} from "../men/@shared/modules/slider-news/slider-news.module";
-import {FavouritesListComponent} from "./module/favourites-list/favourites-list.component";
+import {FavouritesListComponent} from "./component/favourites-list/favourites-list.component";
 
 const routes: Routes = [
   {
@@ -12,7 +12,7 @@ const routes: Routes = [
       {path: '', component: FavouritesListComponent},
       {
         path: ':products',
-        loadChildren: () => import('./component/favourites-content/favourites-content.module').then((m) => m.FavouritesContentModule)
+        loadChildren: () => import('./module/favourites-content/favourites-content.module').then((m) => m.FavouritesContentModule)
       }
     ]
   }

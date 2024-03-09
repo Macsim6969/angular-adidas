@@ -5,6 +5,7 @@ import {ProdsFromService} from "../../../../interfaces/home.interface";
 import {AuthService} from "../../../../services/auth.service";
 import {Store} from "@ngrx/store";
 import {StoreInterface} from "../../../../store/model/store.model";
+import {ClothesContentService} from "../../../../services/clothes-content.service";
 
 @Component({
   selector: 'app-favourites-list',
@@ -19,7 +20,8 @@ export class FavouritesListComponent  implements OnInit{
   constructor(
     private router: Router,
     private authService: AuthService,
-    private store: Store<{store: StoreInterface}>
+    private store: Store<{store: StoreInterface}>,
+    private clothesContentService: ClothesContentService
   ) {}
 
   ngOnInit() {
@@ -37,7 +39,6 @@ export class FavouritesListComponent  implements OnInit{
     })
   }
 
-
   private getListDataAndStateInfo(data: ProdsFromService[]) {
     if (data) {
       this.list = Object.values(data);
@@ -46,6 +47,7 @@ export class FavouritesListComponent  implements OnInit{
       this.stateInfo = true;
     }
   }
+
 
   public openContent(name_id: string, tage: string) {
     const newRoute = name_id.replace(/ /g, '_').toLowerCase();

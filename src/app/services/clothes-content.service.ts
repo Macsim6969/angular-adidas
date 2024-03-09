@@ -12,6 +12,8 @@ export class ClothesContentService {
   private activeSizeClothesSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
   private paramsPageSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
+  private arrayItems: BehaviorSubject<ProdsFromService[]> = new BehaviorSubject<ProdsFromService[]>(null);
+
   get _choiceColorShoes$() {
     return this.choiceColorShoesSubject;
   }
@@ -58,6 +60,15 @@ export class ClothesContentService {
 
   set _paramsPage(newRoute: string){
     this.paramsPageSubject.next(newRoute)
+  }
+
+  set _arrayItems(newArray: ProdsFromService[] | null){
+    console.log(newArray)
+    this.arrayItems.next(newArray)
+  }
+
+  get _arrayItems(){
+    return this.arrayItems.getValue();
   }
 
 }

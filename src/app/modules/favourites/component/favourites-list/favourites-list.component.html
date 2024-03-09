@@ -3,8 +3,8 @@
     <mat-card class="products" *ngFor="let item of list; index as i" (mouseover)="showHoverImage(true, i)"
               (mouseleave)="showHoverImage(false, i)" (click)="openContent(item.name, item.tage)">
       <mat-card-header class="products-header">
-        <img mat-card-image src="{{item.imageURL[0]}}" alt="">
-        <img [ngClass]="{'active': isHover[i]}" class="hover" mat-card-image src="{{item.imageURL_hover}}" alt="">
+        <img mat-card-image src="{{item.imageURL[item.activeColor]}}" alt="">
+        <img [ngClass]="{'active': isHover[i]}" class="hover" mat-card-image src="{{item.galleryDop[item.activeColor].info[1]}}" alt="">
         <p class="products-header-price" [innerHTML]="item.price + '$'"></p>
       </mat-card-header>
       <mat-card-content class="products-content">

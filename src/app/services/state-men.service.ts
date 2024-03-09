@@ -6,6 +6,7 @@ import {StoreInterface} from "../store/model/store.model";
 import {ProdsFromService} from "../interfaces/home.interface";
 import {exhaustMap, Observable, take} from "rxjs";
 import {AuthService} from "./auth.service";
+import {ClothesContentService} from "./clothes-content.service";
 
 
 @Injectable()
@@ -13,7 +14,8 @@ import {AuthService} from "./auth.service";
 export class StateMenService {
   constructor(
     private http: HttpClient,
-    private store: Store<{ store: StoreInterface }>
+    private store: Store<{ store: StoreInterface }>,
+    private clothesContentService: ClothesContentService
   ) {}
 
   public addFavouritesClothes(idToken: string, clothes: ProdsFromService) {
@@ -28,6 +30,7 @@ export class StateMenService {
 
   getFavouritesClothes(idToken: string) {
     this.http.get<ProdsFromService[]>(`https://angular-adidas-default-rtdb.firebaseio.com/users/${idToken}/favourites.json`).pipe(take(1)).subscribe((data: ProdsFromService[]) =>{
+      this.clothesContentService._arrayItems = data;
       this.store.dispatch(favouriteClothes({value: data}))
     })
   }
