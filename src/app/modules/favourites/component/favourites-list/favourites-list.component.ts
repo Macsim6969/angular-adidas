@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {storeSelectorFavourites} from "../../../../store/selectors/store.selectors";
 import {ProdsFromService} from "../../../../interfaces/home.interface";
@@ -7,17 +7,21 @@ import {Store} from "@ngrx/store";
 import {StoreInterface} from "../../../../store/model/store.model";
 import {ClothesContentService} from "../../../../services/clothes-content.service";
 import {FavouriteService} from "../../service/favourite.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-favourites-list',
   templateUrl: './favourites-list.component.html',
   styleUrl: './favourites-list.component.scss'
 })
-export class FavouritesListComponent  implements OnInit{
+export class FavouritesListComponent  implements OnInit, OnDestroy{
   public list: ProdsFromService[];
   public isHover: boolean[] = [];
   public isLoading: boolean = true;
   public stateInfo: boolean;
+
+  private userSubscription: Subscription;
+  private storeSubscription: Subscription;
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -31,9 +35,9 @@ export class FavouritesListComponent  implements OnInit{
   }
 
   private initializeDataFavouriteClothes() {
-    this.authService.user.subscribe((user) => {
+  this.userSubscription = this.authService.user.subscribe((user) => {
       this.isLoading = true;
-      this.store.select(storeSelectorFavourites).subscribe((data: ProdsFromService[]) => {
+    this.storeSubscription = this.store.select(storeSelectorFavourites).subscribe((data: ProdsFromService[]) => {
         this.getListDataAndStateInfo(data)
         this.isLoading = false;
 
@@ -65,5 +69,11 @@ export class FavouritesListComponent  implements OnInit{
 
   public showHoverImage(isHovered: boolean, index: number) {
     this.isHover[index] = isHovered;
+  }
+
+  ngOnDestroy() {
+    this.userSubscription.unsubscribe();
+    this.storeSubscription.unsubscribe();
+
   }
 }

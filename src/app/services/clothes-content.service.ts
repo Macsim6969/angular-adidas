@@ -63,7 +63,6 @@ export class ClothesContentService {
   }
 
   set _arrayItems(newArray: ProdsFromService[] | null){
-    console.log(newArray)
     this.arrayItems.next(newArray)
   }
 

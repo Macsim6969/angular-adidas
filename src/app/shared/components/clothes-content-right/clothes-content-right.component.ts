@@ -6,7 +6,9 @@ import {StateMenService} from "../../../services/state-men.service";
 import {InfoPopupService} from "../../../services/info-popup.service";
 import {ProdsFromService} from "../../../interfaces/home.interface";
 import {ClothesContentService} from "../../../services/clothes-content.service";
-import {Router} from "@angular/router";
+import {StoreInterface} from "../../../store/model/store.model";
+import {Store} from "@ngrx/store";
+import {storeSelectorFavourites} from "../../../store/selectors/store.selectors";
 
 @Component({
   selector: 'app-clothes-content-right',
@@ -36,7 +38,7 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
     private stateMenService: StateMenService,
     private infoPopup: InfoPopupService,
     private clothesContentService: ClothesContentService,
-    private router: Router
+    private store: Store<{ store: StoreInterface }>
   ) {
   }
 
@@ -71,7 +73,8 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
 
     const dopInfo = {
       activeColor: this.choiceColorShoes,
-      activeSize: activeSize
+      activeSize: activeSize,
+      favouriteClothes: true
     }
 
     const newId = {
@@ -94,11 +97,9 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
     if (this.authService.user.pipe(map((user) => !!user)) && this.keysData) {
       this.authService.user.subscribe((user) => {
         const entries = Object.entries(this.keysData);
-
         const foundEntry = entries.find(([key, value]) => value.id === id);
 
         if (foundEntry) {
-          console.log(id)
           const [key, value] = foundEntry;
           const objectKeyToRemove = key;
           this.stateMenService.removeFavouriteClothes(user.id, objectKeyToRemove);
@@ -119,9 +120,13 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
   }
 
   private streamIsFavouriteData() {
-    this.isFavouriteSubscription = this.clothesContentService._isFavourite$.subscribe((data: boolean) => {
-      this.isFavourite = data;
-    });
+    this.isFavouriteSubscription = this.store.select(storeSelectorFavourites).subscribe(data => {
+      if (data && Object.values(data).find((data: ProdsFromService) => data.id === this.contentItem.id)?.favouriteClothes) {
+        this.isFavourite = Object.values(data).find((data: ProdsFromService) => data.id === this.contentItem.id)?.favouriteClothes
+      } else {
+        this.isFavourite = false;
+      }
+    })
   };
 
   private streamChoiceColorShoes() {
@@ -132,6 +137,7 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
 
   private streamIsKeyData() {
     this.keysDataSubscription = this.clothesContentService._keysData$.subscribe((data: ProdsFromService[]) => {
+      console.log(this.keysData, 'key-Data');
       this.keysData = data;
     });
   };

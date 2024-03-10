@@ -31,4 +31,5 @@ export interface ProdsFromService {
   sizes: string[]
   activeColor?: number
   activeSize?: any
+  favouriteClothes?: boolean
 }
