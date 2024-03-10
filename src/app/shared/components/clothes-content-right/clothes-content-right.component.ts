@@ -83,7 +83,7 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
         this.stateMenService.addFavouritesClothes(user.id, newId).add(() => {
           this.stateMenService.getFavouritesClothes(user.id);
           this.infoPopup._favouriteClotheImage = newId.imageURL[this.choiceColorShoes];
-          this.infoPopup._favoriteClotheTitle = newId.name
+          this.infoPopup._favoriteClotheTitle = newId.name;
         })
       })
     }
@@ -91,16 +91,19 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
   }
 
   unlike(id: number) {
-    if (this.authService.user.pipe(map((user) => !!user))) {
+    if (this.authService.user.pipe(map((user) => !!user)) && this.keysData) {
       this.authService.user.subscribe((user) => {
         const entries = Object.entries(this.keysData);
 
         const foundEntry = entries.find(([key, value]) => value.id === id);
 
         if (foundEntry) {
+          console.log(id)
           const [key, value] = foundEntry;
           const objectKeyToRemove = key;
-          this.stateMenService.removeFavouriteClothes(user.id, objectKeyToRemove)
+          this.stateMenService.removeFavouriteClothes(user.id, objectKeyToRemove);
+          this.infoPopup._favouriteClotheImage = this.infoPopup._favouriteClotheImage$.getValue();
+          this.infoPopup._favoriteClotheTitle = this.infoPopup._favoriteClotheTitle$.getValue();
           this.isFavourite = false;
         }
       })

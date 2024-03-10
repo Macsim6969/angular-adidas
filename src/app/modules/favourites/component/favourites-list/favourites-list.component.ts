@@ -6,6 +6,7 @@ import {AuthService} from "../../../../services/auth.service";
 import {Store} from "@ngrx/store";
 import {StoreInterface} from "../../../../store/model/store.model";
 import {ClothesContentService} from "../../../../services/clothes-content.service";
+import {FavouriteService} from "../../service/favourite.service";
 
 @Component({
   selector: 'app-favourites-list',
@@ -21,11 +22,12 @@ export class FavouritesListComponent  implements OnInit{
     private router: Router,
     private authService: AuthService,
     private store: Store<{store: StoreInterface}>,
-    private clothesContentService: ClothesContentService
+    private favouriteService: FavouriteService
   ) {}
 
   ngOnInit() {
     this.initializeDataFavouriteClothes();
+    this.favouriteService._params = 'favourites';
   }
 
   private initializeDataFavouriteClothes() {
