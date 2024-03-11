@@ -56,7 +56,7 @@ export class ClothesContentComponent implements OnInit {
 
           of(null).pipe(take(1)).subscribe(() => {
               this.authService.user.pipe(take(1)).subscribe((user) => {
-                this.store.select(storeSelectorFavourites).pipe(take(1)).subscribe((data) => {
+                this.store.select(storeSelectorFavourites).subscribe((data) => {
                   if (data) {
                     this.clothesContentService._keysData = data;
                     Object.values(data).find(clothes => {

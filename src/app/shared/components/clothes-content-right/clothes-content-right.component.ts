@@ -9,6 +9,7 @@ import {ClothesContentService} from "../../../services/clothes-content.service";
 import {StoreInterface} from "../../../store/model/store.model";
 import {Store} from "@ngrx/store";
 import {storeSelectorFavourites} from "../../../store/selectors/store.selectors";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-clothes-content-right',
@@ -36,6 +37,7 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
     private matIcon: MatIconService,
     private authService: AuthService,
     private stateMenService: StateMenService,
+    private router: Router,
     private infoPopup: InfoPopupService,
     private clothesContentService: ClothesContentService,
     private store: Store<{ store: StoreInterface }>
@@ -87,6 +89,7 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
           this.stateMenService.getFavouritesClothes(user.id);
           this.infoPopup._favouriteClotheImage = newId.imageURL[this.choiceColorShoes];
           this.infoPopup._favoriteClotheTitle = newId.name;
+          this.infoPopup._descriptionTitle = 'Added to favourites'
         })
       })
     }
@@ -102,9 +105,11 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
         if (foundEntry) {
           const [key, value] = foundEntry;
           const objectKeyToRemove = key;
+          this.stateMenService._params = this.router.url.indexOf('?') !== -1 ? this.router.url.substring(1, this.router.url.indexOf('?')) : null;
           this.stateMenService.removeFavouriteClothes(user.id, objectKeyToRemove);
           this.infoPopup._favouriteClotheImage = this.infoPopup._favouriteClotheImage$.getValue();
           this.infoPopup._favoriteClotheTitle = this.infoPopup._favoriteClotheTitle$.getValue();
+          this.infoPopup._descriptionTitle = 'Removed from favourites'
           this.isFavourite = false;
         }
       })
@@ -137,7 +142,6 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
 
   private streamIsKeyData() {
     this.keysDataSubscription = this.clothesContentService._keysData$.subscribe((data: ProdsFromService[]) => {
-      console.log(this.keysData, 'key-Data');
       this.keysData = data;
     });
   };

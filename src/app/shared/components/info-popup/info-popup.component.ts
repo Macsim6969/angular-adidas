@@ -9,8 +9,9 @@ import {Router} from "@angular/router";
   styleUrl: './info-popup.component.scss'
 })
 export class InfoPopupComponent implements OnInit {
-  image$: Observable<string>
-  title$: Observable<string>
+  image$: Observable<string>;
+  title$: Observable<string>;
+  description$: Observable<string>;
   isActive: boolean;
 
   constructor(
@@ -21,6 +22,7 @@ export class InfoPopupComponent implements OnInit {
   ngOnInit() {
     this.image$ = this.infoPopup._favouriteClotheImage$;
     this.title$ = this.infoPopup._favoriteClotheTitle$;
+    this.description$ = this.infoPopup._descriptionTitle$
 
     this.image$.subscribe((data: string) => {
       if(data){

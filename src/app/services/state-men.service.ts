@@ -13,7 +13,9 @@ import {Router} from "@angular/router";
 @Injectable()
 
 export class StateMenService {
-  private isRemoveSubject: BehaviorSubject<'favourites' | null> = new BehaviorSubject<'favourites' | null>(null);
+  private isRemoveSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
+  private paramsSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
+
 
   constructor(
     private http: HttpClient,
@@ -23,12 +25,20 @@ export class StateMenService {
   ) {
   }
 
-  set _isRemove(value: 'favourites' | null) {
+  set _isRemove(value: string | null) {
     this.isRemoveSubject.next(value);
   }
 
-  get _isRemove$(){
+  get _isRemove$() {
     return this.isRemoveSubject;
+  }
+
+  get _params() {
+    return this.paramsSubject.getValue();
+  }
+
+  set _params(value: string | null) {
+    this.paramsSubject.next(value);
   }
 
   public addFavouritesClothes(idToken: string, clothes: ProdsFromService) {
@@ -38,13 +48,15 @@ export class StateMenService {
   public removeFavouriteClothes(idToken: string, id: string) {
     return this.http.delete(`https://angular-adidas-default-rtdb.firebaseio.com/users/${idToken}/favourites/${id}.json`).pipe(take(1)).subscribe(() => {
       this.getFavouritesClothes(idToken);
-      this._isRemove$.pipe(take(1)).subscribe((data) =>{
-        if(data === 'favourites')
-        timer(500).subscribe(() =>{
-          this.router.navigate(['favourites'], {queryParamsHandling: 'merge'}).then(() =>{
-            this._isRemove = null;
+      this._isRemove$.pipe(take(1)).subscribe((data) => {
+        if (this._params.includes('favourites')) {
+          timer(500).subscribe(() => {
+            this.router.navigate(['favourites'], {queryParamsHandling: 'merge'}).then(() => {
+              this._isRemove = null;
+            });
           });
-        })
+        }
+
       })
     });
   }

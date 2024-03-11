@@ -7,6 +7,7 @@ import {BehaviorSubject} from "rxjs";
 export class InfoPopupService {
   private favouriteClotheImageSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
   private favoriteClotheTitleSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+  private descriptionTitleSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
   set _favouriteClotheImage(newImage: string){
     this.favouriteClotheImageSubject.next(newImage);
@@ -22,5 +23,13 @@ export class InfoPopupService {
 
   get _favoriteClotheTitle$(){
     return this.favoriteClotheTitleSubject;
+  }
+
+  set _descriptionTitle(value : string){
+    this.descriptionTitleSubject.next(value)
+  }
+
+  get _descriptionTitle$(){
+    return this.descriptionTitleSubject;
   }
 }

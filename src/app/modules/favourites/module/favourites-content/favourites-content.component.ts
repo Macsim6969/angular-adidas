@@ -8,7 +8,6 @@ import {StoreInterface} from "../../../../store/model/store.model";
 import {AuthService} from "../../../../services/auth.service";
 import {ClothesContentService} from "../../../../services/clothes-content.service";
 import {StateMenService} from "../../../../services/state-men.service";
-import {FavouriteService} from "../../service/favourite.service";
 
 @Component({
   selector: 'app-favourites-content',
@@ -23,7 +22,6 @@ export class FavouritesContentComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private route: ActivatedRoute,
     private stateMenService: StateMenService,
-    private favouriteService: FavouriteService,
     private clothesContentService: ClothesContentService
   ) {
   }
@@ -46,8 +44,6 @@ export class FavouritesContentComponent implements OnInit, OnDestroy {
 
   private getClothesDataFromStore(targetId: string) {
     this.store.select(storeSelectorFavourites).subscribe((data: ProdsFromService[]) => {
-      // !data ? this.router.navigate(['favourites'], {queryParamsHandling: 'merge'}).then() : null;
-      this.stateMenService._isRemove = this.favouriteService._params;
       if (data) {
         this.contentItem = Object.values(data).find((data: ProdsFromService) => data.name == targetId)
         if (this.contentItem?.activeColor) {
@@ -65,7 +61,7 @@ export class FavouritesContentComponent implements OnInit, OnDestroy {
 
         of(null).pipe(take(1)).subscribe(() => {
           this.authService.user.pipe(take(1)).subscribe((user) => {
-            this.store.select(storeSelectorFavourites).pipe(take(1)).subscribe((data: ProdsFromService[]) => {
+            this.store.select(storeSelectorFavourites).subscribe((data: ProdsFromService[]) => {
               this.clothesContentService._keysData = data;
 
               Object.values(data).find((clothes: ProdsFromService) => {

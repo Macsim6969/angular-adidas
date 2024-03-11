@@ -5,7 +5,6 @@ import {ShareModule} from "../../shared/share.module";
 import {RouterModule, Routes} from "@angular/router";
 import {SliderNewsModule} from "../men/@shared/modules/slider-news/slider-news.module";
 import {FavouritesListComponent} from "./component/favourites-list/favourites-list.component";
-import {FavouriteService} from "./service/favourite.service";
 
 const routes: Routes = [
   {
@@ -33,9 +32,7 @@ const routes: Routes = [
   exports: [
     FavouritesComponent
   ],
-  providers: [
-    FavouriteService
-  ]
+  providers: []
 })
 
 export class FavouritesModule {

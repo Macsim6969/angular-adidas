@@ -5,8 +5,6 @@ import {ProdsFromService} from "../../../../interfaces/home.interface";
 import {AuthService} from "../../../../services/auth.service";
 import {Store} from "@ngrx/store";
 import {StoreInterface} from "../../../../store/model/store.model";
-import {ClothesContentService} from "../../../../services/clothes-content.service";
-import {FavouriteService} from "../../service/favourite.service";
 import {Subscription} from "rxjs";
 
 @Component({
@@ -25,13 +23,11 @@ export class FavouritesListComponent  implements OnInit, OnDestroy{
   constructor(
     private router: Router,
     private authService: AuthService,
-    private store: Store<{store: StoreInterface}>,
-    private favouriteService: FavouriteService
+    private store: Store<{store: StoreInterface}>
   ) {}
 
   ngOnInit() {
     this.initializeDataFavouriteClothes();
-    this.favouriteService._params = 'favourites';
   }
 
   private initializeDataFavouriteClothes() {
