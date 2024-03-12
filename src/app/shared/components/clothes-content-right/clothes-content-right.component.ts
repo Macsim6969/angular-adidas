@@ -10,6 +10,8 @@ import {StoreInterface} from "../../../store/model/store.model";
 import {Store} from "@ngrx/store";
 import {storeSelectorFavourites} from "../../../store/selectors/store.selectors";
 import {Router} from "@angular/router";
+import {User} from "../../../modules/auth/auth.model";
+import {Bags} from "../../../interfaces/bags.interface";
 
 @Component({
   selector: 'app-clothes-content-right',
@@ -21,12 +23,13 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
   public sizesShoes: number[] = [6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12]
   public sizesClothes: string[] = ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL']
   public choiceColorShoes: number = 0;
-
   public activeSizeShoes: number;
   public activeSizeClothes: string;
   public isFavourite: boolean = false;
   public keysData: ProdsFromService[];
-
+  public isSizeActive: boolean;
+  public isLoading: boolean;
+  private user: User;
   private isFavouriteSubscription: Subscription;
   private keysDataSubscription: Subscription;
   private activeSizeShoesSubscription: Subscription;
@@ -50,6 +53,9 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
     this.streamIsKeyData();
     this.streamActiveSizeShoes();
     this.streamActiveSizeClothes();
+    this.authService.user.subscribe((user) => {
+      this.user = user;
+    })
   }
 
   public choiceColor(index: number) {
@@ -58,11 +64,30 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
   }
 
   public choiceSize(size: number | string) {
+    this.isSizeActive = true;
     typeof size === 'number' ? this.activeSizeShoes = size : this.activeSizeClothes = size;
   }
 
   public addBag() {
+    this.isLoading = true
+    let activeSize: number | string;
+    if (typeof this.contentItem.sizes === 'number') {
+      activeSize = this.activeSizeShoes;
+    } else {
+      activeSize = this.activeSizeClothes;
+    }
+    const clothes: Bags = {
+      id: this.contentItem.id,
+      name: this.contentItem.name,
+      price: this.contentItem.price,
+      activeSize: activeSize,
+      color: this.contentItem.galleryDop[this.choiceColorShoes].info[1],
 
+    }
+
+    this.stateMenService.addClothesToBags(this.user.id, clothes).add(() =>{
+      this.isLoading = false;
+    })
   }
 
   public like() {
@@ -84,35 +109,33 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
     }
 
     if (this.authService.user.pipe(map((user) => !!user))) {
-      this.authService.user.subscribe((user) => {
-        this.stateMenService.addFavouritesClothes(user.id, newId).add(() => {
-          this.stateMenService.getFavouritesClothes(user.id);
-          this.infoPopup._favouriteClotheImage = newId.imageURL[this.choiceColorShoes];
-          this.infoPopup._favoriteClotheTitle = newId.name;
-          this.infoPopup._descriptionTitle = 'Added to favourites'
-        })
+      this.stateMenService.addFavouritesClothes(this.user.id, newId).add(() => {
+        this.stateMenService.getFavouritesClothes(this.user.id);
+        this.infoPopup._favouriteClotheImage = newId.imageURL[this.choiceColorShoes];
+        this.infoPopup._favoriteClotheTitle = newId.name;
+        this.infoPopup._descriptionTitle = 'Added to favourites'
       })
+
     }
     this.isFavourite = true;
   }
 
   unlike(id: number) {
     if (this.authService.user.pipe(map((user) => !!user)) && this.keysData) {
-      this.authService.user.subscribe((user) => {
-        const entries = Object.entries(this.keysData);
-        const foundEntry = entries.find(([key, value]) => value.id === id);
 
-        if (foundEntry) {
-          const [key, value] = foundEntry;
-          const objectKeyToRemove = key;
-          this.stateMenService._params = this.router.url.indexOf('?') !== -1 ? this.router.url.substring(1, this.router.url.indexOf('?')) : null;
-          this.stateMenService.removeFavouriteClothes(user.id, objectKeyToRemove);
-          this.infoPopup._favouriteClotheImage = this.infoPopup._favouriteClotheImage$.getValue();
-          this.infoPopup._favoriteClotheTitle = this.infoPopup._favoriteClotheTitle$.getValue();
-          this.infoPopup._descriptionTitle = 'Removed from favourites'
-          this.isFavourite = false;
-        }
-      })
+      const entries = Object.entries(this.keysData);
+      const foundEntry = entries.find(([key, value]) => value.id === id);
+
+      if (foundEntry) {
+        const [key, value] = foundEntry;
+        const objectKeyToRemove = key;
+        this.stateMenService._params = this.router.url.indexOf('?') !== -1 ? this.router.url.substring(1, this.router.url.indexOf('?')) : null;
+        this.stateMenService.removeFavouriteClothes(this.user.id, objectKeyToRemove);
+        this.infoPopup._favouriteClotheImage = this.infoPopup._favouriteClotheImage$.getValue();
+        this.infoPopup._favoriteClotheTitle = this.infoPopup._favoriteClotheTitle$.getValue();
+        this.infoPopup._descriptionTitle = 'Removed from favourites'
+        this.isFavourite = false;
+      }
     }
   }
 

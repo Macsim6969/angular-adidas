@@ -10,6 +10,7 @@
       </span>
     </div>
     <p class="shoes-content-right-size">Sizes</p>
+    <pre *ngIf="(!isSizeActive)">Please choice size</pre>
     <div class="shoes-content-right-sizes" *ngIf="contentItem.sizes.includes(8);else clothes">
       <button mat-button *ngFor="let size of sizesShoes"
               (click)="choiceSize(size)"
@@ -31,7 +32,11 @@
     </ng-template>
     <p class="shoes-content-right-size-guide">Size guide</p>
     <div class="shoes-content-right-actions">
-      <button mat-button class="add">ADD TO BAG</button>
+      <button *ngIf="!isLoading; else loading" [disabled]="!isSizeActive" mat-button class="add" (click)="addBag()">ADD TO BAG</button>
+     <ng-template #loading>
+       <div class="add"><app-loading></app-loading></div>
+     </ng-template>
+      <
       <button *ngIf="!isFavourite" mat-button class="like" (click)="like()">Like</button>
       <button *ngIf="isFavourite" mat-button class="like" (click)=" unlike(contentItem.id)">Unlike</button>
     </div>

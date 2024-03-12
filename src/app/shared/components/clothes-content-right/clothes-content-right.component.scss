@@ -97,10 +97,25 @@
         height: auto;
         padding: 10px 0;
         display: flex;
-        background-color: black;
+        background-color: #333131;
         color: #e1e5d9;
         font-size: 2.4rem;
         flex-basis: 70%;
+        justify-content: center;
+
+
+        :disabled{
+          opacity: 0.35;
+        }
+
+       ::ng-deep app-loading{
+          .loader{
+            height: auto !important;
+            mat-spinner{
+              height: 49px !important;
+            }
+          }
+        }
       }
 
       .like {

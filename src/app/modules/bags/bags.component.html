@@ -1,4 +1,19 @@
-<div class="attention">
+<div class="bags">
+  <div *ngFor="let item of bags" class="bags_item">
+    <mat-icon (click)="removeFromBags(item.id)" class="close" svgIcon="close"></mat-icon>
+   <div class="bags_item_container">
+     <div class="image">
+       <img src="{{item.color}}" alt="">
+     </div>
+     <div class="content">
+       <p class="name">{{item.name}}</p>
+       <p class="size">Size: {{item.activeSize}}</p>
+       <p class="price">Price: ${{item.price}}</p>
+     </div>
+   </div>
+  </div>
   <app-attention></app-attention>
   <app-slider-news></app-slider-news>
 </div>
+
+<h1>{{count}}</h1>

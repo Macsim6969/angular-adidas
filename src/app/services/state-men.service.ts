@@ -8,6 +8,7 @@ import {BehaviorSubject, exhaustMap, Observable, take, timer} from "rxjs";
 import {AuthService} from "./auth.service";
 import {ClothesContentService} from "./clothes-content.service";
 import {Router} from "@angular/router";
+import {Bags} from "../interfaces/bags.interface";
 
 
 @Injectable()
@@ -39,6 +40,18 @@ export class StateMenService {
 
   set _params(value: string | null) {
     this.paramsSubject.next(value);
+  }
+
+  public addClothesToBags(idToken: string, data: Bags){
+    return this.http.post<ProdsFromService>(`https://angular-adidas-default-rtdb.firebaseio.com/users/${idToken}/bags.json`, data).subscribe();
+  }
+
+  public getClothesFromBags(idToken: string){
+    return this.http.get(`https://angular-adidas-default-rtdb.firebaseio.com/users/${idToken}/bags.json`)
+  }
+
+  public removeClothesFromBags(idToken: string, id: string){
+    return this.http.delete(`https://angular-adidas-default-rtdb.firebaseio.com/users/${idToken}/bags/${id}.json`).pipe(take(1)).subscribe()
   }
 
   public addFavouritesClothes(idToken: string, clothes: ProdsFromService) {
