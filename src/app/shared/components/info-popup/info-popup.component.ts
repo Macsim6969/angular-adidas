@@ -34,11 +34,9 @@ export class InfoPopupComponent implements OnInit {
       }): null
     })
 
-
-
   }
 
   public openFavourites(){
-    this.router.navigate(['/favourites'], {queryParamsHandling: 'merge'}).then();
+    this.router.navigate([this.infoPopup._routerForPopup$.getValue()], {queryParamsHandling: 'merge'}).then();
   }
 }

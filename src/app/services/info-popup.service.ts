@@ -8,6 +8,7 @@ export class InfoPopupService {
   private favouriteClotheImageSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
   private favoriteClotheTitleSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
   private descriptionTitleSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+  private routerSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
   set _favouriteClotheImage(newImage: string){
     this.favouriteClotheImageSubject.next(newImage);
@@ -31,5 +32,13 @@ export class InfoPopupService {
 
   get _descriptionTitle$(){
     return this.descriptionTitleSubject;
+  }
+
+  set _routerForPopup(value: string){
+     this.routerSubject.next(value);
+  }
+
+  get _routerForPopup$(){
+    return this.routerSubject;
   }
 }

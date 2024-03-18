@@ -86,7 +86,12 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
     }
 
     this.stateMenService.addClothesToBags(this.user.id, clothes).add(() =>{
+      this.infoPopup._favouriteClotheImage =this.contentItem.imageURL[this.choiceColorShoes];
+      this.infoPopup._favoriteClotheTitle = this.contentItem.name;
+      this.infoPopup._descriptionTitle = 'Added to Bags'
+      this.infoPopup._routerForPopup = 'bags'
       this.isLoading = false;
+
     })
   }
 
@@ -113,7 +118,8 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
         this.stateMenService.getFavouritesClothes(this.user.id);
         this.infoPopup._favouriteClotheImage = newId.imageURL[this.choiceColorShoes];
         this.infoPopup._favoriteClotheTitle = newId.name;
-        this.infoPopup._descriptionTitle = 'Added to favourites'
+        this.infoPopup._descriptionTitle = 'Added to favourites';
+        this.infoPopup._routerForPopup = 'favourites';
       })
 
     }
@@ -134,6 +140,7 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
         this.infoPopup._favouriteClotheImage = this.infoPopup._favouriteClotheImage$.getValue();
         this.infoPopup._favoriteClotheTitle = this.infoPopup._favoriteClotheTitle$.getValue();
         this.infoPopup._descriptionTitle = 'Removed from favourites'
+        this.infoPopup._routerForPopup = 'favourites';
         this.isFavourite = false;
       }
     }

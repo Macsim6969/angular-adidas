@@ -4,4 +4,5 @@ export interface Bags {
   price: number
   color: string
   activeSize: string | number
+  count?: number
 }

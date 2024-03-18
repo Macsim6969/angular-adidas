@@ -14,6 +14,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {InfoPopupComponent} from "./components/info-popup/info-popup.component";
 import {AsyncPipe, NgClass} from "@angular/common";
 import {AttentionComponent} from "./components/attention/attention.component";
+import {MatSelectModule} from "@angular/material/select";
 @NgModule({
   declarations: [
     LoadingComponent,
@@ -31,6 +32,7 @@ import {AttentionComponent} from "./components/attention/attention.component";
     MatTabsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
     AsyncPipe,
     NgClass
   ],
@@ -46,6 +48,7 @@ import {AttentionComponent} from "./components/attention/attention.component";
     InfoPopupComponent,
     AttentionComponent,
     MatCardModule,
+    MatSelectModule,
     MatFormFieldModule,
     MatInputModule
   ],

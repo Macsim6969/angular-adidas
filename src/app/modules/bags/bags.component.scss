@@ -1,62 +1,85 @@
 .bags {
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 15px;
-  max-width: 480px;
-  margin: 120px auto;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 30px;
+  max-width: 1124px;
+  margin: 70px auto 0 auto;
 
-
-  .bags_item {
+  .bags_left {
     display: flex;
     flex-direction: column;
-    flex: 1;
-    padding: 5px;
-    border: 1px solid black;
-    border-radius: 8px;
-    position: relative;
+    gap: 15px;
+    max-width: 540px;
+    flex-basis: 70%;
 
-    .close {
-      position: absolute;
-      right: 10px;
-      top: 7px;
-      cursor: pointer;
+    .bags_item {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 5px;
+      border: 1px solid black;
+      border-radius: 8px;
+      position: relative;
+
+      .close {
+        position: absolute;
+        right: 10px;
+        top: 7px;
+        cursor: pointer;
+      }
+
+      .bags_item_container {
+        max-width: 480px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+        justify-content: flex-start;
+
+        .image {
+          max-width: 120px;
+
+          img {
+            max-width: 120px;
+            height: 100%;
+          }
+        }
+
+        .content {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+
+          p {
+            font-size: 1.55rem;
+            font-weight: 500;
+            margin: 0;
+          }
+
+          .name {
+            width: 100%;
+          }
+        }
+
+      }
     }
+  }
 
-    .bags_item_container {
-      max-width: 480px;
-      width: 100%;
+  .bags_right {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-basis: 20%;
+    .content{
       display: flex;
       flex-direction: row;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 15px;
-      justify-content: flex-start;
-
-      .image {
-        max-width: 120px;
-
-        img {
-          max-width: 120px;
-          height: 100%;
-        }
+      justify-content: space-between;
+      p{
+        font-size: 1.5rem;
       }
-
-      .content {
-        display: flex;
-        flex-direction: column;
-gap: 5px;
-        p {
-          font-size: 1.55rem;
-          font-weight: 500;
-          margin: 0;
-        }
-
-        .name {
-          width: 100%;
-        }
-      }
-
     }
   }
 }

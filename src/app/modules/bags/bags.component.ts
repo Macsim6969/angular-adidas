@@ -15,7 +15,9 @@ export class BagsComponent implements OnInit, OnDestroy {
   private user: User;
   private originalBags: Bags[];
   public bags: Bags[];
-  public count: number;
+  public totalPrice: number;
+
+  public choicePriceArray: number[] = [1,2,3,4,5,6,7,8,9,10];
 
   constructor(
     private stateMenService: StateMenService,
@@ -38,9 +40,22 @@ export class BagsComponent implements OnInit, OnDestroy {
   private getDataClothesFromBags(){
     this.stateMenService.getClothesFromBags(this.user.id).subscribe((data: Bags[]) =>{
       this.originalBags = data;
-      this.bags = Object.values(data);
-      console.log(data)
+     this.initializeReadebleData(data)
     })
+  }
+
+  private initializeReadebleData(data: Bags[]){
+    const mergedItemsArray = Object.values(data).reduce((acc, item) => {
+      const existingItem = acc.find(accItem => accItem.name === item.name && accItem.activeSize === item.activeSize);
+      if (existingItem) {
+        existingItem.count += 1;
+      } else {
+        acc.push({ ...item, count: 1 });
+      }
+      return acc;
+    }, []);
+    this.bags = mergedItemsArray;
+    console.log(mergedItemsArray);
   }
 
 
@@ -49,8 +64,35 @@ export class BagsComponent implements OnInit, OnDestroy {
     const foundEntry = entries.find(([key, value]) => value.id === id);
     const [key, value] = foundEntry;
     const objectKeyToRemove = key;
-    this.stateMenService.removeClothesFromBags(this.user.id, objectKeyToRemove)
+    this.stateMenService.removeClothesFromBags(this.user.id, objectKeyToRemove).add(() =>{
+      this.getDataClothesFromBags();
+    })
   }
+
+ public choiceCountClothes(count: number, id: number) {
+   const product = this.bags.find(p => p.id === id);
+   if (product) {
+     product.count = count;
+   }
+
+   const uniqueItems: Bags[] = [];
+   this.bags.forEach(item => {
+     if (item.id === id && !uniqueItems.some(uniqueItem => uniqueItem.id === item.id && uniqueItem.activeSize === item.activeSize)) {
+       uniqueItems.push(item);
+     }
+   });
+
+   const duplicateItems = [...uniqueItems];
+   for (let i = 1; i < count; i++) {
+     this.bags.push(...duplicateItems);
+   }
+
+   this.totalPrice = Object.values(this.bags).reduce((left, right ) => {
+     return  left + right.price
+   }, 0)
+
+   this.initializeReadebleData(this.bags);
+ }
   ngOnDestroy() {
   }
 }

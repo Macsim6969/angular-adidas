@@ -1,19 +1,42 @@
 <div class="bags">
-  <div *ngFor="let item of bags" class="bags_item">
-    <mat-icon (click)="removeFromBags(item.id)" class="close" svgIcon="close"></mat-icon>
-   <div class="bags_item_container">
-     <div class="image">
-       <img src="{{item.color}}" alt="">
-     </div>
-     <div class="content">
-       <p class="name">{{item.name}}</p>
-       <p class="size">Size: {{item.activeSize}}</p>
-       <p class="price">Price: ${{item.price}}</p>
-     </div>
-   </div>
+  <div class="bags_left">
+    <div *ngFor="let item of bags" class="bags_item">
+      <mat-icon (click)="removeFromBags(item.id)" class="close" svgIcon="close"></mat-icon>
+      <div class="bags_item_container">
+        <div class="image">
+          <img src="{{item.color}}" alt="">
+        </div>
+        <div class="content">
+          <p class="name">{{item.name}}</p>
+          <p class="size">Size: {{item.activeSize}}</p>
+          <p class="price">Price: ${{item.price}}</p>
+          <p>Total: <mat-form-field>
+            <mat-label>Choose an option for {{ item.name }}</mat-label>
+            <mat-select [(ngModel)]="item.count" (ngModelChange)="choiceCountClothes($event, item.id)">
+              <mat-option *ngFor="let number of choicePriceArray" [value]="number">{{ number }}</mat-option>
+            </mat-select>
+          </mat-form-field></p>
+        </div>
+      </div>
+    </div>
   </div>
-  <app-attention></app-attention>
-  <app-slider-news></app-slider-news>
+  <div class="bags_right">
+    <h1>ORDER SUMMARY</h1>
+    <div class="content">
+      <p>{{bags?.length}} item</p>
+      <p>$ {{totalPrice}}</p>
+    </div>
+    <div class="content">
+      <p>Delivery</p>
+      <p>Free</p>
+    </div>
+    <div class="content">
+      <p>Total</p>
+      <p>$ {{totalPrice}}</p>
+    </div>
+  </div>
 </div>
 
-<h1>{{count}}</h1>
+
+<app-attention *ngIf="!bags"></app-attention>
+<app-slider-news></app-slider-news>
