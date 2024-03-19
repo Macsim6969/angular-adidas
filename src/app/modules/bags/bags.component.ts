@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {StateMenService} from "../../services/state-men.service";
 import {AuthService} from "../../services/auth.service";
-import {take} from "rxjs";
+import {Subscription, take} from "rxjs";
 import {User} from "../auth/auth.model";
 import {Bags} from "../../interfaces/bags.interface";
 import {MatIconService} from "../../services/matIcon.service";
@@ -19,6 +19,8 @@ export class BagsComponent implements OnInit, OnDestroy {
 
   public choicePriceArray: number[] = [1,2,3,4,5,6,7,8,9,10];
 
+  private getClothesFromBagsSubscription: Subscription;
+
   constructor(
     private stateMenService: StateMenService,
     private authService: AuthService,
@@ -32,73 +34,57 @@ export class BagsComponent implements OnInit, OnDestroy {
   }
 
   private getDataClothesFromBags() {
-    this.stateMenService.getClothesFromBags(this.user.id).subscribe((data: Bags[]) => {
-      this.originalBags = data;
-      this.bags = Object.values(data);
-    })
+    this.getClothesFromBagsSubscription = this.stateMenService.getClothesFromBags(this.user.id).subscribe((data: Bags[]) => {
+      if(data){
+        this.originalBags = data;
+        this.bags = Object.values(data);
+        this.bags.length ? this.initializeTotalPrice() : null;
+      }else {
+        this.bags = null
+      }
+    });
   }
-
 
   public choiceCountClothes(count: number, id: number) {
     const product = this.bags.find(p => p.id === id);
-    if (product) {
-      product.count = count;
-    }
+    product ? product.count = count : null;
 
-    const uniqueItems: Bags[] = [];
-    Object.values(this.bags).forEach(item => {
-      if (item.id === id && !uniqueItems.some(uniqueItem => uniqueItem.id === item.id && uniqueItem.activeSize === item.activeSize)) {
-        uniqueItems.push(item);
-      }
-    });
-
-
-    this.initializeTotalPrice(uniqueItems, count);
-    this.initializeReadebleData(this.bags);
-  }
-  private initializeTotalPrice(uniqueItems: Bags[], count: number) {
-    const duplicateItems = [...uniqueItems];
-    for (let i = 1; i < count; i++) {
-      this.bags.push(...duplicateItems);
-    }
-    this.totalPrice = Object.values(this.bags).reduce((left, right) => {
-      return left + right.price
-    }, 0)
-
+    this.initializeTotalPrice();
+    this.initializeReadebleData();
   }
 
-  private initializeReadebleData(data: Bags[]) {
-    const mergedItemsArray = Object.values(data).reduce((acc, item) => {
+  private initializeTotalPrice() {
+    this.totalPrice = this.bags.reduce((acc, item) => acc + (item.price * item.count || item.price), 0);
+  }
+
+  private initializeReadebleData() {
+    const mergedItemsArray = Object.values(this.bags).reduce((acc, item) => {
       const existingItem = acc.find(accItem => accItem.name === item.name && accItem.activeSize === item.activeSize);
       if (existingItem) {
-        existingItem.count += 1;
+        existingItem.count += item.count;
       } else {
-        acc.push({...item, count: 1});
+        acc.push({...item});
       }
       return acc;
     }, []);
     this.bags = mergedItemsArray;
-    setTimeout(() =>{
-      this.stateMenService.addAllClothesToBags(this.user.id, mergedItemsArray);
-    }, 500)
-
-  }
-  ngOnDestroy() {
+    this.stateMenService.addAllClothesToBags(this.user.id, mergedItemsArray);
   }
 
   private initializeUserData() {
     this.authService.user.pipe(take(1)).subscribe((user: User) => {
       this.user = user;
-    })
+    });
   }
-
-
   public removeFromBags(id: number, size: string| number){
-
    this.bags = Object.values(this.originalBags).filter(item => item.id !== id || item.activeSize !== size)
     this.stateMenService.addAllClothesToBags(this.user.id, this.bags).add(() =>{
       this.getDataClothesFromBags();
     })
+  }
+
+  ngOnDestroy() {
+    this.getClothesFromBagsSubscription.unsubscribe();
   }
 
 }

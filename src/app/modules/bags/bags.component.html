@@ -1,4 +1,4 @@
-<div class="bags" *ngIf="bags">
+<div class="bags" *ngIf="bags;else attention">
   <div class="bags_left">
     <div *ngFor="let item of bags" class="bags_item">
       <mat-icon (click)="removeFromBags(item.id, item.activeSize)" class="close" svgIcon="close"></mat-icon>
@@ -37,6 +37,8 @@
   </div>
 </div>
 
+<ng-template #attention>
+  <app-attention></app-attention>
+</ng-template>
 
-<app-attention *ngIf="!bags"></app-attention>
 <app-slider-news></app-slider-news>
