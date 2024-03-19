@@ -46,6 +46,10 @@ export class StateMenService {
     return this.http.post<ProdsFromService>(`https://angular-adidas-default-rtdb.firebaseio.com/users/${idToken}/bags.json`, data).subscribe();
   }
 
+  public addAllClothesToBags(idToken: string, data: Bags[]){
+    return this.http.put<Bags[]>(`https://angular-adidas-default-rtdb.firebaseio.com/users/${idToken}/bags.json`, data).subscribe();
+  }
+
   public getClothesFromBags(idToken: string){
     return this.http.get(`https://angular-adidas-default-rtdb.firebaseio.com/users/${idToken}/bags.json`)
   }

@@ -27,72 +27,78 @@ export class BagsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-   this.initializeUserData();
+    this.initializeUserData();
     this.getDataClothesFromBags();
   }
 
-  private initializeUserData(){
-    this.authService.user.pipe(take(1)).subscribe((user: User) => {
-      this.user = user;
-    })
-  }
-
-  private getDataClothesFromBags(){
-    this.stateMenService.getClothesFromBags(this.user.id).subscribe((data: Bags[]) =>{
+  private getDataClothesFromBags() {
+    this.stateMenService.getClothesFromBags(this.user.id).subscribe((data: Bags[]) => {
       this.originalBags = data;
-     this.initializeReadebleData(data)
+      this.bags = Object.values(data);
     })
   }
 
-  private initializeReadebleData(data: Bags[]){
+
+  public choiceCountClothes(count: number, id: number) {
+    const product = this.bags.find(p => p.id === id);
+    if (product) {
+      product.count = count;
+    }
+
+    const uniqueItems: Bags[] = [];
+    Object.values(this.bags).forEach(item => {
+      if (item.id === id && !uniqueItems.some(uniqueItem => uniqueItem.id === item.id && uniqueItem.activeSize === item.activeSize)) {
+        uniqueItems.push(item);
+      }
+    });
+
+
+    this.initializeTotalPrice(uniqueItems, count);
+    this.initializeReadebleData(this.bags);
+  }
+  private initializeTotalPrice(uniqueItems: Bags[], count: number) {
+    const duplicateItems = [...uniqueItems];
+    for (let i = 1; i < count; i++) {
+      this.bags.push(...duplicateItems);
+    }
+    this.totalPrice = Object.values(this.bags).reduce((left, right) => {
+      return left + right.price
+    }, 0)
+
+  }
+
+  private initializeReadebleData(data: Bags[]) {
     const mergedItemsArray = Object.values(data).reduce((acc, item) => {
       const existingItem = acc.find(accItem => accItem.name === item.name && accItem.activeSize === item.activeSize);
       if (existingItem) {
         existingItem.count += 1;
       } else {
-        acc.push({ ...item, count: 1 });
+        acc.push({...item, count: 1});
       }
       return acc;
     }, []);
     this.bags = mergedItemsArray;
-    console.log(mergedItemsArray);
+    setTimeout(() =>{
+      this.stateMenService.addAllClothesToBags(this.user.id, mergedItemsArray);
+    }, 500)
+
+  }
+  ngOnDestroy() {
+  }
+
+  private initializeUserData() {
+    this.authService.user.pipe(take(1)).subscribe((user: User) => {
+      this.user = user;
+    })
   }
 
 
-  public removeFromBags(id: number){
-    const entries = Object.entries(this.originalBags);
-    const foundEntry = entries.find(([key, value]) => value.id === id);
-    const [key, value] = foundEntry;
-    const objectKeyToRemove = key;
-    this.stateMenService.removeClothesFromBags(this.user.id, objectKeyToRemove).add(() =>{
+  public removeFromBags(id: number, size: string| number){
+
+   this.bags = Object.values(this.originalBags).filter(item => item.id !== id || item.activeSize !== size)
+    this.stateMenService.addAllClothesToBags(this.user.id, this.bags).add(() =>{
       this.getDataClothesFromBags();
     })
   }
 
- public choiceCountClothes(count: number, id: number) {
-   const product = this.bags.find(p => p.id === id);
-   if (product) {
-     product.count = count;
-   }
-
-   const uniqueItems: Bags[] = [];
-   this.bags.forEach(item => {
-     if (item.id === id && !uniqueItems.some(uniqueItem => uniqueItem.id === item.id && uniqueItem.activeSize === item.activeSize)) {
-       uniqueItems.push(item);
-     }
-   });
-
-   const duplicateItems = [...uniqueItems];
-   for (let i = 1; i < count; i++) {
-     this.bags.push(...duplicateItems);
-   }
-
-   this.totalPrice = Object.values(this.bags).reduce((left, right ) => {
-     return  left + right.price
-   }, 0)
-
-   this.initializeReadebleData(this.bags);
- }
-  ngOnDestroy() {
-  }
 }
