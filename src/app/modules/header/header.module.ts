@@ -9,7 +9,6 @@ import {HeaderService} from "./@shared/services/header.service";
 import {OptionsDropdownComponent} from "./@shared/components/options-dropdown/options-dropdown.component";
 import {SearchPipe} from "./@shared/pipe/search.pipe";
 import {FormsModule} from "@angular/forms";
-import {AuthService} from "../../services/auth.service";
 
 
 @NgModule({

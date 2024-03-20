@@ -6,9 +6,11 @@ import {BehaviorSubject, Observable} from "rxjs";
 export class HeaderService {
   private isDropdown$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  public isDropdownSubject: Observable<boolean> = this.isDropdown$.asObservable();
-
-  handleDropdown(newValue: boolean){
+  set _isDropdown(newValue: boolean){
     this.isDropdown$.next(newValue);
-  };
+  }
+
+  get _isDropdown$(){
+    return this.isDropdown$;
+  }
 }

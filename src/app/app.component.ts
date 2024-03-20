@@ -80,7 +80,7 @@ export class AppComponent implements OnInit {
   }
 
   private getDataFromHeaderService() {
-    this.headerService.isDropdownSubject.subscribe((data: boolean) => {
+    this.headerService._isDropdown$.subscribe((data: boolean) => {
       this.isDropdown = data;
     })
   }
@@ -110,10 +110,10 @@ export class AppComponent implements OnInit {
 
               this.router.navigate([], {
                 queryParams: defaultParams,
-              });
+              }).then();
             }
           } else {
-            this.router.navigate(['/'])
+            this.router.navigate(['/']).then();
           }
         }
       }

@@ -29,7 +29,7 @@ export class ChoiceLanguagesComponent implements OnInit {
   closePopup() {
     this.popupRef.nativeElement.classList.add('closest')
     timer(1000).pipe(take(1)).subscribe(() => {
-      this.headerService.handleDropdown(false);
+      this.headerService._isDropdown = false;
     })
   }
 }

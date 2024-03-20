@@ -12,37 +12,42 @@ import {Subscription} from "rxjs";
 export class OptionsDropdownComponent implements OnInit, OnDestroy {
   @Output() closeDropdown: EventEmitter<boolean> = new EventEmitter<boolean>();
   public userSub: Subscription;
-  isAuthenticated: boolean = false
+  public isAuthenticated: boolean = false
 
   constructor(
     private headerService: HeaderService,
     private router: Router,
     private authService: AuthService
-  ) {}
-
-  ngOnInit() {
-
-   this.userSub = this.authService.user.subscribe(user =>{
-     this.isAuthenticated = !!user;
-   })
+  ) {
   }
 
-  openAuthPage() {
+  ngOnInit() {
+    this.initializeAuthenticatedDataUser();
+  }
+
+  private initializeAuthenticatedDataUser() {
+    this.userSub = this.authService.user.subscribe(user => {
+      this.isAuthenticated = !!user;
+    })
+  }
+
+  public openAuthPage() {
     this.router.navigate(['/auth'], {queryParamsHandling: 'merge'}).then();
     this.closeDropdown.emit(false);
   }
 
-  openPopup() {
-    this.headerService.handleDropdown(true);
-    this.closeDropdown.emit(false)
+  public openPopup() {
+    this.headerService._isDropdown = true;
+    this.closeDropdown.emit(false);
   }
 
-  logout(){
+  public logout() {
     this.authService.logout();
     this.router.navigate(['/auth'], {queryParamsHandling: 'merge'}).then();
   }
 
   ngOnDestroy() {
-   // this.userSub.unsubscribe();
+    this.userSub.unsubscribe();
   }
+
 }
