@@ -1,36 +1,45 @@
-import {Component, OnInit, ViewChildren} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChildren} from '@angular/core';
 import {DragScrollComponent} from "ngx-drag-scroll";
 import {Store} from "@ngrx/store";
 import {StoreInterface} from "../../../../../store/model/store.model";
-import {storeSelectorClothesData, storeSelectorHoodiesData} from "../../../../../store/selectors/store.selectors";
-import {ActivatedRoute, Router} from "@angular/router";
+import {storeSelectorClothesData} from "../../../../../store/selectors/store.selectors";
+import {ProdsFromService} from "../../../../../interfaces/home.interface";
+import {Router} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-slider-news',
   templateUrl: './slider-news.component.html',
   styleUrl: './slider-news.component.scss'
 })
-export class SliderNewsComponent implements OnInit {
+export class SliderNewsComponent implements OnInit, OnDestroy {
   @ViewChildren('nav', {read: DragScrollComponent}) dragScroll: DragScrollComponent
-  newsList: any[];
+  public newsList: any[];
+  private storeSubscription: Subscription;
 
   constructor(
     private store: Store<{ store: StoreInterface }>,
-    private router: Router,
-    private route: ActivatedRoute
+    private router: Router
   ) {
   }
 
   ngOnInit() {
-    this.store.select(storeSelectorClothesData).subscribe(data => {
+    this.initializeValentinesDataFromStore();
+  }
+
+  private initializeValentinesDataFromStore(){
+   this.storeSubscription = this.store.select(storeSelectorClothesData).subscribe((data: ProdsFromService[]) => {
       this.newsList = data['valentines'];
     })
   }
 
-  openNewCollection(id: string) {
+ public openNewCollection(id: string) {
     const newRoute = id.replace(/ /g, '_').toLowerCase();
-    const currentMenu = this.route.snapshot.params['menu'];
     const newRouterLink = 'men/valentines/' + newRoute;
     this.router.navigate([newRouterLink], {queryParamsHandling: 'merge'}).then();
+  }
+
+  ngOnDestroy() {
+    this.storeSubscription.unsubscribe();
   }
 }

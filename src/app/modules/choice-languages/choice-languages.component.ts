@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild, ViewChildren} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {HeaderService} from "../header/@shared/services/header.service";
 import {take, timer} from "rxjs";
 import {Languages, LanguagesService} from "./@shared/services/languages.service";
@@ -12,21 +12,24 @@ import {MatIconService} from "../../services/matIcon.service";
 export class ChoiceLanguagesComponent implements OnInit {
   @ViewChild('popup', {read: ElementRef}) popupRef: ElementRef;
 
-  langList: Languages[];
-  activeLang: string = 'en';
+  public langList: Languages[];
+  public activeLang: string = 'en';
 
   constructor(
     private headerService: HeaderService,
     private languageService: LanguagesService,
     private matIcon: MatIconService
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
+    this.initializeLangListData();
+  }
+
+  private initializeLangListData(){
     this.langList = this.languageService.langList;
   }
 
-  closePopup() {
+  public closePopup() {
     this.popupRef.nativeElement.classList.add('closest')
     timer(1000).pipe(take(1)).subscribe(() => {
       this.headerService._isDropdown = false;

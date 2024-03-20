@@ -33,16 +33,26 @@ export class BagsComponent implements OnInit, OnDestroy {
     this.getDataClothesFromBags();
   }
 
+  private initializeUserData() {
+    this.authService.user.pipe(take(1)).subscribe((user: User) => {
+      this.user = user;
+    });
+  }
+
   private getDataClothesFromBags() {
     this.getClothesFromBagsSubscription = this.stateMenService.getClothesFromBags(this.user.id).subscribe((data: Bags[]) => {
-      if(data){
-        this.originalBags = data;
-        this.bags = Object.values(data);
-        this.bags.length ? this.initializeTotalPrice() : null;
-      }else {
-        this.bags = null
-      }
+      data ? this.isDataClothesNotEmpty(data) : this.bags = null;
     });
+  }
+
+  private isDataClothesNotEmpty(data){
+    this.originalBags = data;
+    this.bags = Object.values(data);
+    this.bags.length ? this.initializeTotalPrice() : null;
+  }
+
+  private initializeTotalPrice() {
+    this.totalPrice = this.bags.reduce((acc, item) => acc + (item.price * item.count || item.price), 0);
   }
 
   public choiceCountClothes(count: number, id: number) {
@@ -51,10 +61,6 @@ export class BagsComponent implements OnInit, OnDestroy {
 
     this.initializeTotalPrice();
     this.initializeReadebleData();
-  }
-
-  private initializeTotalPrice() {
-    this.totalPrice = this.bags.reduce((acc, item) => acc + (item.price * item.count || item.price), 0);
   }
 
   private initializeReadebleData() {
@@ -69,12 +75,6 @@ export class BagsComponent implements OnInit, OnDestroy {
     }, []);
     this.bags = mergedItemsArray;
     this.stateMenService.addAllClothesToBags(this.user.id, mergedItemsArray);
-  }
-
-  private initializeUserData() {
-    this.authService.user.pipe(take(1)).subscribe((user: User) => {
-      this.user = user;
-    });
   }
   public removeFromBags(id: number, size: string| number){
    this.bags = Object.values(this.originalBags).filter(item => item.id !== id || item.activeSize !== size)

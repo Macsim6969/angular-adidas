@@ -1,11 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
-import {Store} from "@ngrx/store";
-import {StoreInterface} from "../../../../../store/model/store.model";
-import {Observable} from "rxjs";
-import {storeSelectorLang} from "../../../../../store/selectors/store.selectors";
 import {MenListMenu} from "../../../../../interfaces/home.interface";
 import {Router} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-men-menu',
@@ -13,30 +10,29 @@ import {Router} from "@angular/router";
   styleUrl: './men-menu.component.scss'
 })
 export class MenMenuComponent implements OnInit, OnDestroy {
-
-  lang$: Observable<string>;
-
-  menuList: MenListMenu[];
+  public menuList: MenListMenu[];
+  private translateSubscription: Subscription;
   constructor(
     private translate: TranslateService,
-    private store: Store<{ store: StoreInterface }>,
     private router: Router
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
-    this.lang$ = this.store.select(storeSelectorLang)
-    this.lang$.subscribe(() => {
-      this.translate.get('men.list').subscribe((data: MenListMenu[]) => {
-        this.menuList = data
-      })
+    this.streamMenuListFromJson();
+
+  }
+
+  private streamMenuListFromJson(){
+   this.translateSubscription = this.translate.stream('men.list').subscribe((data: MenListMenu[]) => {
+      this.menuList = data;
     })
   }
 
-  open(router: string){
+  public open(router: string){
     this.router.navigate([router], {queryParamsHandling: 'merge'}).then();
   }
 
   ngOnDestroy() {
+    this.translateSubscription.unsubscribe();
   }
 }

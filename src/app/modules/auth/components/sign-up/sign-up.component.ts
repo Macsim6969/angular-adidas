@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {newIdUser} from "../../../../store/actions/store.actions";
-import {timer} from "rxjs";
+import {Subscription, take, timer} from "rxjs";
 import {Store} from "@ngrx/store";
 import {StoreInterface} from "../../../../store/model/store.model";
 import {FormControl, FormGroup} from "@angular/forms";
@@ -9,17 +9,19 @@ import {AuthService} from "../../../../services/auth.service";
 
 @Component({
   selector: 'app-sign-up',
-
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss'
 })
-export class SignUpComponent implements OnInit{
+export class SignUpComponent implements OnInit, OnDestroy{
   @Input() idForm: number;
-  public id: string
-  hide = true;
-  form: FormGroup
+  public id: string;
+  public hide = true;
+  public form: FormGroup;
+  public isLoading: boolean;
 
-  isLoading: boolean = false
+  private sigUpSubscription: Subscription;
+  private loginSubscription: Subscription;
+  private storeSubscription: Subscription;
   constructor(
     private authService: AuthService,
     private store: Store<{ store: StoreInterface }>,
@@ -27,6 +29,10 @@ export class SignUpComponent implements OnInit{
     ) {}
 
   ngOnInit() {
+    this.initializeDataForm();
+  }
+
+  private initializeDataForm(){
     this.form = new FormGroup({
       email: new FormControl(''),
       password: new FormControl('')
@@ -35,10 +41,10 @@ export class SignUpComponent implements OnInit{
 
   public signUp() {
     this.isLoading = true;
-    this.authService.sigUp(this.form.value).subscribe((data) => {
-      this.store.dispatch(newIdUser({value: data.localId}))
+    this.sigUpSubscription = this.authService.sigUp(this.form.value).subscribe((data) => {
+    this.store.dispatch(newIdUser({value: data.localId}))
       timer(1000).subscribe(() =>{
-        this.store.select((state) => state.store.idUser).subscribe(data =>{
+        this.storeSubscription = this.store.select((state) => state.store.idUser).subscribe(data =>{
           this.id = data
         })
       })
@@ -52,10 +58,10 @@ export class SignUpComponent implements OnInit{
 
   public login(){
     this.isLoading = true;
-    this.authService.login().subscribe((data) => {
-      this.store.dispatch(newIdUser({value: data.localId}))
-      timer(100).subscribe(() =>{
-        this.store.select((state) => state.store.idUser).subscribe(data =>{
+   this.loginSubscription = this.authService.login().subscribe((data) => {
+     this.store.dispatch(newIdUser({value: data.localId}))
+      timer(100).pipe(take(1)).subscribe(() =>{
+        this.storeSubscription = this.store.select((state) => state.store.idUser).subscribe(data =>{
           this.id = data
         })
       })
@@ -64,5 +70,11 @@ export class SignUpComponent implements OnInit{
     }, error => {
     })
     this.form.reset();
+  }
+
+  ngOnDestroy() {
+    this.sigUpSubscription.unsubscribe();
+    this.loginSubscription.unsubscribe();
+    this.storeSubscription.unsubscribe();
   }
 }

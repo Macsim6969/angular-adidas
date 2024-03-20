@@ -16,11 +16,13 @@ const routes: Routes = [
     BannerComponent,
     StoriesComponent
   ],
-  exports: [],
   imports: [
     CommonModule,
     ShareModule,
     RouterModule.forChild(routes)
+  ],
+  exports: [
+    StoriesComponent
   ]
 })
 

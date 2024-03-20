@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
-import {StateMenService} from "../../services/state-men.service";
 
 @Component({
   selector: 'app-men',
@@ -9,7 +8,7 @@ import {StateMenService} from "../../services/state-men.service";
 })
 export class MenComponent implements OnInit{
 
-  constructor(private translate: TranslateService, private stateShoesService: StateMenService) {}
+  constructor(private translate: TranslateService) {}
 
   ngOnInit() {
     this.translate.use('en');

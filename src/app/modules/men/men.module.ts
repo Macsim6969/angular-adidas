@@ -4,11 +4,8 @@ import {MenComponent} from "./men.component";
 import {CommonModule} from "@angular/common";
 import {ShareModule} from "../../shared/share.module";
 import {MenMenuComponent} from "./@shared/components/men-menu/men-menu.component";
-import {MatCardModule} from "@angular/material/card";
 import {ArticlesComponent} from "./@shared/components/articles/articles.component";
 import {HttpClientModule} from "@angular/common/http";
-import {StateMenService} from "../../services/state-men.service";
-import {SliderNewsModule} from "./@shared/modules/slider-news/slider-news.module";
 
 const routes: Routes = [
   {
@@ -30,7 +27,6 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     ShareModule,
-    MatCardModule,
     HttpClientModule
   ],
   providers: []
