@@ -31,7 +31,6 @@ export class AppComponent implements OnInit {
     private store: Store<{ store: StoreInterface }>,
     private router: Router,
     private route: ActivatedRoute,
-    private translate: TranslateService,
     private headerService: HeaderService,
     private stateShoesService: StateMenService,
     private authService: AuthService
@@ -63,7 +62,6 @@ export class AppComponent implements OnInit {
     combineLatest([this.lang$, this.country$]).subscribe(([lang, country]) => {
       this.lang = lang;
       this.country = country;
-      this.translate.use(lang)
     })
   }
 

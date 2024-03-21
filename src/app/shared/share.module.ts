@@ -15,6 +15,7 @@ import {InfoPopupComponent} from "./components/info-popup/info-popup.component";
 import {AsyncPipe, NgClass} from "@angular/common";
 import {AttentionComponent} from "./components/attention/attention.component";
 import {MatSelectModule} from "@angular/material/select";
+import {TranslateModule} from "@ngx-translate/core";
 @NgModule({
   declarations: [
     LoadingComponent,
@@ -34,6 +35,7 @@ import {MatSelectModule} from "@angular/material/select";
     MatInputModule,
     MatSelectModule,
     AsyncPipe,
+    TranslateModule,
     NgClass
   ],
   exports: [
@@ -50,7 +52,8 @@ import {MatSelectModule} from "@angular/material/select";
     MatCardModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    TranslateModule
   ],
   providers: [MatIconService]
 })
