@@ -2,7 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {MatIconService} from "../../../services/matIcon.service";
 import {ClothesContentService} from "../../../services/clothes-content.service";
-import {Observable, Subscription} from "rxjs";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-clothes-content-left',
@@ -30,6 +30,11 @@ export class ClothesContentLeftComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.streamChoiceColorShoes();
   }
+  private streamChoiceColorShoes() {
+    this.choiceColorShoesSubscription = this.clothesContentService._choiceColorShoes$.subscribe((data) => {
+      this.choiceColorShoes = data;
+    });
+  };
 
   public backRoute() {
     this.router.navigate(['/men/' + this.dataParam], {queryParamsHandling: 'merge'}).then();
@@ -43,11 +48,4 @@ export class ClothesContentLeftComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.choiceColorShoesSubscription.unsubscribe();
   }
-
-  private streamChoiceColorShoes() {
-   this.choiceColorShoesSubscription = this.clothesContentService._choiceColorShoes$.subscribe((data) => {
-      this.choiceColorShoes = data;
-    });
-  };
-
 }

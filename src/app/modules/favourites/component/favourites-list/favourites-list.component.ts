@@ -31,9 +31,9 @@ export class FavouritesListComponent  implements OnInit, OnDestroy{
   }
 
   private initializeDataFavouriteClothes() {
-  this.userSubscription = this.authService.user.subscribe((user) => {
+    this.userSubscription = this.authService.user.subscribe((user) => {
       this.isLoading = true;
-    this.storeSubscription = this.store.select(storeSelectorFavourites).subscribe((data: ProdsFromService[]) => {
+      this.storeSubscription = this.store.select(storeSelectorFavourites).subscribe((data: ProdsFromService[]) => {
         this.getListDataAndStateInfo(data)
         this.isLoading = false;
 
@@ -50,17 +50,10 @@ export class FavouritesListComponent  implements OnInit, OnDestroy{
     }
   }
 
-
   public openContent(name_id: string, tage: string) {
     const newRoute = name_id.replace(/ /g, '_').toLowerCase();
-
     const newRouterLink = ['/favourites', newRoute];
-
     this.router.navigate(newRouterLink, {queryParamsHandling: 'merge'}).then();
-  }
-
-  public openShop() {
-    this.router.navigate(["/men"], {queryParamsHandling: 'merge'}).then();
   }
 
   public showHoverImage(isHovered: boolean, index: number) {

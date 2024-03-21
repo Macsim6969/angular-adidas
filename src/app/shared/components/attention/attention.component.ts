@@ -9,7 +9,6 @@ import {Router} from "@angular/router";
 export class AttentionComponent {
 
   constructor(private router: Router) {}
-
   public openShop(){
     this.router.navigate(["/men"], {queryParamsHandling: 'merge'}).then();
   }

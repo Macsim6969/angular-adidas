@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {MatIconService} from "../../../services/matIcon.service";
-import {map, Subscription} from "rxjs";
+import {map, Subject, takeUntil} from "rxjs";
 import {AuthService} from "../../../services/auth.service";
 import {StateMenService} from "../../../services/state-men.service";
 import {InfoPopupService} from "../../../services/info-popup.service";
@@ -20,6 +20,7 @@ import {Bags} from "../../../interfaces/bags.interface";
 })
 export class ClothesContentRightComponent implements OnInit, OnDestroy {
   @Input() public contentItem: any;
+  private destroy$: Subject<void> = new Subject<void>();
   public sizesShoes: number[] = [6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12]
   public sizesClothes: string[] = ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL']
   public choiceColorShoes: number = 0;
@@ -30,11 +31,6 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
   public isSizeActive: boolean;
   public isLoading: boolean;
   private user: User;
-  private isFavouriteSubscription: Subscription;
-  private keysDataSubscription: Subscription;
-  private activeSizeShoesSubscription: Subscription;
-  private activeSizeClothesSubscription: Subscription;
-  private choiceColorShoesSubscription: Subscription;
 
   constructor(
     private matIcon: MatIconService,
@@ -146,16 +142,8 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy() {
-    this.isFavouriteSubscription.unsubscribe();
-    this.keysDataSubscription.unsubscribe();
-    this.activeSizeShoesSubscription.unsubscribe();
-    this.activeSizeClothesSubscription.unsubscribe();
-    this.choiceColorShoesSubscription.unsubscribe();
-  }
-
   private streamIsFavouriteData() {
-    this.isFavouriteSubscription = this.store.select(storeSelectorFavourites).subscribe(data => {
+    this.store.select(storeSelectorFavourites).pipe(takeUntil(this.destroy$)).subscribe(data => {
       if (data && Object.values(data).find((data: ProdsFromService) => data.id === this.contentItem.id)?.favouriteClothes) {
         this.isFavourite = Object.values(data).find((data: ProdsFromService) => data.id === this.contentItem.id)?.favouriteClothes
       } else {
@@ -165,28 +153,31 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
   };
 
   private streamChoiceColorShoes() {
-    this.choiceColorShoesSubscription = this.clothesContentService._choiceColorShoes$.subscribe((data: number) => {
+   this.clothesContentService._choiceColorShoes$.pipe(takeUntil(this.destroy$)).subscribe((data: number) => {
       this.choiceColorShoes = data;
     });
   };
 
   private streamIsKeyData() {
-    this.keysDataSubscription = this.clothesContentService._keysData$.subscribe((data: ProdsFromService[]) => {
+    this.clothesContentService._keysData$.pipe(takeUntil(this.destroy$)).subscribe((data: ProdsFromService[]) => {
       this.keysData = data;
     });
   };
 
   private streamActiveSizeShoes() {
-    this.activeSizeShoesSubscription = this.clothesContentService._activeSizeShoes$.subscribe((data: number) => {
+    this.clothesContentService._activeSizeShoes$.pipe(takeUntil(this.destroy$)).subscribe((data: number) => {
       this.activeSizeShoes = data;
     });
   };
 
   private streamActiveSizeClothes() {
-    this.activeSizeClothesSubscription = this.clothesContentService._activeSizeClothes$.subscribe((data: string) => {
+    this.clothesContentService._activeSizeClothes$.pipe(takeUntil(this.destroy$)).subscribe((data: string) => {
       this.activeSizeClothes = data;
     });
   };
 
-
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }
