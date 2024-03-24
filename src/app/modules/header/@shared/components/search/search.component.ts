@@ -93,6 +93,7 @@ export class SearchComponent implements OnInit, OnDestroy{
 
   ngOnDestroy() {
     this.storeSubscription.unsubscribe();
+      document.body.style.overflow = '';
   }
 
 }
