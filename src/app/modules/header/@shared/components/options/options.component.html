@@ -1,39 +1,9 @@
 <div class="options">
-  <div class="options-search" (click)="openSearchList()">
-    <input placeholder="search" [(ngModel)]="searchText">
-    <mat-icon class="options-search-icons" svgIcon="search"></mat-icon>
-  </div>
-
-  <div id="search-list-container" class="search-list" *ngIf="searchListVisible">
-    <div class="search-list-back">
-      <p (click)="backList()">Back</p>
-    </div>
-    <div class="search-list-choice" *ngIf="!menuAll && !menuCategory">
-      <div (click)="choiceMenuSearch('all')" class="search-list-choice-item">
-        <p>All products</p>
-      </div>
-      <div (click)="choiceMenuSearch('category')" class="search-list-choice-item">
-        <p>Choice some category</p>
-      </div>
-    </div>
-    <div *ngIf="menuAll && !menuCategory">
-      <div class="search-list-content" *ngFor="let item of searchListCategory | filter: searchText" (click)="openClothes(item.tage, item.name)">
-        <img class="image" [src]="item.imageURL[0]" alt="">
-        <p class="title">{{ item.name }}</p>
-      </div>
-    </div>
-
-    <div *ngIf="menuCategory && !menuAll">
-      <div (click)="openSearchCategory(item)" class="search-list-content" *ngFor="let item of searchItemCategory">
-        <p class="title">{{ item}}</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="icon" (click)="openFavourites()">
-    <mat-icon svgIcon="unlike"></mat-icon>
-  </div>
-  <div class="icon" (click)="openBag()">
+  <app-search></app-search>
+  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="openFavourites()">
+    <mat-icon>favorite</mat-icon>
+  </button>
+  <div class="icon bags" (click)="openBag()">
     <mat-icon svgIcon="shop"></mat-icon>
   </div>
   <div class="icon" (click)="toggleTooltip()">

@@ -9,6 +9,7 @@ import {HeaderService} from "./@shared/services/header.service";
 import {OptionsDropdownComponent} from "./@shared/components/options-dropdown/options-dropdown.component";
 import {SearchPipe} from "./@shared/pipe/search.pipe";
 import {FormsModule} from "@angular/forms";
+import {SearchComponent} from "./@shared/components/search/search.component";
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import {FormsModule} from "@angular/forms";
     MenuComponent,
     OptionsComponent,
     OptionsDropdownComponent,
-    SearchPipe
+    SearchPipe,
+    SearchComponent
   ],
   imports: [
     CommonModule,

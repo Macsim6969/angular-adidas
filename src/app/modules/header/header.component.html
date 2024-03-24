@@ -1,8 +1,20 @@
 <mat-toolbar class="header">
+  <mat-toolbar-row class="header-content">
   <span class="header-logo" (click)="homeRoute()">
     <mat-icon svgIcon="adidas-logo"></mat-icon>
   </span>
-  <app-menu></app-menu>
+    <app-menu></app-menu>
 
-  <app-options></app-options>
+    <app-options></app-options>
+  </mat-toolbar-row>
+  <mat-toolbar-row class="bottom">
+    <app-search></app-search>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="openFavourites()">
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon bags" (click)="openBag()">
+      <mat-icon svgIcon="shop"></mat-icon>
+    </button>
+  </mat-toolbar-row>
 </mat-toolbar>
+

@@ -33,7 +33,8 @@ export class AppComponent implements OnInit {
     private route: ActivatedRoute,
     private headerService: HeaderService,
     private stateShoesService: StateMenService,
-    private authService: AuthService
+    private authService: AuthService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -62,6 +63,7 @@ export class AppComponent implements OnInit {
     combineLatest([this.lang$, this.country$]).subscribe(([lang, country]) => {
       this.lang = lang;
       this.country = country;
+      this.translate.use(lang);
     })
   }
 
