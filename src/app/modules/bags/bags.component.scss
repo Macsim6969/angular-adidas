@@ -7,6 +7,12 @@
   max-width: 1124px;
   margin: 70px auto 0 auto;
 
+  @media (max-width: 920px) {
+    flex-direction: column;
+    width: 95%;
+    align-items: stretch;
+  }
+
   .bags_left {
     display: flex;
     flex-direction: column;
@@ -81,5 +87,17 @@
         font-size: 1.5rem;
       }
     }
+  }
+}
+
+app-slider-news{
+  display: flex;
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+
+  @media (max-width: 920px) {
+    width: 95%;
+    justify-content: center;
   }
 }
