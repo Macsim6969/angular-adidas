@@ -12,6 +12,7 @@
     </div>
     <button (click)="isMorePhoto= !isMorePhoto"> {{ isMorePhoto ? 'Less More' : 'Show More' }}</button>
   </div>
+  <app-clothes-content-right [contentItem]="contentItem"></app-clothes-content-right>
   <div class="shoes-content-left-content">
     <div class="left-content" *ngFor="let title of titleContentLeft; index as i">
       <div class="left-content-header" [ngClass]="{'active': tabsActive === i}"

@@ -12,7 +12,11 @@
     margin: 0 0 100px 0;
 
     @media (max-width: 1460px) {
-      flex-basis: 60%;
+      width: 60%;
+    }
+
+    @media (max-width: 920px) {
+      width: 100%;
     }
   }
 
@@ -21,6 +25,9 @@
     display: flex;
     @media (max-width: 1460px) {
       flex-basis: 40%;
+    }
+    @media (max-width: 920px) {
+      display: none;
     }
   }
 }

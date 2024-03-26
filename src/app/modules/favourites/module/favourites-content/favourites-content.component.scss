@@ -4,12 +4,31 @@
   width: 100%;
   flex-direction: row;
   position: relative;
-  app-clothes-content-left{
+  @media (max-width: 1460px) {
+    app-clothes-content-left{
+      width: 60%;
+    }
+
+    app-clothes-content-right{
+      flex-basis: 40%;
+    }
+  }
+  @media (max-width: 920px) {
+    app-clothes-content-left{
+      width: 100%;
+    }
+
+    app-clothes-content-right{
+      display: none;
+    }
+  }
+   app-clothes-content-left{
     display: flex;
     flex-direction: column;
     flex-basis: 75%;
     gap: 50px;
     margin: 0 0 100px 0;
+
   }
 
   app-clothes-content-right{
