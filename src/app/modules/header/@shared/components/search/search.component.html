@@ -5,14 +5,17 @@
 
 <div id="search-list-container" class="search-list" *ngIf="searchListVisible">
   <div class="search-list-back">
-    <p (click)="backList()">Back</p>
+    <p (click)="backList()" [innerHTML]="'dropdown.back'| translate"></p>
+    <button mat-icon-button (click)="closeSearchList()">
+      <mat-icon svgIcon="close"></mat-icon>
+    </button>
   </div>
   <div class="search-list-choice" *ngIf="!menuAll && !menuCategory">
     <div (click)="choiceMenuSearch('all')" class="search-list-choice-item">
-      <p>All products</p>
+      <p [innerHTML]="'dropdown.allProd' | translate"></p>
     </div>
     <div (click)="choiceMenuSearch('category')" class="search-list-choice-item">
-      <p>Choice some category</p>
+      <p [innerHTML]="'dropdown.choiceCategory' | translate"></p>
     </div>
   </div>
   <div *ngIf="menuAll && !menuCategory">
@@ -28,3 +31,5 @@
     </div>
   </div>
 </div>
+
+<div *ngIf="searchListVisible" class="overlay" (click)="closeSearchList()"></div>

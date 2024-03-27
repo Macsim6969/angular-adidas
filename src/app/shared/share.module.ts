@@ -27,7 +27,6 @@ import {TranslateModule} from "@ngx-translate/core";
     MatIconModule,
     MatListModule,
     MatButtonModule,
-    TranslationModule,
     MatProgressSpinnerModule,
     MatCardModule,
     MatTabsModule,
@@ -35,7 +34,7 @@ import {TranslateModule} from "@ngx-translate/core";
     MatInputModule,
     MatSelectModule,
     AsyncPipe,
-    TranslateModule,
+    TranslationModule,
     NgClass
   ],
   exports: [
@@ -52,8 +51,7 @@ import {TranslateModule} from "@ngx-translate/core";
     MatCardModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatInputModule,
-    TranslateModule
+    MatInputModule
   ],
   providers: [MatIconService]
 })

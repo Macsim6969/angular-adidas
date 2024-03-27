@@ -14,6 +14,12 @@
       }
     ]
   },
+  "dropdown": {
+    "back": "Back",
+    "allProd": "All products",
+    "choiceCategory": "Choice some category"
+
+  },
   "home": {
     "stories": {
       "storiesTime": "Stories, style, and sporting goods at adidas, since 1949",
@@ -112,5 +118,18 @@
         }
       ]
     }
+  },
+  "clothesRight": {
+    "color": "Color",
+    "sizes": "Sized",
+    "attention": "Please choice size",
+    "guide": "Size guide",
+    "add": "Add to bag",
+    "like": "Like",
+    "unlike": "Unlike"
+  },
+  "clothesLeft": {
+    "more": "Show More",
+    "less": "Less More"
   }
 }

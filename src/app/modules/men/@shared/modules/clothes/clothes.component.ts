@@ -36,7 +36,6 @@ export class ClothesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.translate.use('en')
     this.getShoesDataFromStore()
     this.choiceMenu(0, 'All');
     this.getContentHeader();

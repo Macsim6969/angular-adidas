@@ -10,7 +10,7 @@
     <div class="shoes-content-left-header-image" *ngFor="let image of contentItem.galleryDop[choiceColorShoes].info">
       <img src="{{image}}" alt="">
     </div>
-    <button (click)="isMorePhoto= !isMorePhoto"> {{ isMorePhoto ? 'Less More' : 'Show More' }}</button>
+    <button (click)="isMorePhoto= !isMorePhoto"> {{ isMorePhoto ? ('clothesLeft.less'| translate) : ('clothesLeft.more'| translate) }}</button>
   </div>
   <app-clothes-content-right [contentItem]="contentItem"></app-clothes-content-right>
   <div class="shoes-content-left-content">

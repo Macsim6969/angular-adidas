@@ -8,10 +8,11 @@ import {ProdsFromService} from "../../../interfaces/home.interface";
 import {ClothesContentService} from "../../../services/clothes-content.service";
 import {StoreInterface} from "../../../store/model/store.model";
 import {Store} from "@ngrx/store";
-import {storeSelectorFavourites} from "../../../store/selectors/store.selectors";
+import {storeSelectorFavourites, storeSelectorLang} from "../../../store/selectors/store.selectors";
 import {Router} from "@angular/router";
 import {User} from "../../../modules/auth/auth.model";
 import {Bags} from "../../../interfaces/bags.interface";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-clothes-content-right',
@@ -39,11 +40,13 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
     private router: Router,
     private infoPopup: InfoPopupService,
     private clothesContentService: ClothesContentService,
-    private store: Store<{ store: StoreInterface }>
+    private store: Store<{ store: StoreInterface }>,
+    private translate: TranslateService
   ) {
   }
 
   ngOnInit() {
+    this.streamTranslateLang();
     this.streamIsFavouriteData();
     this.streamChoiceColorShoes();
     this.streamIsKeyData();
@@ -51,6 +54,12 @@ export class ClothesContentRightComponent implements OnInit, OnDestroy {
     this.streamActiveSizeClothes();
     this.authService.user.subscribe((user) => {
       this.user = user;
+    })
+  }
+
+  private streamTranslateLang(){
+    this.store.select(storeSelectorLang).subscribe((lang) =>{
+      this.translate.use(lang);
     })
   }
 

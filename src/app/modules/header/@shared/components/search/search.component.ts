@@ -5,6 +5,7 @@ import {ProdsFromService} from "../../../../../interfaces/home.interface";
 import {Store} from "@ngrx/store";
 import {StoreInterface} from "../../../../../store/model/store.model";
 import {Subscription} from "rxjs";
+import {MatIconService} from "../../../../../services/matIcon.service";
 
 @Component({
   selector: 'app-search',
@@ -25,6 +26,7 @@ export class SearchComponent implements OnInit, OnDestroy{
   constructor(
     private router: Router,
     private store: Store<{ store: StoreInterface }>,
+    private matIcon: MatIconService
   ) {
   }
 
