@@ -1,5 +1,5 @@
 <section class="sliders-news">
-  <h2 class="sliders-news-title">OURS NEW COLLECTIONS</h2>
+  <h2 class="sliders-news-title" [innerHTML]="'sliders.sliderTitle'| translate"></h2>
   <div class="slider-news-collections">
     <drag-scroll #nav>
       <mat-card (click)="openNewCollection(clothes.name)" class="collections-block" drag-scroll-item *ngFor="let clothes of newsList">

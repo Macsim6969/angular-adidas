@@ -33,3 +33,9 @@ export interface ProdsFromService {
   activeSize?: any
   favouriteClothes?: boolean
 }
+
+export interface Popup{
+  addToBags: string
+  addToFavourite: string
+  removeFromFavourites: string
+}

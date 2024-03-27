@@ -131,5 +131,28 @@
   "clothesLeft": {
     "more": "Show More",
     "less": "Less More"
+  },
+  "favourites": {
+    "titleEmpty": "MY WISHLIST",
+    "descriptionEmpty": "You haven't saved any items to your wishlist yet. Start shopping and add your favorite items to your wishlist.",
+    "link": "Shop"
+  },
+  "sliders": {
+    "sliderTitle": "OURS NEW COLLECTIONS"
+  },
+  "bags": {
+    "size": "Size:",
+    "price": "Price:",
+    "choice": "Choose an option for",
+    "summary": "ORDER SUMMARY",
+    "item": "item",
+    "delivery": "Delivery",
+    "free": "Free",
+    "total": "Total"
+  },
+  "popup": {
+    "addToBags": "Added to Bags",
+    "addToFavourite": "Added to favourites",
+    "removeFromFavourites": "Removed from favourites"
   }
 }

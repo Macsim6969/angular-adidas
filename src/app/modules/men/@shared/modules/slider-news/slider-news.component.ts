@@ -6,6 +6,7 @@ import {storeSelectorClothesData} from "../../../../../store/selectors/store.sel
 import {ProdsFromService} from "../../../../../interfaces/home.interface";
 import {Router} from "@angular/router";
 import {Subscription} from "rxjs";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-slider-news',
@@ -19,12 +20,14 @@ export class SliderNewsComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<{ store: StoreInterface }>,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {
   }
 
   ngOnInit() {
     this.initializeValentinesDataFromStore();
+    this.translate.use('en')
   }
 
   private initializeValentinesDataFromStore(){

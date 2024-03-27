@@ -1,4 +1,4 @@
-import {NgModule} from "@angular/core";
+import {NgModule, OnInit} from "@angular/core";
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from "@angular/material/icon";
 import {MatIconService} from "../services/matIcon.service";
@@ -15,7 +15,7 @@ import {InfoPopupComponent} from "./components/info-popup/info-popup.component";
 import {AsyncPipe, NgClass} from "@angular/common";
 import {AttentionComponent} from "./components/attention/attention.component";
 import {MatSelectModule} from "@angular/material/select";
-import {TranslateModule} from "@ngx-translate/core";
+import {TranslateService} from "@ngx-translate/core";
 @NgModule({
   declarations: [
     LoadingComponent,
@@ -35,6 +35,7 @@ import {TranslateModule} from "@ngx-translate/core";
     MatSelectModule,
     AsyncPipe,
     TranslationModule,
+    TranslationModule,
     NgClass
   ],
   exports: [
@@ -43,6 +44,7 @@ import {TranslateModule} from "@ngx-translate/core";
     MatListModule,
     MatButtonModule,
     MatTabsModule,
+    TranslationModule,
     TranslationModule,
     MatProgressSpinnerModule,
     LoadingComponent,
@@ -56,4 +58,4 @@ import {TranslateModule} from "@ngx-translate/core";
   providers: [MatIconService]
 })
 
-export class ShareModule {}
+export class ShareModule{}

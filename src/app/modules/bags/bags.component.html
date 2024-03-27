@@ -8,10 +8,10 @@
         </div>
         <div class="content">
           <p class="name">{{item.name}}</p>
-          <p class="size">Size: {{item.activeSize}}</p>
-          <p class="price">Price: ${{item.price}}</p>
+          <p class="size" [innerHTML]="('bags.size'| translate) + item.activeSize"></p>
+          <p class="price" [innerHTML]="('bags.price'| translate) + item.price"></p>
           <p>Total: <mat-form-field>
-            <mat-label>Choose an option for {{ item.name }}</mat-label>
+            <mat-label [innerHTML]="('bags.choice'| translate) + item.name"></mat-label>
             <mat-select [(ngModel)]="item.count" (ngModelChange)="choiceCountClothes($event, item.id)">
               <mat-option *ngFor="let number of choicePriceArray" [value]="number">{{ number }}</mat-option>
             </mat-select>
@@ -21,17 +21,17 @@
     </div>
   </div>
   <div class="bags_right">
-    <h1>ORDER SUMMARY</h1>
+    <h1 [innerHTML]="('bags.summary'| translate)"></h1>
     <div class="content">
-      <p>{{bags?.length}} item</p>
+      <p [innerHTML]="bags?.length + ('bags.item'| translate)"></p>
       <p>$ {{totalPrice}}</p>
     </div>
     <div class="content">
-      <p>Delivery</p>
-      <p>Free</p>
+      <p [innerHTML]="('bags.delivery'| translate)"></p>
+      <p [innerHTML]="('bags.free'| translate)"></p>
     </div>
     <div class="content">
-      <p>Total</p>
+      <p [innerHTML]="('bags.total'| translate)"></p>
       <p>$ {{totalPrice}}</p>
     </div>
   </div>
