@@ -5,7 +5,6 @@ import {combineLatest, Observable, take} from "rxjs";
 import {increment, newCountry, newLang} from "./store/actions/store.actions";
 import {ActivatedRoute, NavigationEnd, NavigationExtras, Params, Router} from "@angular/router";
 import {storeSelectorCountry, storeSelectorLang} from "./store/selectors/store.selectors";
-import {primitivesAreNotAllowedInProps} from "@ngrx/store/src/models";
 import {TranslateService} from "@ngx-translate/core";
 import {HeaderService} from "./modules/header/@shared/services/header.service";
 import {StateMenService} from "./services/state-men.service";
@@ -39,8 +38,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.initializeUserLogin();
-    this.getDataObservFromStore()
-    this.setDataLocalFromObservable()
     this.addedQueryParams()
     this.getDataFromHeaderService()
     this.checkNavigation()
@@ -54,27 +51,16 @@ export class AppComponent implements OnInit {
     this.authService.autoLogin();
   }
 
-  private getDataObservFromStore() {
-    this.lang$ = this.store.select(storeSelectorLang);
-    this.country$ = this.store.select(storeSelectorCountry);
-  }
-
-  private setDataLocalFromObservable() {
-    combineLatest([this.lang$, this.country$]).subscribe(([lang, country]) => {
-      this.lang = lang;
-      this.country = country;
-      this.translate.use(lang);
-    })
-  }
-
   private addedQueryParams() {
     this.route.queryParams.subscribe((params: Params) => {
+      console.log(params)
       if (params['hl'] || params['country']) {
         this.store.dispatch(newLang({value: params['hl']}))
         this.store.dispatch(newCountry({value: params['country']}))
+        this.translate.use(params['hl']);
         this.addedQueryParamsRouter(params['hl'], params['country'])
       } else {
-        this.addedQueryParamsRouter(this.lang, this.country)
+        this.addedQueryParamsRouter('en', 'US')
       }
     })
   }
@@ -86,14 +72,14 @@ export class AppComponent implements OnInit {
   }
 
   private addedQueryParamsRouter(lang, country) {
-    // const navigationExtras: NavigationExtras = {
-    //   queryParams: {
-    //     hl: lang,
-    //     country: country
-    //   },
-    //   replaceUrl: false
-    // };
-    // this.router.navigate([], navigationExtras).then();
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        hl: lang,
+        country: country
+      },
+      replaceUrl: false
+    };
+    this.router.navigate([], navigationExtras).then();
   }
 
   private checkNavigation() {
@@ -108,12 +94,10 @@ export class AppComponent implements OnInit {
                 country: 'US'
               };
 
-              this.router.navigate([], {
-                queryParams: defaultParams,
-              }).then();
+              this.router.navigate([], {queryParamsHandling: 'merge'}).then();
             }
           } else {
-            this.router.navigate(['/']).then();
+            this.router.navigate(['/'], {queryParamsHandling: 'merge'}).then();
           }
         }
       }

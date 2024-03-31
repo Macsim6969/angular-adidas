@@ -50,12 +50,13 @@ export class ChoiceLanguagesComponent implements OnInit, OnDestroy {
     this.langList = this.languageService.langList;
   }
 
-  public choiceLang({icon, lang}){
+  public choiceLang({icon, lang, country}){
     this.activeLang = icon;
     this.translate.use(icon);
     this.store.dispatch(newLang({value: icon}));
-    this.languageService._activeLang = lang;
-    this.openDialog()
+    this.languageService._activeCountry = country;
+    this.languageService._activeLang = icon;
+    this.openDialog();
   }
 
   openDialog() {
