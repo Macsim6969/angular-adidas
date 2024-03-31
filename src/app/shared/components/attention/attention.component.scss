@@ -6,6 +6,10 @@
   max-width: 720px;
   margin: 40px auto;
 
+  @media (max-width: 1024px) {
+
+  }
+
   .attention_title {
     font-size: 2.2rem;
     margin: 0;

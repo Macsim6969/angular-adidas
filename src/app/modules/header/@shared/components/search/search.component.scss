@@ -1,17 +1,18 @@
 .options-search {
   display: flex;
+  justify-content: center;
   align-items: center;
-  background: white;
   padding: 0 10px;
+  width: 100%;
 
   input {
     border: unset;
     outline: unset;
     padding: 8px 0;
-    font-size: 1.6rem;
-
+    font-size: 2.2rem;
+    width: 70%;
     @media (max-width: 576px) {
-      width: 80px;
+      width: 75%;
       font-size: 1.4rem;
     }
 
@@ -46,6 +47,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+
     p {
       cursor: pointer;
       margin: 0;
@@ -124,7 +126,7 @@
   }
 }
 
-.overlay{
+.overlay {
   position: fixed;
   inset: 0;
   z-index: 9;

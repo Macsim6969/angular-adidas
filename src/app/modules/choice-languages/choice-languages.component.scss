@@ -28,6 +28,10 @@
 
     padding: 24px;
 
+    @media (max-width: 576px) {
+      margin: 0 15px;
+    }
+
     &-header {
       display: flex;
       justify-content: space-between;

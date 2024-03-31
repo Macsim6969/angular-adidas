@@ -1,0 +1,157 @@
+{
+  "logo": "LOGO",
+  "back": "Atrás",
+  "header": {
+    "options": {
+      "login": "login",
+      "logout": "logout",
+      "language": "Cambiar país"
+    },
+    "menu-navigation": [
+      {
+        "name": "Hombres",
+        "route": "/men"
+      }
+    ]
+  },
+  "dropdown": {
+    "back": "Atrás",
+    "allProd": "Todos los productos",
+    "choiceCategory": "Elige alguna categoría"
+  },
+  "home": {
+    "stories": {
+      "storiesTime": "Historias, estilo y artículos deportivos en adidas, desde 1949",
+      "storiesTimeContent": "A través del deporte, tenemos el poder de cambiar vidas. El deporte nos mantiene en forma. Nos mantiene atentos. Nos une. Los atletas nos inspiran. Nos ayudan a levantarnos y ponernos en marcha. Y los productos deportivos con las últimas tecnologías nos ayudan a superar nuestros propios límites. adidas es el hogar del corredor, del jugador de baloncesto, del niño futbolista, del entusiasta del fitness, del yogui. E incluso del excursionista de fin de semana que busca escapar de la ciudad. Las 3 Rayas están en todas partes y en cualquier lugar. En el deporte. En la música. En los escenarios de la vida. Antes de que suene el silbato, durante la carrera y en la línea de meta. Estamos aquí para apoyar a los creadores. Para mejorar su juego. Para vivir sus vidas. Y para cambiar el mundo.<br/><br/><br/>adidas es más que ropa deportiva y ropa de entrenamiento. Nos asociamos con los mejores de la industria para co-crear. De esta manera ofrecemos a nuestros fans los productos deportivos, el estilo y la ropa que satisfacen las necesidades atléticas, siempre teniendo en cuenta la sostenibilidad. Estamos aquí para apoyar a los creadores. Mejorar su juego. Crear cambio. Y pensamos en el impacto que tenemos en nuestro mundo.",
+      "storiesClothes": "Ropa de entrenamiento, para cualquier deporte",
+      "storiesClothesContent": "adidas diseña para atletas de todo tipo. Creadores que aman cambiar el juego. Personas que desafían convenciones, rompen las reglas y definen nuevas. Y luego las rompen de nuevo. Diseñamos ropa deportiva que te pone en movimiento, te hace ganar y vivir la vida al máximo. Creamos sujetadores y mallas para atletas femeninas que juegan tan duro como los hombres. Desde soporte bajo hasta alto. Máxima comodidad. Diseñamos, innovamos e iteramos. Probamos nuevas tecnologías en acción. En el campo, la pista, la cancha y en la piscina. Nos inspiramos en la ropa de entrenamiento retro, creando nuevos elementos esenciales de streetwear. Desde NMD y Ozweego hasta nuestros chándales Firebird. Desde Stan Smith hasta Superstar. Los modelos deportivos clásicos vuelven a la vida en las calles y los escenarios de todo el mundo.<br/><br/><br/>A través de nuestras colecciones borramos las fronteras entre la alta moda y el alto rendimiento. Como nuestra colección de ropa deportiva adidas by Stella McCartney, diseñada para lucir bien dentro y fuera del gimnasio. O algunas de nuestras piezas de estilo de vida adidas Originals, que también pueden ser usadas como ropa deportiva. Nuestras vidas están en constante cambio. Volviéndose cada vez más versátiles. Y adidas diseña teniendo eso en mente."
+    }
+  },
+  "men": {
+    "list": [
+      {
+        "image": "./assets/images/adidas/men/list/sneakers.jpg",
+        "name": "zapatillas",
+        "route": "/men/shoes"
+      },
+      {
+        "image": "./assets/images/adidas/men/list/hoodies.jpg",
+        "name": "sudaderas con capucha y sudaderas",
+        "route": "/men/hoodies"
+      },
+      {
+        "image": "./assets/images/adidas/men/list/pants.jpg",
+        "name": "pantalones",
+        "route": "/men/pants"
+      }
+    ],
+    "articles": {
+      "articlesTitle": "ROPA Y ZAPATOS PARA HOMBRE",
+      "articlesDesc": "Como creador, buscas formas de destacar y expresarte cuando y donde puedas, desde alcanzar esa última repetición hasta evolucionar tu estilo streetwear. Recorre millas o desciende la línea de base en zapatos para hombre con amortiguación receptiva. Representa un estilo atlético fuera del campo en ropa de estilo de vida nacida del patrimonio deportivo. Desde atletas hasta entusiastas del streetwear, la ropa y los zapatos adidas para hombre existen para permitirte ir más duro, excavar más profundo y sacar lo mejor de ti mismo, desde la cancha hasta la calle y el camino menos transitado."
+    },
+    "header-content": {
+      "shoes": [
+        {
+          "descriptionTitle": "ZAPATOS PARA HOMBRE",
+          "descriptionText": "Compra adidas para todos los estilos de zapatos para hombre, incluyendo zapatillas casuales, zapatos de running de alto rendimiento y cómodas sandalias."
+        },
+        {
+          "descriptionTitle": "ZAPATILLAS DEPORTIVAS Y ZAPATOS PARA HOMBRE",
+          "descriptionText": "Desde Ultraboost hasta Superstar, puedes encontrar los zapatos atléticos para hombre perfectos para adaptarse a tu estilo de vida. Zapatillas hechas pensando en tu comodidad para que puedas poner toda tu atención en tu próxima sesión."
+        },
+        {
+          "descriptionTitle": "TACOS Y ZAPATOS DE FÚTBOL PARA HOMBRE"
+        },
+        {
+          "descriptionTitle": "TACOS DE FÚTBOL AMERICANO PARA HOMBRE",
+          "descriptionText": "Juega como si lo significara con tacos de fútbol americano para hombre. Cuando estás corriendo por el campo con equipamiento de apoyo diseñado para velocidad y comodidad, el juego será tuyo."
+        },
+        {
+          "descriptionTitle": "ZAPATOS PARA CORRER PARA HOMBRE",
+          "descriptionText": "Corre a tu manera. Ya sea estabilidad, control climático o comodidad lo que buscas, estos zapatos para correr para hombre te ofrecen muchas opciones."
+        },
+        {
+          "descriptionTitle": "SANDALIAS Y CHANCLETAS PARA HOMBRE",
+          "descriptionText": "Las sandalias para hombre son el elemento esencial para un día de relax, ya sea que estés descansando o haciendo recados. Las sandalias adidas están diseñadas con una plantilla contorneada y un acolchado mullido, para que puedas relajarte."
+        },
+        {
+          "descriptionTitle": "ZAPATILLAS DE BALONCESTO PARA HOMBRE"
+        },
+        {
+          "descriptionTitle": "ZAPATILLAS DE SENDERISMO PARA HOMBRE",
+          "descriptionText": "Desde botas aislantes para el frío hasta zapatillas ligeras diseñadas para moverse rápidamente en las montañas, los zapatos de senderismo para hombre te ayudan a encontrar tu equilibrio."
+        }
+      ],
+      "hoodies": [
+        {
+          "descriptionTitle": "SUDADERAS *TODAS"
+        },
+        {
+          "descriptionTitle": "SUDADERAS *SPORTSWEAR"
+        },
+        {
+          "descriptionTitle": "SUDADERAS *ENTRENAMIENTO"
+        },
+        {
+          "descriptionTitle": "SUDADERAS *ORIGINALES"
+        },
+        {
+          "descriptionTitle": "SUDADERAS *RUNNING"
+        }
+      ],
+      "pants": [
+        {
+          "descriptionTitle": "PANTALONES *TODOS"
+        },
+        {
+          "descriptionTitle": "PANTALONES *SPORTSWEAR"
+        },
+        {
+          "descriptionTitle": "PANTALONES *ENTRENAMIENTO"
+        },
+        {
+          "descriptionTitle": "PANTALONES *ORIGINALES"
+        },
+        {
+          "descriptionTitle": "PANTALONES *RUNNING"
+        }
+      ]
+    }
+  },
+  "clothesRight": {
+    "color": "Color",
+    "sizes": "Tallas",
+    "attention": "Por favor, elige una talla",
+    "guide": "Guía de tallas",
+    "add": "Añadir a la bolsa",
+    "like": "Me gusta",
+    "unlike": "No me gusta"
+  },
+  "clothesLeft": {
+    "more": "Mostrar más",
+    "less": "Mostrar menos"
+  },
+  "favourites": {
+    "titleEmpty": "MI LISTA DE DESEOS",
+    "descriptionEmpty": "Todavía no has guardado ningún artículo en tu lista de deseos. Comienza a comprar y añade tus artículos favoritos a tu lista de deseos.",
+    "link": "Comprar"
+  },
+  "sliders": {
+    "sliderTitle": "NUESTRAS NUEVAS COLECCIONES"
+  },
+  "bags": {
+    "size": "Tamaño:",
+    "price": "Precio:",
+    "choice": "Elige una opción para",
+    "summary": "RESUMEN DEL PEDIDO",
+    "item": "artículo",
+    "delivery": "Entrega",
+    "free": "Gratis",
+    "total": "Total"
+  },
+  "popup": {
+    "addToBags": "Añadido a la bolsa",
+    "addToFavourite": "Añadido a favoritos",
+    "removeFromFavourites": "Eliminado de favoritos"
+  }
+}
