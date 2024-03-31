@@ -16,6 +16,7 @@ import {AsyncPipe, NgClass} from "@angular/common";
 import {AttentionComponent} from "./components/attention/attention.component";
 import {MatSelectModule} from "@angular/material/select";
 import {TranslateService} from "@ngx-translate/core";
+import {MatDialogModule} from "@angular/material/dialog";
 @NgModule({
   declarations: [
     LoadingComponent,
@@ -33,6 +34,7 @@ import {TranslateService} from "@ngx-translate/core";
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatDialogModule,
     AsyncPipe,
     TranslationModule,
     TranslationModule,
@@ -47,6 +49,7 @@ import {TranslateService} from "@ngx-translate/core";
     TranslationModule,
     TranslationModule,
     MatProgressSpinnerModule,
+    MatDialogModule,
     LoadingComponent,
     InfoPopupComponent,
     AttentionComponent,

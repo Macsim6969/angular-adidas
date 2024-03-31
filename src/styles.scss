@@ -21,7 +21,24 @@ $my-app-theme: mat.define-light-theme((
 html, body {
   height: 100%;
   font-size: 10px;
+
+  &::-webkit-scrollbar-track{
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb{
+    background-color: gray;
+    border-radius: 12px;
+  }
+
+  &::-webkit-scrollbar{
+    width: 6px;
+    background-color: #e1e5d9;
+
+  }
 }
+
+
 
 body {
   margin: 0;

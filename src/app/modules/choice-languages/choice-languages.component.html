@@ -7,11 +7,12 @@
       </span>
     </div>
     <div class="popup-country-block-main">
-      <div [ngClass]="{'active': lang.icon === activeLang}" *ngFor="let lang of langList; index as i" class="popup-country-block-main-list">
+      <div (click)="choiceLang(lang)" [ngClass]="{'active': lang.icon === activeLang}" *ngFor="let lang of langList; index as i"
+           class="popup-country-block-main-list">
         <span class="popup-country-block-main-list-icon">
         <mat-icon svgIcon="{{lang.icon}}"></mat-icon>
         </span>
-        <nav class="popup-country-block-main-list-lang">{{lang.lang}}</nav>
+        <nav class="popup-country-block-main-list-lang">{{ lang.lang }}</nav>
       </div>
     </div>
   </div>

@@ -4,11 +4,13 @@ import {CommonModule} from "@angular/common";
 import {ShareModule} from "../../shared/share.module";
 import {LanguagesService} from "./@shared/services/languages.service";
 import {HeaderService} from "../header/@shared/services/header.service";
+import {ConfirmedComponent} from "./@shared/components/confirmed/confirmed.component";
 
 
 @NgModule({
   declarations: [
-    ChoiceLanguagesComponent
+    ChoiceLanguagesComponent,
+    ConfirmedComponent
   ],
   exports: [
     ChoiceLanguagesComponent
