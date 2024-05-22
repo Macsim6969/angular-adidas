@@ -11,6 +11,10 @@
       {
         "name": "Men",
         "route": "/men"
+      },
+      {
+        "name": "Admin",
+        "route": "/admin"
       }
     ]
   },
@@ -18,7 +22,6 @@
     "back": "Back",
     "allProd": "All products",
     "choiceCategory": "Choice some category"
-
   },
   "home": {
     "stories": {
@@ -154,5 +157,17 @@
     "addToBags": "Added to Bags",
     "addToFavourite": "Added to favourites",
     "removeFromFavourites": "Removed from favourites"
+  },
+  "admin": {
+    "panels": [
+      {
+        "name": "Goods",
+        "path": "/admin/goods"
+      },
+      {
+        "name": "Orders",
+        "path": "/admin/orders"
+      }
+    ]
   }
 }

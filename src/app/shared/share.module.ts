@@ -1,22 +1,22 @@
-import {NgModule, OnInit} from "@angular/core";
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatIconModule} from "@angular/material/icon";
-import {MatIconService} from "../services/matIcon.service";
-import {TranslationModule} from "./translate.module";
-import {MatListModule} from "@angular/material/list";
-import {MatButtonModule} from "@angular/material/button";
-import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
-import {LoadingComponent} from "./components/loading/loading.component";
-import {MatCardModule} from "@angular/material/card";
-import {MatTabsModule} from "@angular/material/tabs";
-import {MatInputModule} from "@angular/material/input";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {InfoPopupComponent} from "./components/info-popup/info-popup.component";
-import {AsyncPipe, NgClass} from "@angular/common";
-import {AttentionComponent} from "./components/attention/attention.component";
-import {MatSelectModule} from "@angular/material/select";
-import {TranslateService} from "@ngx-translate/core";
-import {MatDialogModule} from "@angular/material/dialog";
+import { NgModule, OnInit } from "@angular/core";
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from "@angular/material/icon";
+import { MatIconService } from "../services/matIcon.service";
+import { TranslationModule } from "./translate.module";
+import { MatListModule } from "@angular/material/list";
+import { MatButtonModule } from "@angular/material/button";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { LoadingComponent } from "./components/loading/loading.component";
+import { MatCardModule } from "@angular/material/card";
+import { MatTabsModule } from "@angular/material/tabs";
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { InfoPopupComponent } from "./components/info-popup/info-popup.component";
+import { AsyncPipe, NgClass } from "@angular/common";
+import { AttentionComponent } from "./components/attention/attention.component";
+import { MatSelectModule } from "@angular/material/select";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { MatDialogModule } from "@angular/material/dialog";
 @NgModule({
   declarations: [
     LoadingComponent,
@@ -37,7 +37,6 @@ import {MatDialogModule} from "@angular/material/dialog";
     MatDialogModule,
     AsyncPipe,
     TranslationModule,
-    TranslationModule,
     NgClass
   ],
   exports: [
@@ -46,7 +45,6 @@ import {MatDialogModule} from "@angular/material/dialog";
     MatListModule,
     MatButtonModule,
     MatTabsModule,
-    TranslationModule,
     TranslationModule,
     MatProgressSpinnerModule,
     MatDialogModule,
@@ -61,4 +59,4 @@ import {MatDialogModule} from "@angular/material/dialog";
   providers: [MatIconService]
 })
 
-export class ShareModule{}
+export class ShareModule { }

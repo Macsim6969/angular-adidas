@@ -1,15 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {Store} from "@ngrx/store";
-import {StoreInterface} from "./store/model/store.model";
-import {combineLatest, Observable, take} from "rxjs";
-import {increment, newCountry, newLang} from "./store/actions/store.actions";
-import {ActivatedRoute, NavigationEnd, NavigationExtras, Params, Router} from "@angular/router";
-import {storeSelectorCountry, storeSelectorLang} from "./store/selectors/store.selectors";
-import {TranslateService} from "@ngx-translate/core";
-import {HeaderService} from "./modules/header/@shared/services/header.service";
-import {StateMenService} from "./services/state-men.service";
-import {AuthService} from "./services/auth.service";
-import {User} from "./modules/auth/auth.model";
+import { Component, OnInit } from '@angular/core';
+import { Store } from "@ngrx/store";
+import { StoreInterface } from "./store/model/store.model";
+import { combineLatest, Observable, take } from "rxjs";
+import { increment, newCountry, newLang } from "./store/actions/store.actions";
+import { ActivatedRoute, NavigationEnd, NavigationExtras, Params, Router } from "@angular/router";
+import { storeSelectorCountry, storeSelectorLang } from "./store/selectors/store.selectors";
+import { TranslateService } from "@ngx-translate/core";
+import { HeaderService } from "./modules/header/@shared/services/header.service";
+import { StateMenService } from "./services/state-men.service";
+import { AuthService } from "./services/auth.service";
+import { User } from "./modules/auth/auth.model";
 
 @Component({
   selector: 'app-root',
@@ -18,13 +18,13 @@ import {User} from "./modules/auth/auth.model";
 })
 export class AppComponent implements OnInit {
 
-  lang$: Observable<string>;
-  country$: Observable<string>;
+  private lang$: Observable<string>;
+  private country$: Observable<string>;
 
-  lang: string;
-  country: string;
+  private lang: string;
+  private country: string;
 
-  isDropdown: boolean = false;
+  public isDropdown: boolean = false;
 
   constructor(
     private store: Store<{ store: StoreInterface }>,
@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
     private stateShoesService: StateMenService,
     private authService: AuthService,
     private translate: TranslateService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.initializeUserLogin();
@@ -42,27 +42,13 @@ export class AppComponent implements OnInit {
     this.getDataFromHeaderService()
     this.checkNavigation()
     this.stateShoesService.getDataClothes();
-    this.authService.user.subscribe((user: User) =>{
+    this.authService.user.subscribe((user: User) => {
       this.stateShoesService.getFavouritesClothes(user.id);
     })
   }
 
-  private initializeUserLogin(){
+  private initializeUserLogin() {
     this.authService.autoLogin();
-  }
-
-  private addedQueryParams() {
-    this.route.queryParams.subscribe((params: Params) => {
-      console.log(params)
-      if (params['hl'] || params['country']) {
-        this.store.dispatch(newLang({value: params['hl']}))
-        this.store.dispatch(newCountry({value: params['country']}))
-        this.translate.use(params['hl']);
-        this.addedQueryParamsRouter(params['hl'], params['country'])
-      } else {
-        this.addedQueryParamsRouter('en', 'US')
-      }
-    })
   }
 
   private getDataFromHeaderService() {
@@ -71,15 +57,25 @@ export class AppComponent implements OnInit {
     })
   }
 
+  private addedQueryParams() {
+    this.route.queryParams.subscribe((params: Params) => {
+      if (params['hl'] || params['country']) {
+        this.store.dispatch(newLang({ value: params['hl'] }))
+        this.store.dispatch(newCountry({ value: params['country'] }))
+        this.translate.use(params['hl']);
+        this.addedQueryParamsRouter(params['hl'], params['country'])
+      }
+    })
+  }
+
   private addedQueryParamsRouter(lang, country) {
-    const navigationExtras: NavigationExtras = {
+    this.router.navigate([], {
       queryParams: {
         hl: lang,
         country: country
       },
-      replaceUrl: false
-    };
-    this.router.navigate([], navigationExtras).then();
+      replaceUrl: true
+    }).then();
   }
 
   private checkNavigation() {
@@ -89,15 +85,13 @@ export class AppComponent implements OnInit {
           if (event.url.indexOf('/') !== -1) {
             const currentParams = this.router.routerState.snapshot.root.queryParams;
             if (!currentParams['hl'] || !currentParams['country']) {
-              const defaultParams = {
-                hl: 'en',
-                country: 'US'
-              };
-
-              this.router.navigate([], {queryParamsHandling: 'merge'}).then();
+              this.router.navigate([], {
+                queryParams: {
+                  hl: 'en',
+                  country: 'US'
+                },
+              }).then();
             }
-          } else {
-            this.router.navigate(['/'], {queryParamsHandling: 'merge'}).then();
           }
         }
       }

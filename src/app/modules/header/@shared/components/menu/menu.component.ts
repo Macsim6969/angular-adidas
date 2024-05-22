@@ -28,7 +28,7 @@ export class MenuComponent implements OnInit, OnDestroy {
       });
   }
 
-  public choiceMenu(route: string){
+public choiceMenu(route: string){
     this.router.navigate([route], {queryParamsHandling: 'merge'}).then();;
   }
 

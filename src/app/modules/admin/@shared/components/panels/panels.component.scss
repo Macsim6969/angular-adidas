@@ -1,0 +1,32 @@
+.panels {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+
+  .content {
+    padding: 15px 35px;
+    border: 1px solid black;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &.active {
+      background-color: black;
+
+      a {
+        color: white;
+      }
+    }
+
+    a {
+      font-size: 1.8rem;
+      color: rgb(15, 25, 122);
+      text-decoration: none;
+
+
+    }
+
+  }
+}
