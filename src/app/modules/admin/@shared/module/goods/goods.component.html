@@ -1,1 +1,24 @@
-<p>goods works!</p>
+<div class="goods">
+  <ul class="goods_lists" *ngIf="allContent; else loading">
+    <li class="list" *ngFor="let content of allContent; index as i">
+      <nav class="id">{{i +1}}</nav>
+      <nav class="image">
+        <img [src]="errorImages[i] ? './assets/images/adidas/admin/goods/goods.jpg' : content?.imageURL"
+          (error)="handleImageError(i)" alt="">
+      </nav>
+      <nav class="tage">{{content?.tage}}</nav>
+      <nav class="categ">{{content?.categ}}</nav>
+      <nav class="name">{{content?.name}}</nav>
+      <nav class="desc">{{content?.desc}}</nav>
+      <nav class="price">{{content?.price}}</nav>
+      <div class="sizes">
+        <nav *ngFor="let size of content?.sizes" class="sizes">{{size}}</nav>
+      </div>
+    </li>
+  </ul>
+
+  <ng-template #loading>
+    <app-loading></app-loading>
+  </ng-template>
+
+</div>
