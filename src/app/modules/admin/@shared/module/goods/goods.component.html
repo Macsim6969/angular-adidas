@@ -1,15 +1,25 @@
 <div class="goods">
   <div class="search-info">
-    <nav *ngIf="!isChange" class="id" (click)="changeMode(true, 'id')">ID</nav>
-    <input *ngIf="isChange" class="id" type="number" [formControl]="streamIdControl" (click)="changeMode(false, 'id')">
+    <nav *ngIf="!changeModule[1]" class="id" (click)="changeMode(1, true, 'id')">ID</nav>
+    <nav *ngIf="changeModule[1]" class="id">
+      <input type="number" [formControl]="streamIdControl">
+      <button (click)="changeMode(1, false, 'price')" mat-button>&#x2715;</button>
+    </nav>
     <nav class="image"> Image</nav>
     <nav class="tage">Tage</nav>
+    <div class="popup">
+      
+    </div>
     <nav class="categ">Category</nav>
     <nav class="name">Name</nav>
     <nav class="desc">Description</nav>
-    <nav class="price">Price</nav>
+    <nav *ngIf="!changeModule[7]" class="price"  (click)="changeMode(7,true, 'price')">Price</nav>
+    <nav *ngIf="changeModule[7]" class="price">
+      <input type="number" [formControl]="streamPriceControl">
+      <button (click)="changeMode(7, false, 'price')" mat-button>&#x2715;</button>
+    </nav>
     <nav class="sizes">Size</nav>
-    
+
   </div>
   <ul class="goods_lists" *ngIf="contentGoods; else loading">
     <li [id]="content?.id" class="list" *ngFor="let content of contentGoods; index as i">

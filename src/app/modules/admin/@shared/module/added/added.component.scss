@@ -1,0 +1,46 @@
+.added {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 30px;
+
+  .added-panel {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    .route {
+      display: flex;
+      gap: 7px;
+      flex-direction: row;
+      align-items: center;
+      border: 1px solid black;
+      border-radius: 12px;
+      padding: 14px 32px;
+      cursor: pointer;
+
+      &:hover{
+        transition: all 0.5s ease;
+        border: 1px solid brown;
+        background-color: brown;
+        a,
+        p{
+          color: white;
+        }
+      }
+
+      a {
+        text-decoration: none;
+        font-size: 2rem;
+        color: brown;
+      }
+
+      p {
+        color: brown;
+        font-size: 2rem;
+      }
+    }
+  }
+}

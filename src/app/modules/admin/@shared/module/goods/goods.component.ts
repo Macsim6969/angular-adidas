@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { StoreInterface } from '../../../../../store/model/store.model';
 import { storeSelectorClothesData } from '../../../../../store/selectors/store.selectors';
-import { take, timer } from 'rxjs';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -11,11 +10,12 @@ import { FormControl } from '@angular/forms';
   styleUrl: './goods.component.scss'
 })
 export class GoodsComponent implements OnInit {
-  streamIdControl = new FormControl();
+  public streamIdControl = new FormControl();
+  public streamPriceControl = new FormControl();
   private allContent: any[] = [];
   public contentGoods: any[] = [];
   public errorImages: boolean[] = [];
-  public isChange: boolean;
+  public changeModule: boolean[] = [];
   public streamId: number
   constructor(
     private store: Store<{ store: StoreInterface }>,
@@ -30,8 +30,12 @@ export class GoodsComponent implements OnInit {
     });
 
     this.streamIdControl.valueChanges.subscribe(value => {
-      this.filterContent(value);
+      this.filterContent(value, 'id');
     });
+
+    this.streamPriceControl.valueChanges.subscribe(value => {
+      this.filterContent(value, 'price')
+    })
 
   }
 
@@ -39,16 +43,18 @@ export class GoodsComponent implements OnInit {
     this.errorImages[index] = true;
   }
 
-  changeMode(isChange: boolean, id: string) {
-    this.isChange = isChange;
-    if (id === 'id' && this.streamIdControl.value != null) {
-      this.filterContent(this.streamIdControl.value);
+  changeMode(idModule: number, isChange: boolean, id: string) {
+    this.changeModule[idModule] = isChange;
+    if (id === 'id') {
+      this.streamId = null;
+      this.filterContent(this.streamIdControl.value, id);
     }
   }
 
-  filterContent(streamId: number) {
+  filterContent(streamId: number, id: string) {
     if (streamId != null) {
-      this.contentGoods = this.allContent.filter(item => item.id === streamId);
+      this.contentGoods = this.allContent.filter(item => item[id] === streamId);
+      console.log(id, this.contentGoods)
     } else {
       this.contentGoods = this.allContent;
     }

@@ -167,6 +167,20 @@
       {
         "name": "Orders",
         "path": "/admin/orders"
+      },
+      {
+        "name": "Added New",
+        "path": "/admin/added"
+      }
+    ],
+    "addedPanel": [
+      {
+        "name": "Goods",
+        "path": "/admin/added/goods"
+      },
+      {
+        "name": "New User Orders",
+        "path": "/admin/added/user-orders"
       }
     ]
   }

@@ -9,7 +9,8 @@ import { PanelsComponent } from "./@shared/components/panels/panels.component";
 const routes: Routes = [
   {
     path: '', component: AdminComponent, children: [
-      { path: 'goods', loadChildren: () => import('./@shared/module/goods/goods.module').then(m => m.GoodsModule) }
+      { path: 'goods', loadChildren: () => import('./@shared/module/goods/goods.module').then(m => m.GoodsModule) },
+      { path: 'added', loadChildren: () => import('./@shared/module/added/added.module').then(m => m.AddedModule) }
     ]
   }
 ]
