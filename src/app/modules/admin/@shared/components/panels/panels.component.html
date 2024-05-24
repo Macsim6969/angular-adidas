@@ -1,5 +1,8 @@
 <div class="panels">
-  <nav routerLinkActive="active" class="content" *ngFor="let panel of panelsContent">
-    <a  routerLink="{{panel.path}}">{{panel.name}}</a>
-  </nav>
+  <div class="panels-route">
+    <nav routerLinkActive="active" class="content" *ngFor="let panel of panelsContent">
+      <a routerLink="{{panel.path}}">{{panel.name}}</a>
+    </nav>
+  </div>
+
 </div>

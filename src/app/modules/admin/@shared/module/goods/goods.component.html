@@ -1,7 +1,19 @@
 <div class="goods">
-  <ul class="goods_lists" *ngIf="allContent; else loading">
-    <li class="list" *ngFor="let content of allContent; index as i">
-      <nav class="id">{{i +1}}</nav>
+  <div class="search-info">
+    <nav *ngIf="!isChange" class="id" (click)="changeMode(true, 'id')">ID</nav>
+    <input *ngIf="isChange" class="id" type="number" [formControl]="streamIdControl" (click)="changeMode(false, 'id')">
+    <nav class="image"> Image</nav>
+    <nav class="tage">Tage</nav>
+    <nav class="categ">Category</nav>
+    <nav class="name">Name</nav>
+    <nav class="desc">Description</nav>
+    <nav class="price">Price</nav>
+    <nav class="sizes">Size</nav>
+    
+  </div>
+  <ul class="goods_lists" *ngIf="contentGoods; else loading">
+    <li [id]="content?.id" class="list" *ngFor="let content of contentGoods; index as i">
+      <nav class="id">{{content?.id}}</nav>
       <nav class="image">
         <img [src]="errorImages[i] ? './assets/images/adidas/admin/goods/goods.jpg' : content?.imageURL"
           (error)="handleImageError(i)" alt="">
