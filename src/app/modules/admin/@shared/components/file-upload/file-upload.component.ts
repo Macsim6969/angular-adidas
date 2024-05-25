@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ScanService } from '../../services/scan.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-file-upload',
@@ -8,15 +9,19 @@ import { ScanService } from '../../services/scan.service';
 })
 export class FileUploadComponent {
 
-  constructor(private scanService: ScanService) {}
+  constructor(private scanService: ScanService,
+    private router: Router
+  ) { }
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (file) {
       console.log('Selected File:', file); // Лог выбранного файла
       this.scanService.startScan(file).subscribe(result => {
-        console.log('Analysis Result:', result);
-        this.scanService._id = result.scan_id
+        if (result) {
+          this.scanService._id = result.scan_id
+          this.router.navigate(['/admin/added/result']).then()
+        }
       }, error => {
         console.error('Error analyzing file:', error);
       });
