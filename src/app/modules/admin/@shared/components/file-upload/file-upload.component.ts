@@ -9,7 +9,8 @@ import { Router } from '@angular/router';
 })
 export class FileUploadComponent {
 
-  constructor(private scanService: ScanService,
+  constructor(
+    private scanService: ScanService,
     private router: Router
   ) { }
 
@@ -17,14 +18,37 @@ export class FileUploadComponent {
     const file: File = event.target.files[0];
     if (file) {
       console.log('Selected File:', file); // Лог выбранного файла
-      this.scanService.startScan(file).subscribe(result => {
-        if (result) {
-          this.scanService._id = result.scan_id
-          this.router.navigate(['/admin/added/result']).then()
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const xhr = new XMLHttpRequest();
+      xhr.upload.addEventListener('progress', (e) => {
+        if (e.lengthComputable) {
+          const percentComplete = (e.loaded / e.total) * 100;
+          this.updateProgressBar(percentComplete);
         }
-      }, error => {
-        console.error('Error analyzing file:', error);
-      });
+      }, false);
+
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            const result = JSON.parse(xhr.responseText);
+            this.scanService._id = result.scan_id;
+            this.router.navigate(['/admin/added/result']).then();
+          } else {
+            console.error('Error analyzing file:', xhr.responseText);
+          }
+        }
+      };
+
+      xhr.open('POST', 'http://localhost:3000/admin/scan', true);
+      xhr.send(formData);
     }
+  }
+
+  updateProgressBar(progress: number) {
+    const progressBar = document.getElementById('progress-bar') as HTMLElement;
+    progressBar.style.width = progress + '%';
   }
 }
