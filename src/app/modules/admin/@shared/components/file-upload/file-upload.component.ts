@@ -16,6 +16,7 @@ export class FileUploadComponent {
       console.log('Selected File:', file); // Лог выбранного файла
       this.scanService.startScan(file).subscribe(result => {
         console.log('Analysis Result:', result);
+        this.scanService._id = result.scan_id
       }, error => {
         console.error('Error analyzing file:', error);
       });

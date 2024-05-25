@@ -1,8 +1,12 @@
-<div *ngIf="reports">
-  <h2>Reports</h2>
+<div *ngIf="reports; else loading">
+  <h2>Reports for File {{ fileId }}</h2>
   <ul>
-    <li *ngFor="let report of reports">
-      <a [routerLink]="['/report', report.id]">{{ report.name }}</a>
+    <li *ngFor="let key of reportsTitle">
+      {{ key }} - {{ reports[key].detected ? 'Detected' : 'Not Detected' }}
     </li>
   </ul>
 </div>
+
+<ng-template #loading>
+  Loading...
+</ng-template>

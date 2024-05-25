@@ -30,13 +30,16 @@ app.post('/admin/scan', upload.single('file'), async (req, res) => {
 });
 
 // API для получения результатов сканирования
-app.get('/admin/results', (req, res) => {
-  // Пример данных, замените на реальную логику получения данных
-  const exampleResults = [
-    { id: '1', name: 'File1.txt' },
-    { id: '2', name: 'File2.txt' },
-  ];
-  res.json({ results: exampleResults });
+app.get('/admin/results/:resourceId', async (req, res) => {
+  const { resourceId } = req.params;
+
+  try {
+    const analysisResult = await getAnalysisResultFromVirusTotal(resourceId);
+    res.json(analysisResult);
+  } catch (error) {
+    console.error('Error getting scan results:', error.message);
+    res.status(500).json({ message: 'Error getting scan results', error: error.message });
+  }
 });
 
 // API для отметки файла как ложноположительный
@@ -79,6 +82,7 @@ async function getAnalysisResultFromVirusTotal(analysisId) {
         resource: analysisId
       }
     });
+
     return response.data;
   } catch (error) {
     console.error('VirusTotal API error:', error.message);

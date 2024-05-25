@@ -8,17 +8,33 @@ import { ScanService } from '../../services/scan.service';
 })
 export class ScanResultsComponent implements OnInit {
   public reports: any[] = [];
+  public reportsTitle: string[];
+  public fileId: string;
 
-  constructor(private scanService: ScanService) { }
+  constructor(
+    private scanService: ScanService
+  ) { }
 
   ngOnInit() {
-    this.loadReports();
+    this.scanService._id$.subscribe(params => {
+      this.fileId = params;
+      if (this.fileId) {
+        this.loadReports(this.fileId);
+      }
+    });
   }
 
-  private loadReports() {
-    this.scanService.getScanResults().subscribe(data => {
-      console.log(data)
-      this.reports = data;
-    });
+  private loadReports(fileId: string) {
+    this.scanService.getScanResults(fileId).subscribe(
+      data => {
+        console.log('Scans:', data.scans);
+        this.reports = data.scans;
+        this.reportsTitle = Object.keys(data.scans);
+      },
+      error => {
+        console.error('Error loading reports:', error);
+        // Обработка ошибок, если необходимо
+      }
+    );
   }
 }
