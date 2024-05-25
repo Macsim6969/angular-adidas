@@ -1,0 +1,372 @@
+const fs = require('fs');
+
+// Читання файлу для подальшого сканування
+fs.readFile('file.txt', 'utf8', (err, data) => {
+  if (err) {
+    console.error('Помилка читання файлу:', err);
+    return;
+  }
+  
+  // Виклик функції аналізу файлу
+  analyzeFile(data);
+});
+
+// Функція для аналізу вмісту файлу
+function analyzeFile(fileContent) {
+  // Реалізація алгоритму аналізу файлу
+  // Наприклад, перевірка наявності шкідливого коду або вразливостей
+}
+
+
+const { exec } = require('child_process');
+
+// Виконання файлу у контрольованому середовищі
+exec('node file.js', (error, stdout, stderr) => {
+  if (error) {
+    console.error(`Виникла помилка: ${error.message}`);
+    return;
+  }
+  if (stderr) {
+    console.error(`Помилка виконання: ${stderr}`);
+    return;
+  }
+    // Обробка результатів виконання
+  console.log(`Результати виконання: ${stdout}`);
+});
+
+const fs = require('fs');
+
+// Створення читаючого потоку
+const readStream = fs.createReadStream('largeFile.txt', { encoding: 'utf8' });
+
+// Обробка кожного чанку даних
+readStream.on('data', chunk => {
+  // Обробка чанку даних (наприклад, аналіз)
+  analyzeChunk(chunk);
+});
+
+// Обробка завершення читання файлу
+readStream.on('end', () => {
+  console.log('Читання файлу завершено');
+});
+
+// Функція для аналізу кожного чанку даних
+function analyzeChunk(chunk) {
+  // Реалізація аналізу чанку даних
+  // Наприклад, перевірка наявності шкідливого коду або вразливостей
+}
+
+const axios = require('axios');
+
+// Функція для відправки запиту на аналіз файлу до VirusTotal
+async function analyzeFileWithVirusTotal(filePath) {
+  try {
+    // Зчитування файлу у форматі base64
+    const fileData = fs.readFileSync(filePath, { encoding: 'base64' });
+
+    // Відправка POST-запиту до API VirusTotal
+    const response = await axios.post('https://www.virustotal.com/vtapi/v2/file/scan', {
+      apikey: 'YOUR_API_KEY', // Ваш API-ключ VirusTotal
+      file: fileData
+    });
+
+    // Отримання ID аналізу
+    const analysisId = response.data.scan_id;
+
+    // Отримання результатів аналізу
+    const analysisResult = await getAnalysisResultFromVirusTotal(analysisId);
+
+    // Повернення результатів аналізу
+    return analysisResult;
+  } catch (error) {
+    console.error('Помилка під час аналізу файлу з використанням VirusTotal:', error.message);
+    throw error;
+  }
+}
+
+// Функція для отримання результатів аналізу від VirusTotal
+async function getAnalysisResultFromVirusTotal(analysisId) {
+  try {
+    // Відправка GET-запиту до API VirusTotal
+    const response = await axios.get(`https://www.virustotal.com/vtapi/v2/file/report?apikey=YOUR_API_KEY&resource=${analysisId}`);
+
+    // Повернення результатів аналізу
+    return response.data;
+  } catch (error) {
+    console.error('Помилка під час отримання результатів аналізу з VirusTotal:', error.message);
+    throw error;
+  }
+}
+// Приклад використання функцій для аналізу файлу
+analyzeFileWithVirusTotal('file_path_to_analyze.txt')
+  .then(result => {
+    console.log('Результат аналізу від VirusTotal:', result);
+  })
+  .catch(error => {
+    console.error('Помилка:', error.message);
+  });
+
+const axios = require('axios');
+
+const API_KEY = 'YOUR_API_KEY';
+
+// Використання API ключа для аутентифікації
+const headers = {
+  'Authorization': `Bearer ${API_KEY}`
+};
+
+// Відправка GET-запиту з аутентифікацією
+axios.get('https://api.example.com/data', { headers })
+  .then(response => {
+    console.log('Дані отримані з API:', response.data);
+  })
+  .catch(error => {
+    console.error('Помилка отримання даних:', error.message);
+  });
+
+//При взаємодії з API важливо шифрувати трафік для захисту від прослуховування та перехоплення. Зазвичай це досягається за допомогою протоколу HTTPS.
+// Відправка захищеного HTTPS-запиту
+axios.get('https://api.example.com/data')
+  .then(response => {
+    console.log('Дані отримані з API:', response.data);
+  })
+  .catch(error => {
+    console.error('Помилка отримання даних:', error.message);
+  });
+
+
+const winston = require('winston');
+
+// Конфігурація логера
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.json(),
+  transports: [
+    new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),
+    new winston.transports.File({ filename: 'logs/combined.log' }),
+  ],
+});
+
+// Додавання логу повідомлення
+logger.log({
+  level: 'info',
+  message: 'Сканування файлу завершено успішно',
+});
+
+//Morgan - це middleware для створення журналу HTTP-запитів в Node.js, який можна використовувати для стеження за запитами до сервера.
+
+const express = require('express');
+const morgan = require('morgan');
+const fs = require('fs');
+
+const app = express();
+
+// Створення потоку для запису журналу в файл
+const accessLogStream = fs.createWriteStream('logs/access.log', { flags: 'a' });
+
+// Використання Morgan для логування HTTP-запитів
+app.use(morgan('combined', { stream: accessLogStream }));
+
+// Маршрутизація та обробка запитів...
+
+// reports.component.ts
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-reports',
+  templateUrl: './reports.component.html',
+  styleUrls: ['./reports.component.css']
+})
+export class ReportsComponent {
+  reports: any[]; // Масив звітів сканування
+
+  constructor() {
+    // Метод отримання звітів з сервера
+    this.loadReports();
+  }
+
+  loadReports() {
+    // Логіка для отримання звітів сканування з сервера
+    // Наприклад, через HTTP запит
+    // this.http.get('/api/reports').subscribe((data: any[]) => {
+    //   this.reports = data;
+    // });
+  }
+}
+HTM
+<!-- reports.component.html -->
+<div *ngIf="reports">
+  <h2>Reports</h2>
+  <ul>
+    <li *ngFor="let report of reports">
+      <a [routerLink]="['/report', report.id]">{{ report.name }}</a>
+    </li>
+  </ul>
+</div>
+
+
+// scan.service.ts
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ScanService {
+
+  constructor(private http: HttpClient) { }
+
+  // Метод для виконання HTTP запиту до сервера для сканування
+  startScan(data: any): Observable<any> {
+    return this.http.post<any>('/api/scan', data);
+  }
+}
+
+//Angular HttpClientModule використовується для взаємодії з сервером за допомогою HTTP запитів. Цей модуль можна імпортувати у головний модуль вашого додатку для доступу до HttpClient у всьому додатку [33].
+// app.module.ts
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+//Для взаємодії з WebSocket з'єднаннями можна використати сторонні бібліотеки, такі як ngx-socket-io. Цей модуль дозволяє встановлювати та керувати WebSocket з'єднаннями у вашому Angular додатку.
+// app.module.ts
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+import { AppComponent } from './app.component';
+
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    SocketIoModule.forRoot(config)
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+Санітізація вводу користувача: Angular має вбудовані механізми санітизації для відображення вводу користувача безпечним способом [32].
+import { DomSanitizer } from '@angular/platform-browser';
+
+constructor(private sanitizer: DomSanitizer) {}
+
+// Санітізація HTML
+sanitizedHtml = this.sanitizer.bypassSecurityTrustHtml('<script>alert("XSS Attack!")</script>');
+Angular дозволяє додавати HTTP заголовки для забезпечення безпеки, наприклад, Content Security Policy (CSP). Це можна зробити, наприклад, в сервісі HttpClient:
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Security-Policy': 'default-src https:'
+  })
+};
+
+constructor(private http: HttpClient) {}
+
+getData() {
+  return this.http.get<any>('api/data', httpOptions);
+}
+
+//У Node.js можна використовувати бібліотеки, такі як DOMPurify, для санітізації вводу користувача перед збереженням у базі даних або відображенням на клієнтській стороні:
+const DOMPurify = require('dompurify');
+
+// Санітізація HTML
+const sanitizedHtml = DOMPurify.sanitize('<script>alert("XSS Attack!")</script>');
+
+//У Node.js треба встановити HTTP заголовки, включаючи Content Security Policy, відповідь на HTTP запити. Наприклад, використовуючи бібліотеку Express.js:
+const express = require('express');
+const app = express();
+
+// Встановлення Content Security Policy заголовка
+app.use((req, res, next) => {
+  res.setHeader('Content-Security-Policy', "default-src 'self'");
+  next();
+});
+
+// Решта конфігурації сервера...
+
+ 
+3.3. Інтерфейс користувача та зворотній зв'язок
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+
+@Component({
+  selector: 'app-my-form',
+  template: `
+    <form [formGroup]="myForm">
+      <input formControlName="name" placeholder="Enter your name">
+    </form>
+    <p>Your name is: {{ myForm.get('name').value }}</p>
+  `
+})
+export class MyFormComponent {
+  myForm: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.myForm = this.fb.group({
+      name: ['']
+    });
+  }
+}
+
+//Для отримання асинхронних даних з сервера без перезавантаження сторінки можна використовувати Angular HttpClient.
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+@Component({
+  selector: 'app-my-component',
+  template: `
+    <button (click)="fetchData()">Fetch Data</button>
+    <div *ngIf="data">{{ data }}</div>
+  `
+})
+export class MyComponent implements OnInit {
+  data: any;
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {
+    this.fetchData();
+  }
+
+  fetchData() {
+    this.http.get<any>('https://api.example.com/data')
+      .subscribe(response => {
+        this.data = response;
+      });
+  }
+}
+
+<div *ngFor="let result of scanResults">
+    <p>{{ result.name }}</p>
+    <button (click)="markAsFalsePositive(result)">Помилкове виявлення</button>
+</div>
+
+app.post('/markAsFalsePositive', (req, res) => {
+    const { resultId } = req.body;
+    // Збереження в базі даних інформації про помилкове виявлення
+    res.status(200).json({ message: 'Результат помічений як помилковий.' });
+});

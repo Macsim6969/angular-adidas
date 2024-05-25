@@ -175,12 +175,12 @@
     ],
     "addedPanel": [
       {
-        "name": "Goods",
-        "path": "/admin/added/goods"
+        "name": "Scan",
+        "path": "/admin/added/scan"
       },
       {
-        "name": "New User Orders",
-        "path": "/admin/added/user-orders"
+        "name": "Result",
+        "path": "/admin/added/result"
       }
     ]
   }
