@@ -1,8 +1,36 @@
-<div>
-  <div id="progress-container">
-    <div id="progress-bar"></div>
-  </div>
-
+<div class="upload">
   <h1>File Analyzer</h1>
   <input type="file" (change)="onFileSelected($event)">
 </div>
+
+<mat-card class="popup" *ngIf="isPopup" (click)="this.isPopup = false">
+  <div class="popup_container">
+    <mat-card-header id="progress-container">
+      <div id="progress-bar"></div>
+    </mat-card-header>
+    <mat-card-content class="reports" *ngIf="reports; else loading">
+      <div class="reports_block">
+        <h2 class="reports_title">Reports for File {{ fileName }}</h2>
+        <div>
+          <p>Detected: {{ detectedCount }}</p>
+          <p>Not Detected: {{ notDetectedCount }}</p>
+        </div>
+      </div>
+      <mat-list class="reports_lists">
+        <mat-list-item class="list" *ngFor="let key of reportsTitle">
+          <nav>{{ key }} -</nav>
+          <nav [ngClass]="{'active': reports[key].detected}">{{ reports[key].detected ? 'Detected' : 'Not Detected' }}
+          </nav>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+    <mat-card-actions>
+      b
+    </mat-card-actions>
+
+    <ng-template #loading>
+      <p>Loading...</p>
+    </ng-template>
+  </div>
+
+</mat-card>

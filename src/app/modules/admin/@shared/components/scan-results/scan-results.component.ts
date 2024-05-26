@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ScanService } from '../../services/scan.service';
+import { ScanResult, ScanService } from '../../services/scan.service';
 
 @Component({
   selector: 'app-scan-results',
@@ -9,7 +9,8 @@ import { ScanService } from '../../services/scan.service';
 export class ScanResultsComponent implements OnInit {
   public reports: any[] = [];
   public reportsTitle: string[];
-  public fileId: string;
+  public fileId: ScanResult;
+  public fileName: string;
 
   constructor(
     private scanService: ScanService
@@ -17,23 +18,25 @@ export class ScanResultsComponent implements OnInit {
 
   ngOnInit() {
     this.scanService._id$.subscribe(params => {
+      this.fileName = this.scanService._fileName$.getValue();
       this.fileId = params;
       if (this.fileId) {
-        this.loadReports(this.fileId);
+        this.loadReports(this.fileId.scan_id);
       }
     });
   }
 
   private loadReports(fileId: string) {
-    this.scanService.getScanResults(fileId).subscribe(
-      data => {
-        console.log('Scans:', data.scans);
+    this.scanService.getScanResults(fileId).subscribe((data: ScanResult) => {
+      if(data){
+        console.log('Scans:', data);
         this.reports = data.scans;
         this.reportsTitle = Object.keys(data.scans);
+      }
+        
       },
       error => {
-        console.error('Error loading reports:', error);
-        // Обработка ошибок, если необходимо
+        throw new Error(`VirusTotal API error: ${error.message}`);
       }
     );
   }

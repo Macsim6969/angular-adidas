@@ -1,5 +1,5 @@
 <div *ngIf="reports; else loading">
-  <h2>Reports for File {{ fileId }}</h2>
+  <h2>Reports for File {{ fileName }}</h2>
   <ul>
     <li *ngFor="let key of reportsTitle">
       {{ key }} - {{ reports[key].detected ? 'Detected' : 'Not Detected' }}
@@ -8,5 +8,5 @@
 </div>
 
 <ng-template #loading>
-  Loading...
+  <p>Loading...</p>
 </ng-template>

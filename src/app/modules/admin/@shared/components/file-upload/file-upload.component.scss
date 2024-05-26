@@ -1,16 +1,97 @@
-#progress-container {
-  width: 100%;
-  height: 20px;
-  background-color: #f0f0f0;
-  border-radius: 5px;
-  overflow: hidden;
-  margin-bottom: 10px;
+.upload {
+  input[type='file'] {
+    border: none;
+    outline: none;
+  }
+
+  input {
+    font-size: 1.8rem;
+    outline: none;
+  }
 }
 
-#progress-bar {
-  height: 100%;
-  background-color: #76c7c0;
-  width: 0;
-  border-radius: 5px;
-  transition: width 0.4s ease;
+.popup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(129, 129, 129, 0.5);
+
+  .popup_container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 780px;
+    height: 920px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 24px;
+
+    #progress-container {
+      height: 20px;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    #progress-bar {
+      height: 100%;
+      background-color: #76c7c0;
+      width: 0;
+      border-radius: 5px;
+      transition: width 0.4s ease;
+    }
+
+    .reports {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: auto;
+      height: 100%;
+
+      .reports_block {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        .reports_title {
+          font-size: 2.4rem;
+        }
+      }
+
+      ::ng-deep .reports_lists {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 5px;
+        align-items: center;
+        justify-content: center;
+
+        mat-list-item {
+          padding: 0;
+          width: 40%;
+        }
+
+        .mdc-list-item__primary-text {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 10px;
+
+          nav {
+            width: max-content;
+            color: green;
+            font-size: 1.8rem;
+
+            &.active {
+              color: red;
+            }
+          }
+        }
+      }
+    }
+  }
+
 }

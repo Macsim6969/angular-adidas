@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { ScanResultsComponent } from '../../components/scan-results/scan-results.component';
 import { FileUploadComponent } from '../../components/file-upload/file-upload.component';
+import { ShareModule } from '../../../../../shared/share.module';
 
 const routes: Routes = [
   {
@@ -28,6 +29,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    ShareModule,
     HttpClientModule,
     RouterModule.forChild(routes)
   ]
