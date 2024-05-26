@@ -92,6 +92,24 @@
         }
       }
     }
+
+    .actions {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 25px;
+      padding: 0 15px;
+
+      button {
+        outline: none;
+        border: 1px solid black;
+        font-size: 1.75rem;
+        background: white;
+        padding: 7px 12px;
+        border-radius: 8px;
+      }
+    }
   }
 
 }

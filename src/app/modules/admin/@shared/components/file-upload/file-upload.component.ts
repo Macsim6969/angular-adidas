@@ -8,7 +8,7 @@ import { ScanResult, ScanService } from '../../services/scan.service';
 })
 export class FileUploadComponent implements OnInit {
 
-  public isPopup: boolean;
+  public isPopup: boolean = true;
 
   //scan result
   public reports: any[] = [];
@@ -62,7 +62,7 @@ export class FileUploadComponent implements OnInit {
     );
   }
 
-  onFileSelected(event: any) {
+  public onFileSelected(event: any) {
     const file: File = event.target.files[0];
     this.isPopup = true;
 
@@ -96,8 +96,19 @@ export class FileUploadComponent implements OnInit {
     }
   }
 
-  updateProgressBar(progress: number) {
+  private updateProgressBar(progress: number) {
     const progressBar = document.getElementById('progress-bar') as HTMLElement;
     progressBar.style.width = progress + '%';
+  }
+
+  public removeFile() {
+    const input = document.querySelector('input[type="file"]') as HTMLInputElement;
+    if (input) {
+      input.value = ''; // Очистка выбранного файла
+    }
+  }
+
+  public confirmeFile() {
+
   }
 }
