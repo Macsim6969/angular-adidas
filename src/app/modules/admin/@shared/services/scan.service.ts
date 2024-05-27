@@ -26,6 +26,7 @@ export class ScanService {
 
   private idSubject: BehaviorSubject<ScanResult> = new BehaviorSubject<ScanResult>(null);
   private fileNameSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+  private fileContentSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
   constructor(private http: HttpClient) { }
 
@@ -76,5 +77,13 @@ export class ScanService {
 
   set _fileName(value: string) {
     this.fileNameSubject.next(value);
+  }
+
+  get _fileContent$() {
+    return this.fileContentSubject;
+  }
+
+  set _fileContent(value: any) {
+    this.fileContentSubject.next(value);
   }
 }

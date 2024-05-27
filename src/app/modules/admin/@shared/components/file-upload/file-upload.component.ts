@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ScanResult, ScanService } from '../../services/scan.service';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss']
 })
-export class FileUploadComponent implements OnInit {
+export class FileUploadComponent implements OnInit, OnDestroy {
 
-  public isPopup: boolean = true;
-
+  public isPopup: boolean;
+  private scanSubscription: Subscription;
+  private getScanResultsSubscription: Subscription;
+  private file: File;
+  public isScanFalse: boolean;
   //scan result
   public reports: any[] = [];
   public reportsTitle: string[];
@@ -19,7 +24,8 @@ export class FileUploadComponent implements OnInit {
   public notDetectedCount: number = 0;
 
   constructor(
-    private scanService: ScanService
+    private scanService: ScanService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -27,7 +33,7 @@ export class FileUploadComponent implements OnInit {
   }
 
   private initializeResultScaneData() {
-    this.scanService._id$.subscribe(params => {
+    this.scanSubscription = this.scanService._id$.subscribe(params => {
       this.fileName = this.scanService._fileName$.getValue();
       this.fileId = params;
       if (this.fileId) {
@@ -37,10 +43,11 @@ export class FileUploadComponent implements OnInit {
   }
 
   private loadReports(fileId: string) {
-    this.scanService.getScanResults(fileId).subscribe((data: ScanResult) => {
-      if (data) {
+    this.getScanResultsSubscription = this.scanService.getScanResults(fileId).subscribe((data: ScanResult) => {
+      if (data.scans) {
         console.log('Scans:', data);
         this.reports = data.scans;
+        data.response_code === -2 ? this.isScanFalse = true : null;
         this.reportsTitle = Object.keys(data.scans);
 
 
@@ -64,12 +71,12 @@ export class FileUploadComponent implements OnInit {
 
   public onFileSelected(event: any) {
     const file: File = event.target.files[0];
+    this.file = file;
     this.isPopup = true;
 
     if (file) {
       const formData = new FormData();
       formData.append('file', file);
-
       const xhr = new XMLHttpRequest();
       xhr.upload.addEventListener('progress', (e) => {
         if (e.lengthComputable) {
@@ -104,11 +111,39 @@ export class FileUploadComponent implements OnInit {
   public removeFile() {
     const input = document.querySelector('input[type="file"]') as HTMLInputElement;
     if (input) {
-      input.value = ''; // Очистка выбранного файла
+      input.value = '';
     }
+    this.isPopup = false;
   }
 
-  public confirmeFile() {
+  public confirmFile() {
+    const fileReader = new FileReader();
 
+    fileReader.onload = (e) => {
+      try {
+        const jsonContent = JSON.parse(fileReader.result as string);
+        console.log(jsonContent);
+        this.scanService._fileContent = jsonContent;
+        this.router.navigate(['/admin/added/result']).then();
+        // Proceed with your existing logic, e.g., sending the file to the server
+        const formData = new FormData();
+        formData.append('file', this.file);
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'http://localhost:3000/admin/scan', true);
+        xhr.send(formData);
+      } catch (error) {
+        console.error('Error parsing JSON file:', error);
+      }
+    };
+
+    // Read the file as text
+    fileReader.readAsText(this.file);
+  }
+
+
+  ngOnDestroy(): void {
+    this.scanSubscription.unsubscribe();
+    this.getScanResultsSubscription.unsubscribe();
   }
 }

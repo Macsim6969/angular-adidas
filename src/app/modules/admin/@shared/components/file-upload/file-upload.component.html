@@ -3,15 +3,19 @@
   <input type="file" (change)="onFileSelected($event)">
 </div>
 
-<mat-card class="popup" *ngIf="isPopup" (click)="this.isPopup = false">
+<mat-card class="popup" *ngIf="isPopup">
   <div class="popup_container">
     <mat-card-header id="progress-container">
       <div id="progress-bar"></div>
     </mat-card-header>
+    <div class="isScanFalse" *ngIf="isScanFalse">
+      What's wrong please try again
+      <button (click)="removeFile()">try</button>
+    </div>
     <mat-card-content class="reports" *ngIf="reports; else loading">
       <div class="reports_block">
         <h2 class="reports_title">Reports for File {{ fileName }}</h2>
-        <div>
+        <div class="reports_block_info">
           <p>Detected: {{ detectedCount }}</p>
           <p>Not Detected: {{ notDetectedCount }}</p>
         </div>
@@ -26,7 +30,7 @@
     </mat-card-content>
     <mat-card-actions class="actions">
       <button mat-button class="close" (click)="removeFile()">Remove</button>
-      <button mat-button class="confirmed" (click)="confirmeFile()">Confirmed</button>
+      <button mat-button class="confirmed" (click)="confirmFile()">Confirmed</button>
     </mat-card-actions>
 
     <ng-template #loading>

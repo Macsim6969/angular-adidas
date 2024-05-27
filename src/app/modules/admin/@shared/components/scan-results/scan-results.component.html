@@ -1,12 +1,24 @@
-<div *ngIf="reports; else loading">
-  <h2>Reports for File {{ fileName }}</h2>
-  <ul>
-    <li *ngFor="let key of reportsTitle">
-      {{ key }} - {{ reports[key].detected ? 'Detected' : 'Not Detected' }}
+<div class="goods">
+  <ul class="goods_lists" *ngIf="contentGoods; else loading">
+    <li [id]="content?.id" class="list" *ngFor="let content of contentGoods; index as i">
+      <nav class="id">{{content?.id}}</nav>
+      <nav class="image">
+        <img [src]="errorImages[i] ? './assets/images/adidas/admin/goods/goods.jpg' : content?.imageURL"
+          (error)="handleImageError(i)" alt="">
+      </nav>
+      <nav class="tage">{{content?.tage}}</nav>
+      <nav class="categ">{{content?.categ}}</nav>
+      <nav class="name">{{content?.name}}</nav>
+      <nav class="desc">{{content?.desc}}</nav>
+      <nav class="price">{{content?.price}}</nav>
+      <div class="sizes">
+        <nav *ngFor="let size of content?.sizes" class="sizes">{{size}}</nav>
+      </div>
     </li>
   </ul>
-</div>
 
-<ng-template #loading>
-  <p>Loading...</p>
-</ng-template>
+  <ng-template #loading>
+    <app-loading></app-loading>
+  </ng-template>
+
+</div>

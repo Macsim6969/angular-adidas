@@ -19,10 +19,11 @@ export class AddedComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initializePanelsDataFromJson();
+    this.translate.use('en')
   }
 
   private initializePanelsDataFromJson() {
-    this.translateSubscription = this.translate.get('admin.addedPanel').subscribe((data: Panels[]) => {
+    this.translateSubscription = this.translate.stream('admin.addedPanel').subscribe((data: Panels[]) => {
       this.panelsContent = data;
     })
   }

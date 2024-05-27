@@ -59,6 +59,17 @@
         .reports_title {
           font-size: 2.4rem;
         }
+
+        .reports_block_info {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 15px;
+          p {
+            font-size: 1.6rem;
+            margin: 0;
+          }
+        }
       }
 
       ::ng-deep .reports_lists {
