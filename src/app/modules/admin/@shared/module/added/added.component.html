@@ -1,7 +1,7 @@
 <div class="added">
   <div class="added-panel">
-    <nav class="route" *ngFor="let panel of panelsContent">
-      <a [routerLink]="panel.path">{{panel.name}}</a>
+    <nav class="route" routerLinkActive="active" *ngFor="let panel of panelsContent">
+      <nav [routerLink]="panel.path">{{panel.name}}</nav>
       <p>+</p>
     </nav>
   </div>

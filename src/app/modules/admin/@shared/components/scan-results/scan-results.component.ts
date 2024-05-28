@@ -33,6 +33,16 @@ export class ScanResultsComponent implements OnInit, OnDestroy {
     this.errorImages[index] = true;
   }
 
+  public removeDataFiles() {
+    this.scanService._fileContent = null;
+    this.router.navigate(['/admin/added/scan'], { queryParamsHandling: 'merge' }).then(() => {
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement;
+      if (input) {
+        input.value = '';
+      }
+    })
+  }
+
   ngOnDestroy(): void {
     this.fileContentSubscription.unsubscribe();
   }
