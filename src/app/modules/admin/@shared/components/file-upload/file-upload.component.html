@@ -1,6 +1,7 @@
 <div class="upload">
   <h1>File Analyzer</h1>
-  <input type="file" (change)="onFileSelected($event)">
+  <input type="file" id="uploadBtn" (change)="onFileSelected($event)">
+  <label for="uploadBtn">Upload File</label>
 </div>
 
 <mat-card class="popup" *ngIf="isPopup">

@@ -5,11 +5,10 @@ const fs = require('fs');
 const axios = require('axios');
 const FormData = require('form-data');
 const cors = require('cors');
-const path = require('path');
 
 const app = express();
 const upload = multer({ dest: 'uploads/' });
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -90,14 +89,6 @@ async function getAnalysisResultFromVirusTotal(analysisId) {
     throw new Error(`VirusTotal API error: ${error.message}`);
   }
 }
-
-// Сервируем статические файлы из директории dist
-app.use(express.static(path.join(__dirname, 'dist/my-app/browser')));
-
-// Обработка всех остальных запросов, отправка index.html
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/my-app/browser/index.html'));
-});
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

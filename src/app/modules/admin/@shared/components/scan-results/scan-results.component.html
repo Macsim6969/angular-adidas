@@ -1,24 +1,29 @@
-<div class="goods">
-  <ul class="goods_lists" *ngIf="contentGoods; else loading">
-    <li [id]="content?.id" class="list" *ngFor="let content of contentGoods; index as i">
-      <nav class="id">{{content?.id}}</nav>
-      <nav class="image">
-        <img [src]="errorImages[i] ? './assets/images/adidas/admin/goods/goods.jpg' : content?.imageURL"
-          (error)="handleImageError(i)" alt="">
-      </nav>
-      <nav class="tage">{{content?.tage}}</nav>
-      <nav class="categ">{{content?.categ}}</nav>
-      <nav class="name">{{content?.name}}</nav>
-      <nav class="desc">{{content?.desc}}</nav>
-      <nav class="price">{{content?.price}}</nav>
-      <div class="sizes">
-        <nav *ngFor="let size of content?.sizes" class="sizes">{{size}}</nav>
-      </div>
-    </li>
-  </ul>
+<mat-card class="card">
+  <mat-card-actions class="actions">
+    <button mat-button>Remove</button>
+    <button mat-button>Save</button>
+  </mat-card-actions>
+  <mat-card-content class="goods">
+    <ul class="goods_lists" *ngIf="contentGoods; else loading">
+      <li [id]="content?.id" class="list" *ngFor="let content of contentGoods; index as i">
+        <nav class="id">{{content?.id}}</nav>
+        <nav class="image">
+          <img [src]="errorImages[i] ? './assets/images/adidas/admin/goods/goods.jpg' : content?.imageURL"
+            (error)="handleImageError(i)" alt="">
+        </nav>
+        <nav class="tage">{{content?.tage}}</nav>
+        <nav class="categ">{{content?.categ}}</nav>
+        <nav class="name">{{content?.name}}</nav>
+        <nav class="desc">{{content?.desc}}</nav>
+        <nav class="price">{{content?.price}}</nav>
+        <div class="sizes">
+          <nav *ngFor="let size of content?.sizes" class="sizes">{{size}}</nav>
+        </div>
+      </li>
+    </ul>
 
-  <ng-template #loading>
-    <app-loading></app-loading>
-  </ng-template>
-
-</div>
+    <ng-template #loading>
+      <app-loading></app-loading>
+    </ng-template>
+  </mat-card-content>
+</mat-card>

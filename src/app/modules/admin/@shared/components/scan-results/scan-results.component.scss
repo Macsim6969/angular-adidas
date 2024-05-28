@@ -1,3 +1,24 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 25px;
+
+    button {
+      outline: none;
+      border: 1px solid black;
+      border-radius: 8px;
+      font-size: 1.6rem;
+      padding: 8px 16px;
+    }
+  }
+}
+
 .goods {
   display: flex;
   flex-direction: column;
@@ -19,9 +40,10 @@
       border-radius: 16px;
       border: 1px solid black;
 
-      nav{
+      nav {
         font-size: 1.6rem;
       }
+
       .id {
         width: 36px;
       }
@@ -53,11 +75,11 @@
         text-overflow: ellipsis;
       }
 
-      .price{
+      .price {
         width: 40px;
       }
 
-      .sizes{
+      .sizes {
         display: flex;
         flex-direction: row;
         gap: 8px;

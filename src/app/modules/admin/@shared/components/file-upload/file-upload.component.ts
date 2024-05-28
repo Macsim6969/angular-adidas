@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ScanResult, ScanService } from '../../services/scan.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-file-upload',
@@ -47,7 +48,6 @@ export class FileUploadComponent implements OnInit, OnDestroy {
       if (data.scans) {
         console.log('Scans:', data);
         this.reports = data.scans;
-        data.response_code === -2 ? this.isScanFalse = true : null;
         this.reportsTitle = Object.keys(data.scans);
 
 
@@ -59,7 +59,8 @@ export class FileUploadComponent implements OnInit, OnDestroy {
             this.notDetectedCount++;
           }
         }
-
+      } else {
+        data.response_code === -2 ? this.isScanFalse = true : null;
       }
 
     },
@@ -144,6 +145,6 @@ export class FileUploadComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.scanSubscription.unsubscribe();
-    this.getScanResultsSubscription.unsubscribe();
+    this.getScanResultsSubscription ? this.getScanResultsSubscription.unsubscribe() : null;
   }
 }

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from "@ngrx/store";
 import { StoreInterface } from "./store/model/store.model";
-import { combineLatest, Observable, take } from "rxjs";
-import { increment, newCountry, newLang } from "./store/actions/store.actions";
-import { ActivatedRoute, NavigationEnd, NavigationExtras, Params, Router } from "@angular/router";
-import { storeSelectorCountry, storeSelectorLang } from "./store/selectors/store.selectors";
+import { Observable } from "rxjs";
+import { newCountry, newLang } from "./store/actions/store.actions";
+import { ActivatedRoute, NavigationEnd, Params, Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { HeaderService } from "./modules/header/@shared/services/header.service";
 import { StateMenService } from "./services/state-men.service";
@@ -46,6 +45,7 @@ export class AppComponent implements OnInit {
       this.stateShoesService.getFavouritesClothes(user.id);
     })
   }
+
 
   private initializeUserLogin() {
     this.authService.autoLogin();
