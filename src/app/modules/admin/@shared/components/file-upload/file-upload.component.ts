@@ -110,11 +110,12 @@ export class FileUploadComponent implements OnInit, OnDestroy {
   }
 
   public removeFile() {
-    const input = document.querySelector('input[type="file"]') as HTMLInputElement;
-    if (input) {
-      input.value = '';
-    }
     this.isPopup = false;
+
+    setTimeout(() => {
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement;
+      input ? input.value = '' : null;
+    }, 1000);
   }
 
   public confirmFile() {
