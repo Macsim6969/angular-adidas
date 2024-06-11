@@ -12,16 +12,18 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { InfoPopupComponent } from "./components/info-popup/info-popup.component";
-import { AsyncPipe, NgClass } from "@angular/common";
+import { AsyncPipe, CommonModule, NgClass } from "@angular/common";
 import { AttentionComponent } from "./components/attention/attention.component";
 import { MatSelectModule } from "@angular/material/select";
-import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { MatDialogModule } from "@angular/material/dialog";
+import { AdminGoodsComponent } from "./components/admin-goods/admin-goods.component";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 @NgModule({
   declarations: [
     LoadingComponent,
     InfoPopupComponent,
-    AttentionComponent
+    AttentionComponent,
+    AdminGoodsComponent
   ],
   imports: [
     MatToolbarModule,
@@ -37,9 +39,13 @@ import { MatDialogModule } from "@angular/material/dialog";
     MatDialogModule,
     AsyncPipe,
     TranslationModule,
-    NgClass
+    NgClass,
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule
   ],
   exports: [
+    AdminGoodsComponent,
     MatToolbarModule,
     MatIconModule,
     MatListModule,
@@ -54,7 +60,9 @@ import { MatDialogModule } from "@angular/material/dialog";
     MatCardModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [MatIconService]
 })

@@ -1,0 +1,57 @@
+<div class="goods">
+  <div class="search-info">
+    <div class="info">
+      <nav *ngIf="!changeModule[1]" class="id" (click)="changeMode(1, true, 'id')">ID</nav>
+      <nav *ngIf="changeModule[1]" class="id">
+        <input type="number" [formControl]="streamIdControl">
+        <button (click)="changeMode(1, false, 'price')" mat-button>&#x2715;</button>
+      </nav>
+      <nav class="image"> Image</nav>
+      <nav class="tage">Tage</nav>
+      <div class="popup">
+
+      </div>
+      <nav class="categ">Category</nav>
+      <nav class="name">Name</nav>
+      <nav class="desc">Description</nav>
+      <nav *ngIf="!changeModule[7]" class="price" (click)="changeMode(7,true, 'price')">Price</nav>
+      <nav *ngIf="changeModule[7]" class="price">
+        <input type="number" [formControl]="streamPriceControl">
+        <button (click)="changeMode(7, false, 'price')" mat-button>&#x2715;</button>
+      </nav>
+      <nav class="sizes">Size</nav>
+    </div>
+    <div class="info-goods">
+      <button disabled="true" mat-button class="trash">Trash</button>
+    </div>
+
+  </div>
+  <ul class="goods_lists" *ngIf="contentGoods; else loading">
+    <li [id]="content?.id" class="list" *ngFor="let content of contentGoods; index as i">
+      <div class="list_inner">
+        <nav class="id">{{content?.id}}</nav>
+        <nav class="image">
+          <img [src]="errorImages[i] ? './assets/images/adidas/admin/goods/goods.jpg' : content?.imageURL"
+            (error)="handleImageError(i)" alt="">
+        </nav>
+        <nav class="tage">{{content?.tage}}</nav>
+        <nav class="categ">{{content?.categ}}</nav>
+        <nav class="name">{{content?.name}}</nav>
+        <nav class="desc">{{content?.desc}}</nav>
+        <nav class="price">{{content?.price}}</nav>
+        <div class="sizes">
+          <nav *ngFor="let size of content?.sizes" class="sizes">{{size}}</nav>
+        </div>
+      </div>
+      <div class="info-goods">
+        <button mat-button class="trash">Trash</button>
+      </div>
+
+    </li>
+  </ul>
+
+  <ng-template #loading>
+    <app-loading></app-loading>
+  </ng-template>
+
+</div>

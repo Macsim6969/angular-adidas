@@ -1,0 +1,165 @@
+.goods {
+  display: flex;
+  flex-direction: column;
+
+  .search-info {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    background-color: white;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid black;
+    padding: 8px;
+    border-radius: 16px;
+    z-index: 999;
+
+    .info {
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+
+      nav {
+        font-size: 1.6rem;
+        cursor: pointer;
+      }
+
+      .id {
+        width: 36px;
+      }
+
+      .image {
+        width: 56px;
+      }
+
+      .tage {
+        width: 56px;
+      }
+
+      .categ {
+        width: 150px;
+      }
+
+      .desc,
+      .name {
+        width: 250px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .price {
+        width: 40px;
+      }
+
+      .sizes {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        align-items: center;
+      }
+    }
+
+    .info-goods {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .trash {
+        color: red;
+        font-size: 1.6rem;
+        background-color: rgb(240, 203, 203);
+      }
+    }
+  }
+
+  .goods_lists {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0;
+
+    .list {
+      padding: 8px;
+      border-radius: 16px;
+      border: 1px solid black;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .list_inner {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+
+        nav {
+          font-size: 1.6rem;
+        }
+
+        .id {
+          width: 36px;
+        }
+
+        .image {
+          width: 56px;
+          height: 56px;
+
+          img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        .tage {
+          width: 56px;
+        }
+
+        .categ {
+          width: 150px;
+        }
+
+        .desc,
+        .name {
+          width: 250px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .price {
+          width: 40px;
+        }
+
+        .sizes {
+          display: flex;
+          flex-direction: row;
+          gap: 8px;
+          align-items: center;
+        }
+      }
+
+      .info-goods {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .trash {
+          color: red;
+          font-size: 1.6rem;
+          background-color: rgb(240, 203, 203);
+        }
+      }
+
+
+    }
+  }
+}

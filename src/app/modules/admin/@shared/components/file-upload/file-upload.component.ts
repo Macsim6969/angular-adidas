@@ -45,6 +45,7 @@ export class FileUploadComponent implements OnInit, OnDestroy {
 
   private loadReports(fileId: string) {
     this.getScanResultsSubscription = this.scanService.getScanResults(fileId).subscribe((data: ScanResult) => {
+      console.log(data)
       if (data.scans) {
         console.log('Scans:', data);
         this.reports = data.scans;
@@ -111,6 +112,7 @@ export class FileUploadComponent implements OnInit, OnDestroy {
 
   public removeFile() {
     this.isPopup = false;
+    this.reports = null
 
     setTimeout(() => {
       const input = document.querySelector('input[type="file"]') as HTMLInputElement;
